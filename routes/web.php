@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix' => 'publishers'], function() {
+    Route::get('/', ['as' => 'publishers.index', 'uses' => 'PublisherController@index']);
+});
