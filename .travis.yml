@@ -13,5 +13,5 @@ script:
   - vendor/bin/phpunit
 
 branches:
-  except:
-    - master
+  only:
+    - develop
