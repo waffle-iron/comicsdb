@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Publisher
@@ -14,11 +15,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Publisher extends Model
 {
     use SoftDeletes;
+    use Searchable;
 
     /**
      * @var array
      */
     protected $dates = [
-        'founded_at'
+        'founded_at',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 }

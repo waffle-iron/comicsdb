@@ -29,7 +29,10 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $publishers = $this->publisherRepository->index();
+        $publishers = $this
+            ->publisherRepository
+            ->index()
+            ->sortBy('name');
 
         return view('publishers.index', [
             'publishers' => $publishers
