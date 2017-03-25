@@ -179,6 +179,8 @@ return [
 
         Laravel\Scout\ScoutServiceProvider::class,
         ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
+
+        PragmaRX\Countries\ServiceProvider::class,
     ],
 
     /*
@@ -228,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Countries' => PragmaRX\Countries\Facade::class,
     ],
 
 ];
