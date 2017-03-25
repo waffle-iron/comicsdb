@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('dashboard', ['as' => 'dashboard.index', 'uses' => 'HomeController@index']);
 
 Route::group(['prefix' => 'publishers'], function() {
     Route::get('/', ['as' => 'publishers.index', 'uses' => 'PublisherController@index']);
