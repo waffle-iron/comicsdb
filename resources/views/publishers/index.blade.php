@@ -55,9 +55,9 @@
                 <!-- START Toolbar -->
                 <div class="btn-toolbar pull-right">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-primary">
+                        <a class="btn btn-primary" href="{{ route('publishers.create') }}">
                             <i class="fa fa-fw fa-plus"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

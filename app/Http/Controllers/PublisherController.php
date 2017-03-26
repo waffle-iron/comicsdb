@@ -38,4 +38,16 @@ class PublisherController extends Controller
             'publishers' => $publishers
         ]);
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        $countries =  \Countries::all()->pluck('common.name');
+
+        return view('publishers.create', [
+            'countries' => $countries
+        ]);
+    }
 }

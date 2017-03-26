@@ -21,4 +21,6 @@ Route::get('dashboard', ['as' => 'dashboard.index', 'uses' => 'HomeController@in
 
 Route::group(['prefix' => 'publishers'], function() {
     Route::get('/', ['as' => 'publishers.index', 'uses' => 'PublisherController@index']);
+    Route::get('create', ['as' => 'publishers.create', 'uses' => 'PublisherController@create']);
+    Route::post('store', ['as' => 'publishers.store', 'uses' => 'PublisherController@store']);
 });
