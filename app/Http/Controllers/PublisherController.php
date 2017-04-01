@@ -45,7 +45,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        $countries =  \Countries::all()->pluck('name.common', 'name.common');
+        $countries = \Countries::all()->pluck('name.common', 'name.common');
 
         return view('publishers.create', [
             'countries' => $countries
