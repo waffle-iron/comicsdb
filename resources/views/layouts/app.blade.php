@@ -29,18 +29,20 @@
 
     <!-- SCSS Output -->
     <!-- build:css assets/stylesheets/app.min.css -->
-    <link rel="stylesheet" href="assets/stylesheets/bootstrap.css">
-    <link rel="stylesheet" href="assets/stylesheets/app.css">
-    <link rel="stylesheet" href="assets/stylesheets/plugins.css">
+    <link rel="stylesheet" href="/assets/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/assets/stylesheets/app.css">
+    <link rel="stylesheet" href="/assets/stylesheets/plugins.css">
+    <link rel="stylesheet" href="/assets/vendor/css/select2.css">
+    <link rel="stylesheet" href="/assets/vendor/css/select2-bootstrap.css">
     <!-- endbuild -->
 
     <!-- START Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicons/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicons/android-chrome-256x256.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png">
-    <link rel="mask-icon" href="assets/images/favicons/safari-pinned-tab.svg" color="#f85d4c">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicons/android-chrome-256x256.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/assets/images/favicons/safari-pinned-tab.svg" color="#f85d4c">
     <meta name="theme-color" content="#ffffff">
     <!-- END Favicon -->
 
@@ -69,7 +71,7 @@
 
 
 <body class="sidebar-full-height sidebar-full-height ">
-<script src="assets/vendor/js/lib.min.js"></script>
+<script src="/assets/vendor/js/lib.min.js"></script>
 
 <div class="main-wrap">
     <nav class="navigation">
@@ -325,7 +327,7 @@
                         <div class="media">
                             <div class="media-left media-top">
                                 <div class="avatar avatar-image avatar-inline">
-                                    <img src="../assets/images/avatars/avatar-34.jpg" alt="Avatar">
+                                    <img src="/assets/images/avatars/avatar-34.jpg" alt="Avatar">
                                     <i class="avatar-status bg-success avatar-status-bottom b-sidebar-status"></i>
                                 </div>
                             </div>
@@ -387,16 +389,20 @@
     <div class="content">
         @yield('content')
     </div>
+
+    @yield('javascript')
 </div>
 
-<link rel="stylesheet" href="assets/vendor/css/lib.min.css">
+<link rel="stylesheet" href="/assets/vendor/css/lib.min.css">
 
 <!-- JS -->
-<script src="assets/javascript/app/helpers.js"></script>
-<script src="assets/javascript/app/layoutControl.js"></script>
-<script src="assets/javascript/app/rightSidebar.js"></script>
-<script src="assets/javascript/app/sidebar.js"></script>
-<script src="assets/javascript/app/main.js"></script>
+<script src="/assets/javascript/app/helpers.js"></script>
+<script src="/assets/javascript/app/layoutControl.js"></script>
+<script src="/assets/javascript/app/rightSidebar.js"></script>
+<script src="/assets/javascript/app/sidebar.js"></script>
+<script src="/assets/javascript/app/main.js"></script>
+<script src="/assets/javascript/plugins-init.js"></script>
+<script src="/assets/javascript/holder.min.js"></script>
 </body>
 
 </html>

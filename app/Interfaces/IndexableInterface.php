@@ -3,8 +3,6 @@ declare(strict_types = 1);
 
 namespace App\Interfaces;
 
-use Illuminate\Database\Eloquent\Collection;
-
 /**
  * Interface IndexableInterface
  * @package App\Interfaces
@@ -13,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 interface IndexableInterface
 {
     /**
-     * @return Collection
+     * @return mixed
      */
-    public function index(): Collection;
+    public function index();
 }
