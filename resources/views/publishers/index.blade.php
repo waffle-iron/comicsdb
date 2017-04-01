@@ -62,58 +62,32 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default shadow-box b-a-0 m-t-3">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th class="small text-muted text-uppercase"><strong>Name</strong></th>
-                            <th class="small text-muted text-uppercase"><strong>Founded At</strong></th>
-                            <th class="small text-muted text-uppercase"><strong>Social</strong></th>
-                            <th class="small text-muted text-uppercase"><strong>Address</strong></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($publishers as $publisher)
-                            <tr>
-                                <td class="v-a-m">
-                                    <div class="media">
-                                        <div class="media-left media-middle media-middle">
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title data-original-title="Publisher Logo">
-                                                <div class="avatar avatar-image">
-                                                    <img class="media-object img-circle" src="" alt="Avatar">
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="media-body media-auto">
-                                            <h5 class="m-b-0">
-                                                {{ $publisher->name }}
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="v-a-m">{{ $publisher->founded_at->format('Y-m-d') }}</td>
-                                <td class="v-a-m">
-                                    @if (!empty($publisher->twitter))
-                                        <a href="http://twitter.com/{{ $publisher->twitter }}" data-toggle="tooltip" data-placement="top" title data-original-title="Twitter Profile" target="_blank"><i class="fa fa-fw fa-twitter-square text-muted fa-lg"></i></a>
-                                    @endif
 
-                                    @if (!empty($publisher->website))
-                                        <a href="{{ $publisher->website }}" data-toggle="tooltip" data-placement="top" title data-original-title="Website" target="_blank"><i class="fa fa-fw fa-globe text-muted fa-lg"></i></a>
-                                    @endif
-                                </td>
-                                <td class="v-a-m">
-                                    {{ $publisher->address }}<br>
-                                    {{ $publisher->city }} {{ $publisher->zip }}<br>
-                                    {{ $publisher->country }}
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+        <div class="row m-t-3">
+            @foreach($publishers as $publisher)
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="thumbnail shadow-box b-a-0">
+                        <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="#" data-holder style="height: 200px; width: 100%;">
+                        <div class="caption">
+                            <div class="pull-right m-t-1">
+                                <i class="fa fa-star-o"></i> {{ $publisher->founded_at->format('Y') }}
+                            </div>
+                            <h4>{{ $publisher->name }}</h4>
+                            <p class="text-gray-light m-t-1 m-b-0 text-right" style="line-height: 10px;">
+                                <small>
+                                {{ $publisher->address }}<br>
+                                {{ $publisher->city }}, {{ $publisher->state }} {{ $publisher->zip }}<br>
+                                {{ $publisher->country }}
+                                </small>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endforeach
+        </div>
+
+        <div class="text-center">
+            {{ $publishers->links() }}
         </div>
     </div>
 @endsection

@@ -5,7 +5,7 @@ namespace App\Repositories;
 
 use App\Interfaces\IndexableInterface;
 use App\Models\Publisher;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 /**
  * Class PublisherRepository
@@ -16,11 +16,25 @@ class PublisherRepository
     implements IndexableInterface
 {
     /**
-     * @return Collection
+     * Error message bag
+     * @var \Illuminate\Support\MessageBag
      */
-    public function index(): Collection
+    protected $errors;
+
+    public function index()
     {
-        $publishers = Publisher::all();
+        $publishers = Publisher::orderBy('name')
+            ->paginate(3);
+
         return $publishers;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        Publisher::create($request->all());
     }
 }

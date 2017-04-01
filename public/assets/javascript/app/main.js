@@ -256,6 +256,15 @@
                 text: String.fromCharCode(0xf03d)
             });
 
+            Holder.addTheme('star', {
+                bg: '#DADFE3',
+                fg: '#B3B9C5',
+                font: 'FontAwesome',
+                size: 26,
+                fontweight: 'normal',
+                text: String.fromCharCode(0xf005)
+            });
+
             Holder.addTheme('text', {
                 bg: '#DADFE3',
                 fg: '#B3B9C5'

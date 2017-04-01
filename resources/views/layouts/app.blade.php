@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="/assets/stylesheets/bootstrap.css">
     <link rel="stylesheet" href="/assets/stylesheets/app.css">
     <link rel="stylesheet" href="/assets/stylesheets/plugins.css">
+    <link rel="stylesheet" href="/assets/vendor/css/select2.css">
+    <link rel="stylesheet" href="/assets/vendor/css/select2-bootstrap.css">
     <!-- endbuild -->
 
     <!-- START Favicon -->
@@ -399,6 +401,8 @@
 <script src="/assets/javascript/app/rightSidebar.js"></script>
 <script src="/assets/javascript/app/sidebar.js"></script>
 <script src="/assets/javascript/app/main.js"></script>
+<script src="/assets/javascript/plugins-init.js"></script>
+<script src="/assets/javascript/holder.min.js"></script>
 </body>
 
 </html>

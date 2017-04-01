@@ -9,6 +9,16 @@ use Laravel\Scout\Searchable;
 
 /**
  * Class Publisher
+ *
+ * @property string name
+ * @property \DateTime founded_at
+ * @property string twitter
+ * @property string website
+ * @property string address
+ * @property string city
+ * @property string state
+ * @property string zip
+ * @property string country
  * @package App\Models
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
@@ -16,6 +26,11 @@ class Publisher extends Model
 {
     use SoftDeletes;
     use Searchable;
+
+    /**
+     * @var array
+     */
+    protected $guarded = [];
 
     /**
      * @var array

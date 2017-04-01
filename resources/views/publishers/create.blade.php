@@ -39,45 +39,87 @@
     <!-- END Sub-Navbar with Header and Breadcrumbs-->
 
     <div class="container">
+        @if (count($errors) > 0)
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div class="alert b-l-danger bg-white b-r-a-0 b-l-3 b-r-0 b-b-0 b-t-0 shadow-box" role="alert">
+                        <div class="media">
+                            <div class="media-left">
+                                <span class="fa fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                    <i class="fa fa-close fa-stack-1x text-white"></i>
+                                </span>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="m-b-1 media-heading">Some errors occured</h5>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 {!! Form::open(['route' => 'publishers.store']) !!}
-                <div class="panel panel-default b-a-0 shadow-box">
-                    <div class="panel-body">
-                        {!! Form::token() !!}
-                        <div class="form-group">
-                            {!! Form::label('name', 'Name') !!}
-                            {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('founded_at', 'Founded') !!}
-                            {!! Form::text('founded_at', null, ['class' => 'form-control', 'name' => 'daterange-date-picker']) !!}
-                        </div>
-                        <div class="hr-text hr-text-left">
-                            <h6 class="text-white bg-white-i">
-                                <strong>Social</strong>
-                            </h6>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('twitter', 'Twitter account') !!}
-                            <div class="input-group">
-                                <span class="input-group-addon">https://twitter.com/</span>
-                                {!! Form::text('twitter', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('website', 'Website') !!}
-                            {!! Form::text('website', null, ['class' => 'form-control']) !!}
-                        </div>
-                        <div class="hr-text hr-text-left">
-                            <h6 class="text-white bg-white-i">
-                                <strong>Address</strong>
-                            </h6>
-                        </div>
+                {!! Form::token() !!}
+                {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
+                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    {!! Form::label('name', 'Name *') !!}
+                    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('founded_at', 'Founded') !!}
+                    {!! Form::text('founded_at', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="hr-text hr-text-left">
+                    <h6 class="text-white">
+                        <strong>Social</strong>
+                    </h6>
+                </div>
+                <div class="form-group">
+                    {!! Form::label('twitter', 'Twitter account') !!}
+                    <div class="input-group">
+                        <span class="input-group-addon">https://twitter.com/</span>
+                        {!! Form::text('twitter', null, ['class' => 'form-control']) !!}
                     </div>
-                    <div class="panel-footer text-right">
-                        <button type="submit" class="btn btn-primary">Save Publisher</button>
-                    </div>
+                </div>
+                <div class="form-group">
+                    {!! Form::label('website', 'Website') !!}
+                    {!! Form::text('website', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="hr-text hr-text-left">
+                    <h6 class="text-white">
+                        <strong>Address</strong>
+                    </h6>
+                </div>
+                <div class="form-group">
+                    {!! Form::label('address', 'Address') !!}
+                    {!! Form::text('address', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('city', 'City') !!}
+                    {!! Form::text('city', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('state', 'State') !!}
+                    {!! Form::text('state', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('zip', 'Zipcode') !!}
+                    {!! Form::text('zip', null, ['class' => 'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::label('country', 'Country') !!}
+                    {!! Form::select('country', $countries, null, ['id' => 'country', 'class' => 'form-control select2 select2-input']) !!}
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary">Save Publisher</button>
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -88,9 +130,11 @@
 @section('javascript')
     <script src="/assets/vendor/js/moment.min.js"></script>
     <script src="/assets/vendor/js/daterangepicker.min.js"></script>
+    <script src="/assets/vendor/js/select2.min.js"></script>
+    <script src="/assets/vendor/js/bootstrap-select.min.js"></script>
     <script>
         $(function() {
-            $('input[name="daterange-date-picker"]').daterangepicker({
+            $('input[name="founded_at"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
                 minDate: "1960-01-01",
