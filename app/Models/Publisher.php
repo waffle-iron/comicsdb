@@ -30,7 +30,7 @@ class Publisher extends Model
     /**
      * @var array
      */
-    protected $guarded = [];
+    protected $guarded = [ ];
 
     /**
      * @var array
