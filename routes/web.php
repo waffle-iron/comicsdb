@@ -23,4 +23,6 @@ Route::group(['prefix' => 'publishers'], function() {
     Route::get('/', ['as' => 'publishers.index', 'uses' => 'PublisherController@index']);
     Route::get('create', ['as' => 'publishers.create', 'uses' => 'PublisherController@create']);
     Route::post('store', ['as' => 'publishers.store', 'uses' => 'PublisherController@store']);
+    Route::get('{id}/edit', ['as' => 'publishers.edit', 'uses' => 'PublisherController@edit'])->where(['id' => '[0-9]+']);
+    Route::post('update', ['as' => 'publishers.update', 'uses' => 'PublisherController@update']);
 });

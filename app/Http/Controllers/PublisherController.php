@@ -3,9 +3,9 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePublisherRequest;
 use App\Repositories\PublisherRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use PragmaRX\Countries\Support\CountriesRepository;
 
 /**
  * Class PublisherController
@@ -41,6 +41,21 @@ class PublisherController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(int $id)
+    {
+        $countries = \Countries::all()->pluck('name.common', 'name.common');
+        $publisher = $this->publisherRepository->get($id);
+
+        return view('publishers.edit', [
+            'publisher' => $publisher,
+            'countries' => $countries
+        ]);
+    }
+
+    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -53,25 +68,23 @@ class PublisherController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param StorePublisherRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StorePublisherRequest $request)
     {
-        $messages = [
-            'name.required' => 'The name cannot be empty.'
-        ];
-
-        $rules = [
-            'name' => 'required'
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
         $this->publisherRepository->store($request);
+
+        return redirect()->route('publishers.index');
+    }
+
+    /**
+     * @param StorePublisherRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(StorePublisherRequest $request)
+    {
+        $this->publisherRepository->update($request);
 
         return redirect()->route('publishers.index');
     }

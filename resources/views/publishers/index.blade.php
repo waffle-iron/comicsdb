@@ -29,8 +29,7 @@
                                 <i class="fa fa-fw fa-home"></i>
                             </a>
                         </li>
-                        <li>Publishers</li>
-                        <li class="active">Publishers List</li>
+                        <li class="active">Publishers</li>
                     </ol>
                 </div>
             </div>
@@ -73,11 +72,35 @@
                                 <i class="fa fa-star-o"></i> {{ $publisher->founded_at->format('Y') }}
                             </div>
                             <h4>{{ $publisher->name }}</h4>
+                            <div class="btn-group pull-left">
+                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-fw fa-gear"></i>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-fw fa-eye text-gray-lighter m-r-1"></i> View
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="{{ route('publishers.edit', ['id' => $publisher->id]) }}">
+                                            <i class="fa fa-fw fa-edit text-gray-lighter m-r-1"></i> Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-fw fa-trash text-gray-lighter m-r-1"></i> Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                             <p class="text-gray-light m-t-1 m-b-0 text-right" style="line-height: 10px;">
                                 <small>
-                                {{ $publisher->address }}<br>
-                                {{ $publisher->city }}, {{ $publisher->state }} {{ $publisher->zip }}<br>
-                                {{ $publisher->country }}
+                                    {{ $publisher->address }}<br>
+                                    {{ $publisher->city }}, {{ $publisher->state }} {{ $publisher->zip }}<br>
+                                    {{ $publisher->country }}
                                 </small>
                             </p>
                         </div>

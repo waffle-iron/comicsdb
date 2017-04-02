@@ -11,6 +11,7 @@ use Laravel\Scout\Searchable;
  * Class Publisher
  *
  * @property string name
+ * @property string uuid
  * @property \DateTime founded_at
  * @property string twitter
  * @property string website

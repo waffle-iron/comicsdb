@@ -24,17 +24,38 @@ class PublisherRepository
     public function index()
     {
         $publishers = Publisher::orderBy('name')
-            ->paginate(3);
+            ->paginate(6);
 
         return $publishers;
     }
 
     /**
+     * @param int $id
+     * @return Publisher
+     */
+    public function get(int $id) : Publisher
+    {
+        $publisher = Publisher::find($id);
+        return $publisher;
+    }
+
+    /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         Publisher::create($request->all());
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function update(Request $request)
+    {
+        $publisher = Publisher::find(
+            $request->get('id')
+        );
+        $publisher->fill($request->all());
+        $publisher->save();
     }
 }
