@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
@@ -49,9 +49,9 @@ class LogoController extends Controller
     {
         $file = $request->file('image');
         $extension = $file->getClientOriginalExtension();
-        $destinationFile = $request->get('uuid') . '.' . $extension;
+        $destinationFile = $request->get('uuid').'.'.$extension;
 
-        Storage::disk('publishers')->put($destinationFile,  File::get($file));
+        Storage::disk('publishers')->put($destinationFile, File::get($file));
 
         return redirect()->route('publishers.index');
     }
