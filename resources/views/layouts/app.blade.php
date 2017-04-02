@@ -403,6 +403,7 @@
 <script src="/assets/javascript/app/main.js"></script>
 <script src="/assets/javascript/plugins-init.js"></script>
 <script src="/assets/javascript/holder.min.js"></script>
+
 </body>
 
 </html>

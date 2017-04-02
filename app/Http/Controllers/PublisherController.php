@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePublisherRequest;
 use App\Repositories\PublisherRepository;
-use PragmaRX\Countries\Support\CountriesRepository;
 
 /**
  * Class PublisherController

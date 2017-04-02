@@ -66,7 +66,7 @@
             @foreach($publishers as $publisher)
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="thumbnail shadow-box b-a-0">
-                        <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="#" data-holder style="height: 200px; width: 100%;">
+                        <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}" data-holder style="height: 100%; width: 100%;">
                         <div class="caption">
                             <div class="pull-right m-t-1">
                                 <i class="fa fa-star-o"></i> {{ $publisher->founded_at->format('Y') }}
@@ -78,20 +78,30 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
+                                    <!-- View publisher in detail -->
                                     <li>
                                         <a href="#">
                                             <i class="fa fa-fw fa-eye text-gray-lighter m-r-1"></i> View
                                         </a>
                                     </li>
                                     <li role="separator" class="divider"></li>
+                                    <!-- Edit publisher -->
                                     <li>
                                         <a href="{{ route('publishers.edit', ['id' => $publisher->id]) }}">
                                             <i class="fa fa-fw fa-edit text-gray-lighter m-r-1"></i> Edit
                                         </a>
                                     </li>
+                                    <!-- Delete publisher -->
                                     <li>
                                         <a href="#">
                                             <i class="fa fa-fw fa-trash text-gray-lighter m-r-1"></i> Delete
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <!-- Upload publishers logo -->
+                                    <li>
+                                        <a href="{{ route('publishers.logo.add', ['id' => $publisher->id]) }}">
+                                            <i class="fa fa-fw fa-image text-gray-lighter m-r-1"></i> Upload Logo
                                         </a>
                                     </li>
                                 </ul>
