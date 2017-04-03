@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Repositories;
 
@@ -37,6 +37,6 @@ class LogoRepository implements StorableInterface, DeletableInterface
     public function delete(int $id)
     {
         $publisher = Publisher::find($id);
-        Storage::disk('publishers')->delete($publisher->uuid . '.png');
+        Storage::disk('publishers')->delete($publisher->uuid.'.png');
     }
 }

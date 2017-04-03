@@ -58,7 +58,7 @@ class LogoController extends Controller
      */
     public function delete(Request $request)
     {
-        $id = (int)$request->get('id');
+        $id = (int) $request->get('id');
         $this->logoRepository->delete($id);
 
         return redirect()->route('publishers.index');
