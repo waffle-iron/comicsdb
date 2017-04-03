@@ -3,7 +3,10 @@ declare(strict_types = 1);
 
 namespace App\Repositories;
 
+use App\Interfaces\GetableInterface;
 use App\Interfaces\IndexableInterface;
+use App\Interfaces\StorableInterface;
+use App\Interfaces\UpdatableInterface;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 
@@ -12,8 +15,7 @@ use Illuminate\Http\Request;
  * @package App\Repositories
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class PublisherRepository
-    implements IndexableInterface
+class PublisherRepository implements IndexableInterface, GetableInterface, StorableInterface, UpdatableInterface
 {
     /**
      * Error message bag

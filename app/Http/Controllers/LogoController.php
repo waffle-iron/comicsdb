@@ -3,12 +3,9 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
+use App\Repositories\LogoRepository;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Class LogoController
@@ -18,14 +15,17 @@ use Illuminate\Support\Facades\Storage;
 class LogoController extends Controller
 {
     private $publisherRepository;
+    private $logoRepository;
 
     /**
      * PublisherController constructor.
      * @param PublisherRepository $publisherRepository
+     * @param LogoRepository $logoRepository
      */
-    public function __construct(PublisherRepository $publisherRepository)
+    public function __construct(PublisherRepository $publisherRepository, LogoRepository $logoRepository)
     {
         $this->publisherRepository = $publisherRepository;
+        $this->logoRepository = $logoRepository;
     }
 
     /**
@@ -47,11 +47,19 @@ class LogoController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('image');
-        $extension = $file->getClientOriginalExtension();
-        $destinationFile = $request->get('uuid').'.'.$extension;
+        $this->logoRepository->store($request);
+        return redirect()->route('publishers.index');
+    }
 
-        Storage::disk('publishers')->put($destinationFile, File::get($file));
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @internal param int $id
+     */
+    public function delete(Request $request)
+    {
+        $id = (int)$request->get('id');
+        $this->logoRepository->delete($id);
 
         return redirect()->route('publishers.index');
     }

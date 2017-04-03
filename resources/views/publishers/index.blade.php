@@ -66,7 +66,7 @@
             @foreach($publishers as $publisher)
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="thumbnail shadow-box b-a-0">
-                        <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}" data-holder style="height: 100%; width: 100%;">
+                        <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}" data-holder style="width: 100%; height: 200px">
                         <div class="caption">
                             <div class="pull-right m-t-1">
                                 <i class="fa fa-star-o"></i> {{ $publisher->founded_at->format('Y') }}
@@ -104,6 +104,14 @@
                                             <i class="fa fa-fw fa-image text-gray-lighter m-r-1"></i> Upload Logo
                                         </a>
                                     </li>
+                                    @if (Storage::disk('publishers')->exists($publisher->uuid . '.png'))
+                                        <!-- Remove publishers logo -->
+                                        <li>
+                                            <a href="#myModal" class="deleteLogo" data-toggle="modal" data-id="{{ $publisher->id }}">
+                                                <i class="fa fa-fw fa-image text-gray-lighter m-r-1"></i> Remove Logo
+                                            </a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                             <p class="text-gray-light m-t-1 m-b-0 text-right" style="line-height: 10px;">
@@ -123,4 +131,36 @@
             {{ $publishers->links() }}
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content b-a-0">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#xD7;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Remove Publishers Logo</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to remove the Publisher Logo?
+                </div>
+                <div class="modal-footer">
+                    {!! Form::open(['route' => ['publishers.logo.delete'], 'method' => 'delete']) !!}
+                    {!! Form::hidden('id', 1) !!}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Remove Logo</button>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Live Demo -->
+@endsection
+
+@section('javascript')
+    <script>
+        $('.deleteLogo').click(function() {
+            var id = $(this).data('id');
+            $('input[name="id"]').val(id);
+        });
+    </script>
 @endsection
