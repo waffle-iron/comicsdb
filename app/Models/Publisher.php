@@ -24,7 +24,7 @@ use Laravel\Scout\Searchable;
  * @property \DateTime created_at
  * @property \DateTime updated_at
  * @property \DateTime deleted_at
- * 
+ *
  * @package App\Models
  * @author Maik Pütz <maikpuetz@gmail.com>
  */

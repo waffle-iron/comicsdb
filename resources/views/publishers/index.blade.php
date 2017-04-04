@@ -98,12 +98,14 @@
                                         </a>
                                     </li>
                                     <li role="separator" class="divider"></li>
-                                    <!-- Upload publishers logo -->
-                                    <li>
-                                        <a href="{{ route('publishers.logo.add', ['id' => $publisher->id]) }}">
-                                            <i class="fa fa-fw fa-image text-gray-lighter m-r-1"></i> Upload Logo
-                                        </a>
-                                    </li>
+                                    @if (!Storage::disk('publishers')->exists($publisher->uuid . '.png'))
+                                        <!-- Upload publishers logo -->
+                                        <li>
+                                            <a href="{{ route('publishers.logo.add', ['id' => $publisher->id]) }}">
+                                                <i class="fa fa-fw fa-image text-gray-lighter m-r-1"></i> Upload Logo
+                                            </a>
+                                        </li>
+                                    @endif
                                     @if (Storage::disk('publishers')->exists($publisher->uuid . '.png'))
                                         <!-- Remove publishers logo -->
                                         <li>
