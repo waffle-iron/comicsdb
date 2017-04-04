@@ -10,8 +10,9 @@ use Laravel\Scout\Searchable;
 /**
  * Class Publisher
  *
- * @property string name
+ * @property int id
  * @property string uuid
+ * @property string name
  * @property \DateTime founded_at
  * @property string twitter
  * @property string website
@@ -20,6 +21,10 @@ use Laravel\Scout\Searchable;
  * @property string state
  * @property string zip
  * @property string country
+ * @property \DateTime created_at
+ * @property \DateTime updated_at
+ * @property \DateTime deleted_at
+ * 
  * @package App\Models
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
