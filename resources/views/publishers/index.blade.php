@@ -72,8 +72,8 @@
                                 <i class="fa fa-star-o"></i> {{ $publisher->founded_at->format('Y') }}
                             </div>
                             <h4>{{ $publisher->name }}</h4>
-                            <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            <div class="btn-group pull-left dropup">
+                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-fw fa-gear"></i>
                                     <span class="caret"></span>
                                 </button>
@@ -93,7 +93,7 @@
                                     </li>
                                     <!-- Delete publisher -->
                                     <li>
-                                        <a href="#">
+                                        <a href="#deletePublisherModal" class="deletePublisher" data-toggle="modal" data-id="{{ $publisher->id }}">
                                             <i class="fa fa-fw fa-trash text-gray-lighter m-r-1"></i> Delete
                                         </a>
                                     </li>
@@ -107,7 +107,7 @@
                                     @if (Storage::disk('publishers')->exists($publisher->uuid . '.png'))
                                         <!-- Remove publishers logo -->
                                         <li>
-                                            <a href="#myModal" class="deleteLogo" data-toggle="modal" data-id="{{ $publisher->id }}">
+                                            <a href="#deleteLogoModal" class="deleteLogo" data-toggle="modal" data-id="{{ $publisher->id }}">
                                                 <i class="fa fa-fw fa-image text-gray-lighter m-r-1"></i> Remove Logo
                                             </a>
                                         </li>
@@ -132,22 +132,44 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- Delete Logo Modal -->
+    <div class="modal fade" id="deleteLogoModal" tabindex="-1" role="dialog" aria-labelledby="deleteLogoModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content b-a-0">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#xD7;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Remove Publishers Logo</h4>
+                    <h4 class="modal-title" id="deleteLogoModalLabel">Remove Publishers Logo</h4>
                 </div>
                 <div class="modal-body">
                     Are you sure you want to remove the Publisher Logo?
                 </div>
                 <div class="modal-footer">
                     {!! Form::open(['route' => ['publishers.logo.delete'], 'method' => 'delete']) !!}
-                    {!! Form::hidden('id', 1) !!}
+                    {!! Form::hidden('id', 0) !!}
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-danger">Remove Logo</button>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Publisher Modal -->
+    <div class="modal fade" id="deletePublisherModal" tabindex="-1" role="dialog" aria-labelledby="deletePublisherModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content b-a-0">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#xD7;</span></button>
+                    <h4 class="modal-title" id="deletePublisherModalLabel">Remove Publisher</h4>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to remove the Publisher?
+                </div>
+                <div class="modal-footer">
+                    {!! Form::open(['route' => ['publishers.delete'], 'method' => 'delete']) !!}
+                    {!! Form::hidden('id', 0) !!}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Remove Publisher</button>
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -159,6 +181,11 @@
 @section('javascript')
     <script>
         $('.deleteLogo').click(function() {
+            var id = $(this).data('id');
+            $('input[name="id"]').val(id);
+        });
+
+        $('.deletePublisher').click(function() {
             var id = $(this).data('id');
             $('input[name="id"]').val(id);
         });

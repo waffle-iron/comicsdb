@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePublisherRequest;
 use App\Repositories\PublisherRepository;
+use Illuminate\Http\Request;
 
 /**
  * Class PublisherController
@@ -84,6 +85,18 @@ class PublisherController extends Controller
     public function update(StorePublisherRequest $request)
     {
         $this->publisherRepository->update($request);
+
+        return redirect()->route('publishers.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request)
+    {
+        $id = (int) $request->get('id');
+        $this->publisherRepository->delete($id);
 
         return redirect()->route('publishers.index');
     }

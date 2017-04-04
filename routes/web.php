@@ -25,6 +25,7 @@ Route::group(['prefix' => 'publishers'], function() {
     Route::post('store', ['as' => 'publishers.store', 'uses' => 'PublisherController@store']);
     Route::get('{id}/edit', ['as' => 'publishers.edit', 'uses' => 'PublisherController@edit'])->where(['id' => '[0-9]+']);
     Route::post('update', ['as' => 'publishers.update', 'uses' => 'PublisherController@update']);
+    Route::delete('/', ['as' => 'publishers.delete', 'uses' => 'PublisherController@delete']);
 
     Route::get('{id}/logo', ['as' => 'publishers.logo.add', 'uses' => 'LogoController@create'])->where(['id' => '[0-9]+']);
     Route::post('logo', ['as' => 'publishers.logo.store', 'uses' => 'LogoController@store']);

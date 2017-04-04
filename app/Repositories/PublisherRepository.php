@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Repositories;
 
+use App\Interfaces\DeletableInterface;
 use App\Interfaces\GetableInterface;
 use App\Interfaces\IndexableInterface;
 use App\Interfaces\StorableInterface;
@@ -15,7 +16,7 @@ use Illuminate\Http\Request;
  * @package App\Repositories
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class PublisherRepository implements IndexableInterface, GetableInterface, StorableInterface, UpdatableInterface
+class PublisherRepository implements IndexableInterface, GetableInterface, StorableInterface, UpdatableInterface, DeletableInterface
 {
     /**
      * Error message bag
@@ -57,7 +58,17 @@ class PublisherRepository implements IndexableInterface, GetableInterface, Stora
         $publisher = Publisher::find(
             $request->get('id')
         );
+
         $publisher->fill($request->all());
         $publisher->save();
+    }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        Publisher::find($id)->delete();
     }
 }
