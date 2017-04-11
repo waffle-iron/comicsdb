@@ -47,4 +47,12 @@ class Publisher extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function volumes()
+    {
+        return $this->hasMany(Volume::class, 'publisher_id', 'id');
+    }
 }

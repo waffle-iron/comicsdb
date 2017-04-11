@@ -371,6 +371,7 @@
                             <i class="fa fa-home fa-lg"></i><span class="nav-label">Dashboard</span>
                         </a>
                     </li>
+                    <!-- Publishers -->
                     <li>
                         <a href="#" title="Publisher">
                             <i class="fa fa-newspaper-o fa-lg"></i><span class="nav-label">Publishers</span><i class="fa arrow"></i>
@@ -379,6 +380,20 @@
                             <li class="">
                                 <a href="{{ route('publishers.index') }}">
                                     <span class="nav-label">Publishers List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Volumes -->
+                    <li>
+                        <a href="#" title="Volumes">
+                            <i class="fa fa-cubes fa-lg"></i><span class="nav-label">Volumes</span><i class="fa arrow"></i>
+                        </a>
+                        <ul>
+                            <li class="">
+                                <a href="#">
+                                    <span class="nav-label">Volumes List</span>
                                 </a>
                             </li>
                         </ul>

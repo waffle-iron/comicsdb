@@ -17,9 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('home', ['as' => 'dashboard.index', 'uses' => 'HomeController@index']);
 Route::get('dashboard', ['as' => 'dashboard.index', 'uses' => 'HomeController@index']);
 
-Route::group(['prefix' => 'publishers'], function() {
+Route::group(['prefix' => 'publishers', 'middleware' => 'auth'], function() {
     Route::get('/', ['as' => 'publishers.index', 'uses' => 'PublisherController@index']);
     Route::get('create', ['as' => 'publishers.create', 'uses' => 'PublisherController@create']);
     Route::post('store', ['as' => 'publishers.store', 'uses' => 'PublisherController@store']);
