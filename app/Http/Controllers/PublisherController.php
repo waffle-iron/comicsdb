@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePublisherRequest;
+use App\Interfaces\DisplayableInterface;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
  * @package App\Http\Controllers
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class PublisherController extends Controller
+class PublisherController extends Controller implements DisplayableInterface
 {
     /** @var PublisherRepository  */
     private $publisherRepository;
@@ -99,5 +100,18 @@ class PublisherController extends Controller
         $this->publisherRepository->delete($id);
 
         return redirect()->route('publishers.index');
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(int $id)
+    {
+        $publisher = $this->publisherRepository->get($id);
+
+        return view('publishers.show', [
+            'publisher' => $publisher
+        ]);
     }
 }

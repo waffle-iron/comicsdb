@@ -80,7 +80,7 @@
                                 <ul class="dropdown-menu">
                                     <!-- View publisher in detail -->
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ route('publishers.show', ['id' => $publisher->id]) }}">
                                             <i class="fa fa-fw fa-eye text-gray-lighter m-r-1"></i> View
                                         </a>
                                     </li>

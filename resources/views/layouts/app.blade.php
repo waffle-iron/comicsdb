@@ -267,6 +267,7 @@
                             <!-- END Messages Dropdown Menu -->
                         </li>
 
+                        @if(Auth::check())
                         <li class="dropdown">
                             <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" href="#" role="button">
                                 <span class="m-r-1">{{ Auth::user()->name }}</span>
@@ -306,6 +307,7 @@
                                 </li>
                             </ul>
                         </li>
+                        @endif
                     </ul>
                     <!-- END Right Side Navbar -->
                 </div>
@@ -324,6 +326,7 @@
                 <div class="add-on-container">
                     <!-- START Sidebar Header -->
                     <div class="sidebar-container-default sidebar-section">
+                        @if(Auth::check())
                         <div class="media">
                             <div class="media-left media-top">
                                 <div class="avatar avatar-image avatar-inline">
@@ -349,6 +352,7 @@
                                 <!-- END Usage & Gear Icon -->
                             </div>
                         </div>
+                        @endif
                     </div>
                     <!-- END Sidebar Header -->
 
