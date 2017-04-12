@@ -55,6 +55,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'publishers' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/publishers'),
+            'url' => env('APP_URL').'/storage/publishers',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_KEY'),
