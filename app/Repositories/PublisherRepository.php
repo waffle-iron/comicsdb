@@ -3,11 +3,6 @@ declare(strict_types = 1);
 
 namespace App\Repositories;
 
-use App\Interfaces\DeletableInterface;
-use App\Interfaces\GetableInterface;
-use App\Interfaces\IndexableInterface;
-use App\Interfaces\StorableInterface;
-use App\Interfaces\UpdatableInterface;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 
@@ -16,7 +11,7 @@ use Illuminate\Http\Request;
  * @package App\Repositories
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class PublisherRepository implements IndexableInterface, GetableInterface, StorableInterface, UpdatableInterface, DeletableInterface
+class PublisherRepository
 {
     /**
      * Error message bag
@@ -24,10 +19,25 @@ class PublisherRepository implements IndexableInterface, GetableInterface, Stora
      */
     protected $errors;
 
-    public function index()
+    /**
+     * @param int $elementsPerPage
+     * @return mixed
+     */
+    public function index($elementsPerPage = 6)
     {
         $publishers = Publisher::orderBy('name')
-            ->paginate(6);
+            ->paginate($elementsPerPage);
+
+        return $publishers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function all()
+    {
+        $publishers = Publisher::orderBy('name')
+            ->get();
 
         return $publishers;
     }
@@ -44,6 +54,7 @@ class PublisherRepository implements IndexableInterface, GetableInterface, Stora
 
     /**
      * @param Request $request
+     * @return void
      */
     public function store(Request $request)
     {
@@ -52,6 +63,7 @@ class PublisherRepository implements IndexableInterface, GetableInterface, Stora
 
     /**
      * @param Request $request
+     * @return void
      */
     public function update(Request $request)
     {

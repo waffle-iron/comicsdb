@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
  * @package App\Http\Controllers
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class PublisherController extends Controller implements DisplayableInterface
+class PublisherController extends Controller
 {
     /** @var PublisherRepository  */
     private $publisherRepository;

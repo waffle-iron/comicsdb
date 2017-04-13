@@ -392,7 +392,7 @@
                         </a>
                         <ul>
                             <li class="">
-                                <a href="#">
+                                <a href="{{ route('volumes.index') }}">
                                     <span class="nav-label">Volumes List</span>
                                 </a>
                             </li>

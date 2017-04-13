@@ -33,3 +33,7 @@ Route::group(['prefix' => 'publishers', 'middleware' => 'auth'], function() {
     Route::post('logo', ['as' => 'publishers.logo.store', 'uses' => 'LogoController@store']);
     Route::delete('logo', ['as' => 'publishers.logo.delete', 'uses' => 'LogoController@delete']);
 });
+
+Route::group(['prefix' => 'volumes', 'middleware' => 'auth'], function() {
+    Route::get('/', ['as' => 'volumes.index', 'uses' => 'VolumeController@index']);
+});
