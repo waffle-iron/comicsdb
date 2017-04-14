@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace App\Repositories;
 
 use App\Models\Volume;
+use Illuminate\Http\Request;
 
 /**
  * Class VolumeRepository
@@ -28,5 +29,25 @@ class VolumeRepository
             ->paginate($elementsPerPage);
 
         return $volumes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function all()
+    {
+        $volumes = Volume::orderBy('name')
+            ->get();
+
+        return $volumes;
+    }
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    public function store(Request $request)
+    {
+        Volume::create($request->all());
     }
 }

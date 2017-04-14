@@ -382,6 +382,11 @@
                                     <span class="nav-label">Publishers List</span>
                                 </a>
                             </li>
+                            <li class="">
+                                <a href="{{ route('publishers.create') }}">
+                                    <span class="nav-label">Create Publisher</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
@@ -394,6 +399,11 @@
                             <li class="">
                                 <a href="{{ route('volumes.index') }}">
                                     <span class="nav-label">Volumes List</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{{ route('volumes.create') }}">
+                                    <span class="nav-label">Create Volume</span>
                                 </a>
                             </li>
                         </ul>

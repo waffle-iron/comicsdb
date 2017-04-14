@@ -36,4 +36,6 @@ Route::group(['prefix' => 'publishers', 'middleware' => 'auth'], function() {
 
 Route::group(['prefix' => 'volumes', 'middleware' => 'auth'], function() {
     Route::get('/', ['as' => 'volumes.index', 'uses' => 'VolumeController@index']);
+    Route::get('create', ['as' => 'volumes.create', 'uses' => 'VolumeController@create']);
+    Route::post('store', ['as' => 'volumes.store', 'uses' => 'VolumeController@store']);
 });

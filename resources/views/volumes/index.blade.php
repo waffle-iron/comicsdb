@@ -64,7 +64,7 @@
 
         <div class="row m-t-3">
             @foreach ($volumes as $volume)
-                <div class="col-lg-3">
+                <div class="col-md-4 col-lg-3">
                     <div class="panel panel-default shadow-box b-l-2 b-t-0 b-r-0 b-b-0">
                         <div class="panel-body">
                             <div class="row">
@@ -81,11 +81,11 @@
                         </div>
                         <div class="panel-footer text-gray-light">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-xs-8">
                                     <i class="m-r-1 fa fa-newspaper-o"></i>
                                     {{ $volume->publisher()->first()->name }}
                                 </div>
-                                <div class="col-lg-6 text-right">
+                                <div class="col-xs-4 text-right">
                                     <i class="m-r-1 fa fa-file"></i>
                                     0
                                 </div>
