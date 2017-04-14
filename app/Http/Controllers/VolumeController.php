@@ -43,7 +43,7 @@ class VolumeController extends Controller
     public function create()
     {
         $publishersRepository = new PublisherRepository();
-        $publishers = $publishersRepository->all()->pluck('name', 'id');
+        $publishers           = $publishersRepository->all()->pluck('name', 'id');
 
         return view('volumes.create', [
             'publishers' => $publishers
