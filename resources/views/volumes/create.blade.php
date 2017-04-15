@@ -68,6 +68,7 @@
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 {!! Form::open(['route' => 'volumes.store']) !!}
                 {!! Form::token() !!}
+                {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     {!! Form::label('name', 'Name *') !!}
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}

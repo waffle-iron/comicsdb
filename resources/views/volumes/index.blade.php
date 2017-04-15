@@ -68,13 +68,17 @@
                     <div class="panel panel-default shadow-box b-l-2 b-t-0 b-r-0 b-b-0">
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-12 text-right">
-                                    <h3 class="f-w-300 m-t-0 m-b-0 text-gray-light">{{ $volume->name }}</h3>
-                                    <p class="f-w-300 m-t-0 m-b-0">
-                                        &nbsp;
-                                        @if (isset($volume->number))
-                                            Vol. {{ $volume->number }}
-                                        @endif
+                                <div class="col-xs-9">
+                                    <p class="f-w-300 m-t-0 m-b-0">{{ $volume->name }}</p>
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                    <p class="f-w-300 m-t-0 m-b-0 text-gray-light">
+                                        <small>
+                                            &nbsp;
+                                            @if (isset($volume->number))
+                                                Vol. {{ $volume->number }}
+                                            @endif
+                                        </small>
                                     </p>
                                 </div>
                             </div>
