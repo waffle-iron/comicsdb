@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreVolumeRequest;
+use App\Http\Requests\VolumeRequest;
 use App\Repositories\PublisherRepository;
 use App\Repositories\VolumeRepository;
 
@@ -51,12 +51,39 @@ class VolumeController extends Controller
     }
 
     /**
-     * @param StoreVolumeRequest $request
+     * @param VolumeRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreVolumeRequest $request)
+    public function store(VolumeRequest $request)
     {
         $this->volumeRepository->store($request);
+
+        return redirect()->route('volumes.index');
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(int $id)
+    {
+        $publisherRepository = new PublisherRepository();
+        $publishers          = $publisherRepository->all()->pluck('name', 'id');
+        $volume              = $this->volumeRepository->get($id);
+
+        return view('volumes.edit', [
+            'publishers' => $publishers,
+            'volume' => $volume
+        ]);
+    }
+
+    /**
+     * @param VolumeRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(VolumeRequest $request)
+    {
+        $this->volumeRepository->update($request);
 
         return redirect()->route('volumes.index');
     }

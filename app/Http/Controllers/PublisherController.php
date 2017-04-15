@@ -3,8 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePublisherRequest;
-use App\Interfaces\DisplayableInterface;
+use App\Http\Requests\PublisherRequest;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;
 
@@ -42,6 +41,29 @@ class PublisherController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        $countries = \Countries::all()->pluck('name.common', 'name.common');
+
+        return view('publishers.create', [
+            'countries' => $countries
+        ]);
+    }
+
+    /**
+     * @param PublisherRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(PublisherRequest $request)
+    {
+        $this->publisherRepository->store($request);
+
+        return redirect()->route('publishers.index');
+    }
+
+    /**
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -57,33 +79,10 @@ class PublisherController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        $countries = \Countries::all()->pluck('name.common', 'name.common');
-
-        return view('publishers.create', [
-            'countries' => $countries
-        ]);
-    }
-
-    /**
-     * @param StorePublisherRequest $request
+     * @param PublisherRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StorePublisherRequest $request)
-    {
-        $this->publisherRepository->store($request);
-
-        return redirect()->route('publishers.index');
-    }
-
-    /**
-     * @param StorePublisherRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(StorePublisherRequest $request)
+    public function update(PublisherRequest $request)
     {
         $this->publisherRepository->update($request);
 
