@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePublisherRequest;
+use App\Http\Requests\PublisherRequest;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;
 
@@ -68,10 +68,10 @@ class PublisherController extends Controller
     }
 
     /**
-     * @param StorePublisherRequest $request
+     * @param PublisherRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StorePublisherRequest $request)
+    public function store(PublisherRequest $request)
     {
         $this->publisherRepository->store($request);
 
@@ -79,10 +79,10 @@ class PublisherController extends Controller
     }
 
     /**
-     * @param StorePublisherRequest $request
+     * @param PublisherRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(StorePublisherRequest $request)
+    public function update(PublisherRequest $request)
     {
         $this->publisherRepository->update($request);
 

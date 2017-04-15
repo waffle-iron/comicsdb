@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreVolumeRequest;
+use App\Http\Requests\VolumeRequest;
 use App\Repositories\PublisherRepository;
 use App\Repositories\VolumeRepository;
 
@@ -51,10 +51,10 @@ class VolumeController extends Controller
     }
 
     /**
-     * @param StoreVolumeRequest $request
+     * @param VolumeRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreVolumeRequest $request)
+    public function store(VolumeRequest $request)
     {
         $this->volumeRepository->store($request);
 
