@@ -41,21 +41,6 @@ class PublisherController extends Controller
     }
 
     /**
-     * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit(int $id)
-    {
-        $countries = \Countries::all()->pluck('name.common', 'name.common');
-        $publisher = $this->publisherRepository->get($id);
-
-        return view('publishers.edit', [
-            'publisher' => $publisher,
-            'countries' => $countries
-        ]);
-    }
-
-    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -76,6 +61,21 @@ class PublisherController extends Controller
         $this->publisherRepository->store($request);
 
         return redirect()->route('publishers.index');
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(int $id)
+    {
+        $countries = \Countries::all()->pluck('name.common', 'name.common');
+        $publisher = $this->publisherRepository->get($id);
+
+        return view('publishers.edit', [
+            'publisher' => $publisher,
+            'countries' => $countries
+        ]);
     }
 
     /**

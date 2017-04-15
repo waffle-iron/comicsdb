@@ -38,4 +38,6 @@ Route::group(['prefix' => 'volumes', 'middleware' => 'auth'], function() {
     Route::get('/', ['as' => 'volumes.index', 'uses' => 'VolumeController@index']);
     Route::get('create', ['as' => 'volumes.create', 'uses' => 'VolumeController@create']);
     Route::post('store', ['as' => 'volumes.store', 'uses' => 'VolumeController@store']);
+    Route::get('{id}/edit', ['as' => 'volumes.edit', 'uses' => 'VolumeController@edit'])->where(['id' => '[0-9]+']);
+    Route::post('update', ['as' => 'volumes.update', 'uses' => 'VolumeController@update']);
 });

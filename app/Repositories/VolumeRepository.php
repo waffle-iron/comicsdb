@@ -3,8 +3,8 @@ declare(strict_types = 1);
 
 namespace App\Repositories;
 
+use App\Http\Requests\VolumeRequest;
 use App\Models\Volume;
-use Illuminate\Http\Request;
 
 /**
  * Class VolumeRepository
@@ -43,11 +43,36 @@ class VolumeRepository
     }
 
     /**
-     * @param Request $request
+     * @param int $id
+     * @return Volume
+     */
+    public function get(int $id) : Volume
+    {
+        $volume = Volume::find($id);
+
+        return $volume;
+    }
+
+    /**
+     * @param VolumeRequest $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(VolumeRequest $request)
     {
         Volume::create($request->all());
+    }
+
+    /**
+     * @param VolumeRequest $request
+     * @return void
+     */
+    public function update(VolumeRequest $request)
+    {
+        $volume = Volume::find(
+            $request->get('id')
+        );
+
+        $volume->fill($request->all());
+        $volume->save();
     }
 }

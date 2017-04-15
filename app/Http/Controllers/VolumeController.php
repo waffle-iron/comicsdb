@@ -60,4 +60,31 @@ class VolumeController extends Controller
 
         return redirect()->route('volumes.index');
     }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(int $id)
+    {
+        $publisherRepository = new PublisherRepository();
+        $publishers          = $publisherRepository->all()->pluck('name', 'id');
+        $volume              = $this->volumeRepository->get($id);
+
+        return view('volumes.edit', [
+            'publishers' => $publishers,
+            'volume' => $volume
+        ]);
+    }
+
+    /**
+     * @param VolumeRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(VolumeRequest $request)
+    {
+        $this->volumeRepository->update($request);
+
+        return redirect()->route('volumes.index');
+    }
 }
