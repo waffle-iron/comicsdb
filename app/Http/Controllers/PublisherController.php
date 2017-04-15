@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePublisherRequest;
-use App\Interfaces\DisplayableInterface;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;
 
