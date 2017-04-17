@@ -104,6 +104,17 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="panel panel-default shadow-box b-t-2 b-t-primary b-r-0 b-l-0 b-b-0">
+                        <div class="panel-body">
+                            <h3 class="display-4 text-center m-t-2">{{ $publisher->amountOfIssues() }}</h3>
+                            <p class="text-muted small text-uppercase m-t-0 m-b-2 text-center">
+                                <strong>Issues</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

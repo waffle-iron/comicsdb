@@ -55,4 +55,21 @@ class Publisher extends Model
     {
         return $this->hasMany(Volume::class, 'publisher_id', 'id');
     }
+
+    /**
+     * @return int
+     */
+    public function amountOfIssues() : int
+    {
+        $amount = 0;
+
+        $volumes = $this->volumes()->get();
+
+        foreach ($volumes as $volume)
+        {
+            $amount += $volume->issues()->count();
+        }
+
+        return $amount;
+    }
 }
