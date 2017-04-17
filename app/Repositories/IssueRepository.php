@@ -37,11 +37,36 @@ class IssueRepository
     }
 
     /**
+     * @param int $id
+     * @return Issue
+     */
+    public function get(int $id) : Issue
+    {
+        $issue = Issue::find($id);
+
+        return $issue;
+    }
+
+    /**
      * @param IssueRequest $request
      * @return void
      */
     public function store(IssueRequest $request)
     {
         Issue::create($request->all());
+    }
+
+    /**
+     * @param IssueRequest $request
+     * @return void
+     */
+    public function update(IssueRequest $request)
+    {
+        $issue = Issue::find(
+            $request->get('id')
+        );
+
+        $issue->fill($request->all());
+        $issue->save();
     }
 }

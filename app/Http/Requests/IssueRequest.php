@@ -24,11 +24,9 @@ class IssueRequest extends FormRequest
     public function rules()
     {
         return [
-            'uuid' => 'required',
             'volume_id' => 'required',
             'number' => 'required',
-            'store_date' => 'required',
-            'name' => 'required'
+            'store_date' => 'required'
         ];
     }
 }

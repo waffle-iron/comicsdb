@@ -58,6 +58,6 @@ class Issue extends Model
      */
     public function volume()
     {
-        return $this->belongsTo(Volume::class, 'id', 'volume_id');
+        return $this->belongsTo(Volume::class, 'volume_id', 'id');
     }
 }

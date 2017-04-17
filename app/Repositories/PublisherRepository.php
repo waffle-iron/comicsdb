@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Repositories;
 
+use App\Http\Requests\PublisherRequest;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 
@@ -53,19 +54,19 @@ class PublisherRepository
     }
 
     /**
-     * @param Request $request
+     * @param PublisherRequest $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(PublisherRequest $request)
     {
         Publisher::create($request->all());
     }
 
     /**
-     * @param Request $request
+     * @param PublisherRequest $request
      * @return void
      */
-    public function update(Request $request)
+    public function update(PublisherRequest $request)
     {
         $publisher = Publisher::find(
             $request->get('id')

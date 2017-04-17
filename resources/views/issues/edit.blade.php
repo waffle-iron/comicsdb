@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-lg-12 sub-navbar-column">
                     <div class="sub-navbar-header">
-                        <h3>Create Issue</h3>
+                        <h3>#{{ $issue->number }} {{ $issue->name }}</h3>
                     </div>
                     <ol class="breadcrumb navbar-text navbar-right no-bg">
                         <li class="current-parent">
@@ -30,7 +30,7 @@
                             </a>
                         </li>
                         <li><a href="{{ route('issues.index') }}">Issues</a></li>
-                        <li class="active">Create Issue</li>
+                        <li class="active">#{{ $issue->number }} {{ $issue->name }}</li>
                     </ol>
                 </div>
             </div>
@@ -66,31 +66,31 @@
 
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                {!! Form::open(['route' => 'issues.store']) !!}
+                {!! Form::open(['route' => 'issues.update']) !!}
                 {!! Form::token() !!}
-                {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
+                {!! Form::hidden('id', $issue->id) !!}
                 <div class="form-group">
                     {!! Form::label('volume_id', 'Volume *') !!}
-                    {!! Form::select('volume_id', $volumes, $selected_volume_id, ['class' => 'form-control select2 select2-input']) !!}
+                    {!! Form::select('volume_id', $volumes, $issue->volume()->first()->id, ['class' => 'form-control select2 select2-input']) !!}
                 </div>
                 <div class="form-group{{ $errors->has('number') ? ' has-error' : '' }}">
                     {!! Form::label('number', 'Number *') !!}
-                    {!! Form::text('number', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('number', $issue->number, ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     {!! Form::label('name', 'Name') !!}
-                    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('name', $issue->name, ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group{{ $errors->has('cover_date') ? ' has-error' : '' }}">
                     {!! Form::label('cover_date', 'Cover Date') !!}
-                    {!! Form::text('cover_date', null, ['class' => 'form-control datepicker datepicker-empty']) !!}
+                    {!! Form::text('cover_date', $issue->cover_date, ['class' => 'form-control datepicker datepicker-empty']) !!}
                 </div>
                 <div class="form-group{{ $errors->has('store_date') ? ' has-error' : '' }}">
                     {!! Form::label('store_date', 'Store Date') !!}
-                    {!! Form::text('store_date', null, ['class' => 'form-control datepicker']) !!}
+                    {!! Form::text('store_date', $issue->store_date->format('Y-m-d'), ['class' => 'form-control datepicker']) !!}
                 </div>
                 <div class="form-group text-right">
-                    <button type="submit" class="btn btn-primary">Save Issue</button>
+                    <button type="submit" class="btn btn-primary">Update Issue</button>
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -113,7 +113,7 @@
                 locale: {
                     format: "YYYY-MM-DD",
                 }
-            }).val('');
+            });
 
             $('.datepicker-empty').daterangepicker({
                 singleDatePicker: true,

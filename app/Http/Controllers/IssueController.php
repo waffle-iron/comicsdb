@@ -75,4 +75,31 @@ class IssueController extends Controller
 
         return redirect()->route('issues.index');
     }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(int $id)
+    {
+        $issue            = $this->issueRepository->get($id);
+        $volumeRepository = new VolumeRepository();
+        $volumes          = $volumeRepository->all()->pluck('name', 'id');
+
+        return view('issues.edit', [
+            'issue' => $issue,
+            'volumes' => $volumes
+        ]);
+    }
+
+    /**
+     * @param IssueRequest $issueRequest
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(IssueRequest $issueRequest)
+    {
+        $this->issueRepository->update($issueRequest);
+
+        return redirect()->route('issues.index');
+    }
 }
