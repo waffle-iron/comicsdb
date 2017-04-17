@@ -11,6 +11,7 @@ use Laravel\Scout\Searchable;
  *
  * @property int $id
  * @property string $name
+ * @property int number
  * @property int $year
  * @property int $publisher_id
  *
@@ -35,4 +36,12 @@ class Volume extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function publisher()
+    {
+        return $this->belongsTo(Publisher::class, 'publisher_id', 'id');
+    }
 }

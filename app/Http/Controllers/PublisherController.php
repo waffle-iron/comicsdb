@@ -3,8 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePublisherRequest;
-use App\Interfaces\DisplayableInterface;
+use App\Http\Requests\PublisherRequest;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;
 
@@ -13,7 +12,7 @@ use Illuminate\Http\Request;
  * @package App\Http\Controllers
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class PublisherController extends Controller implements DisplayableInterface
+class PublisherController extends Controller
 {
     /** @var PublisherRepository  */
     private $publisherRepository;
@@ -45,14 +44,12 @@ class PublisherController extends Controller implements DisplayableInterface
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(int $id)
+    public function show(int $id)
     {
-        $countries = \Countries::all()->pluck('name.common', 'name.common');
         $publisher = $this->publisherRepository->get($id);
 
-        return view('publishers.edit', [
-            'publisher' => $publisher,
-            'countries' => $countries
+        return view('publishers.show', [
+            'publisher' => $publisher
         ]);
     }
 
@@ -69,10 +66,10 @@ class PublisherController extends Controller implements DisplayableInterface
     }
 
     /**
-     * @param StorePublisherRequest $request
+     * @param PublisherRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StorePublisherRequest $request)
+    public function store(PublisherRequest $request)
     {
         $this->publisherRepository->store($request);
 
@@ -80,10 +77,25 @@ class PublisherController extends Controller implements DisplayableInterface
     }
 
     /**
-     * @param StorePublisherRequest $request
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(int $id)
+    {
+        $countries = \Countries::all()->pluck('name.common', 'name.common');
+        $publisher = $this->publisherRepository->get($id);
+
+        return view('publishers.edit', [
+            'publisher' => $publisher,
+            'countries' => $countries
+        ]);
+    }
+
+    /**
+     * @param PublisherRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(StorePublisherRequest $request)
+    public function update(PublisherRequest $request)
     {
         $this->publisherRepository->update($request);
 
@@ -100,18 +112,5 @@ class PublisherController extends Controller implements DisplayableInterface
         $this->publisherRepository->delete($id);
 
         return redirect()->route('publishers.index');
-    }
-
-    /**
-     * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show(int $id)
-    {
-        $publisher = $this->publisherRepository->get($id);
-
-        return view('publishers.show', [
-            'publisher' => $publisher
-        ]);
     }
 }

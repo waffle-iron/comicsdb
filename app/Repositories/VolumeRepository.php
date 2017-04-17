@@ -3,15 +3,15 @@ declare(strict_types = 1);
 
 namespace App\Repositories;
 
-use App\Models\Publisher;
-use Illuminate\Http\Request;
+use App\Http\Requests\VolumeRequest;
+use App\Models\Volume;
 
 /**
- * Class PublisherRepository
+ * Class VolumeRepository
  * @package App\Repositories
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class PublisherRepository
+class VolumeRepository
 {
     /**
      * Error message bag
@@ -25,10 +25,10 @@ class PublisherRepository
      */
     public function index($elementsPerPage = 6)
     {
-        $publishers = Publisher::orderBy('name')
+        $volumes = Volume::orderBy('name')
             ->paginate($elementsPerPage);
 
-        return $publishers;
+        return $volumes;
     }
 
     /**
@@ -36,43 +36,44 @@ class PublisherRepository
      */
     public function all()
     {
-        $publishers = Publisher::orderBy('name')
+        $volumes = Volume::orderBy('name')
             ->get();
 
-        return $publishers;
+        return $volumes;
     }
 
     /**
      * @param int $id
-     * @return Publisher
+     * @return Volume
      */
-    public function get(int $id) : Publisher
+    public function get(int $id) : Volume
     {
-        $publisher = Publisher::find($id);
-        return $publisher;
+        $volume = Volume::find($id);
+
+        return $volume;
     }
 
     /**
-     * @param Request $request
+     * @param VolumeRequest $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(VolumeRequest $request)
     {
-        Publisher::create($request->all());
+        Volume::create($request->all());
     }
 
     /**
-     * @param Request $request
+     * @param VolumeRequest $request
      * @return void
      */
-    public function update(Request $request)
+    public function update(VolumeRequest $request)
     {
-        $publisher = Publisher::find(
+        $volume = Volume::find(
             $request->get('id')
         );
 
-        $publisher->fill($request->all());
-        $publisher->save();
+        $volume->fill($request->all());
+        $volume->save();
     }
 
     /**
@@ -81,6 +82,6 @@ class PublisherRepository
      */
     public function delete(int $id)
     {
-        Publisher::find($id)->delete();
+        Volume::find($id)->delete();
     }
 }

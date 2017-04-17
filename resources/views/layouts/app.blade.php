@@ -70,7 +70,7 @@
 <!-- END Head -->
 
 
-<body class="sidebar-full-height sidebar-full-height ">
+<body class="sidebar-full-height sidebar-full-height sidebar-slim">
 <script src="/assets/vendor/js/lib.min.js"></script>
 
 <div class="main-wrap">
@@ -367,7 +367,7 @@
                 <!-- START Tree Sidebar Common -->
                 <ul class="side-menu">
                     <li class="">
-                        <a href="#">
+                        <a href="{{ route('dashboard.index') }}">
                             <i class="fa fa-home fa-lg"></i><span class="nav-label">Dashboard</span>
                         </a>
                     </li>
@@ -382,6 +382,11 @@
                                     <span class="nav-label">Publishers List</span>
                                 </a>
                             </li>
+                            <li class="">
+                                <a href="{{ route('publishers.create') }}">
+                                    <span class="nav-label">Create Publisher</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
@@ -392,8 +397,13 @@
                         </a>
                         <ul>
                             <li class="">
-                                <a href="#">
+                                <a href="{{ route('volumes.index') }}">
                                     <span class="nav-label">Volumes List</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{{ route('volumes.create') }}">
+                                    <span class="nav-label">Create Volume</span>
                                 </a>
                             </li>
                         </ul>
