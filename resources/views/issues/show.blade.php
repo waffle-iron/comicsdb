@@ -81,7 +81,7 @@
                         <strong>Intro</strong>
                     </h6>
                 </div>
-                <p>{{ $issue->intro }}</p>
+                <p>{!! nl2br($issue->intro) !!}</p>
 
                 <div class="hr-text hr-text-left m-t-2">
                     <h6 class="text-white">
