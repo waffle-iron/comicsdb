@@ -46,5 +46,6 @@ Route::group(['prefix' => 'volumes', 'middleware' => 'auth'], function() {
 
 Route::group(['prefix' => 'issues', 'middleware' => 'auth'], function() {
     Route::get('/', ['as' => 'issues.index', 'uses' => 'IssueController@index']);
-    Route::get('create', ['as' => 'issues.create', 'uses' => 'IssueController@create']);
+    Route::get('create/{volume?}', ['as' => 'issues.create', 'uses' => 'IssueController@create'])->where(['volume' => '[0-9]+']);
+    Route::post('store', ['as' => 'issues.store', 'uses' => 'IssueController@store']);
 });

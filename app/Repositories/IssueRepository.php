@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Repositories;
 
+use App\Http\Requests\IssueRequest;
 use App\Models\Issue;
 
 /**
@@ -33,5 +34,14 @@ class IssueRepository
             ->get();
 
         return $issues;
+    }
+
+    /**
+     * @param IssueRequest $request
+     * @return void
+     */
+    public function store(IssueRequest $request)
+    {
+        Issue::create($request->all());
     }
 }

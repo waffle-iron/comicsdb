@@ -9,6 +9,18 @@ use Laravel\Scout\Searchable;
 
 /**
  * Class Issue
+ *
+ * @property int $id
+ * @property string $uuid
+ * @property int $volume_id
+ * @property int $number
+ * @property string $name
+ * @property \DateTime $cover_date
+ * @property \DateTime $store_date
+ * @property \DateTime $created_at
+ * @property \DateTime $updated_at
+ * @property \DateTime $deleted_at
+ *
  * @package App\Models
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
@@ -35,6 +47,11 @@ class Issue extends Model
         'volume_id' => 'integer',
         'number' => 'integer'
     ];
+
+    /**
+     * @var array
+     */
+    protected $guarded = [];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

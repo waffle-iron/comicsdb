@@ -67,6 +67,11 @@
                                     <i class="fa fa-fw fa-trash"></i>
                                 </a>
                             </div>
+                            <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Add Issue">
+                                <a role="button" href="{{ route('issues.create', ['volume' => $volume->id]) }}" class="btn btn-primary">
+                                    Add Issue
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,6 +87,27 @@
                     </h6>
                 </div>
                 {{ $volume->year }}
+            </div>
+
+            <div class="col-lg-8 m-b-2">
+                <div class="row">
+                    @foreach($volume->issues()->get() as $issue)
+                        <div class="col-md-4 col-lg-4">
+                            <div class="panel panel-default shadow-box b-l-2 b-t-0 b-r-0 b-b-0">
+                                <div class="panel-body">
+
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="text-center">
+                                        <p class="m-l-0 m-r-0 m-t-0 m-b-0"><strong>Issue #{{ $issue->number }}</strong></p>
+                                        <p class="m-l-0 m-r-0 m-t-0 m-b-0"><small>{{ $issue->name }}</small></p>
+                                        <p class="text-muted m-l-0 m-r-0 m-t-0 m-b-0"><small>{{ $issue->store_date->format('F Y') }}</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

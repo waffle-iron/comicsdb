@@ -10,10 +10,14 @@ use Laravel\Scout\Searchable;
  * Class Volume
  *
  * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property int number
  * @property int $year
  * @property int $publisher_id
+ * @property \DateTime $created_at
+ * @property \DateTime $updated_at
+ * @property \DateTime $deleted_at
  *
  * @package App\Models
  * @author Maik Pütz <maikpuetz@gmail.com>
@@ -43,5 +47,10 @@ class Volume extends Model
     public function publisher()
     {
         return $this->belongsTo(Publisher::class, 'publisher_id', 'id');
+    }
+
+    public function issues()
+    {
+        return $this->hasMany(Issue::class, 'volume_id', 'id');
     }
 }
