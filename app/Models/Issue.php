@@ -51,7 +51,7 @@ class Issue extends Model
     /**
      * @var array
      */
-    protected $guarded = [];
+    protected $guarded = [ ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
