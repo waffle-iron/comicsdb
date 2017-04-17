@@ -5,7 +5,6 @@ namespace App\Repositories;
 
 use App\Http\Requests\PublisherRequest;
 use App\Models\Publisher;
-use Illuminate\Http\Request;
 
 /**
  * Class PublisherRepository
