@@ -43,3 +43,8 @@ Route::group(['prefix' => 'volumes', 'middleware' => 'auth'], function() {
     Route::post('update', ['as' => 'volumes.update', 'uses' => 'VolumeController@update']);
     Route::delete('/', ['as' => 'volumes.delete', 'uses' => 'VolumeController@delete']);
 });
+
+Route::group(['prefix' => 'issues', 'middleware' => 'auth'], function() {
+    Route::get('/', ['as' => 'issues.index', 'uses' => 'IssueController@index']);
+    Route::get('create', ['as' => 'issues.create', 'uses' => 'IssueController@create']);
+});

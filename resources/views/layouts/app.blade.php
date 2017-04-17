@@ -408,6 +408,20 @@
                             </li>
                         </ul>
                     </li>
+
+                    <!-- Issue -->
+                    <li>
+                        <a href="#" title="Issues">
+                            <i class="fa fa-file fa-lg"></i><span class="nav-label">Issues</span><i class="fa arrow"></i>
+                        </a>
+                        <ul>
+                            <li class="">
+                                <a href="{{ route('issues.index') }}">
+                                    <span class="nav-label">Issues List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </aside>
