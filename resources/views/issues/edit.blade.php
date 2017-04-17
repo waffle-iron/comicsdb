@@ -81,6 +81,10 @@
                     {!! Form::label('name', 'Name') !!}
                     {!! Form::text('name', $issue->name, ['class' => 'form-control']) !!}
                 </div>
+                <div class="form-group">
+                    {!! Form::label('intro', 'Intro') !!}
+                    {!! Form::textarea('intro', $issue->intro, ['class' => 'form-control']) !!}
+                </div>
                 <div class="form-group{{ $errors->has('cover_date') ? ' has-error' : '' }}">
                     {!! Form::label('cover_date', 'Cover Date') !!}
                     {!! Form::text('cover_date', $issue->cover_date, ['class' => 'form-control datepicker datepicker-empty']) !!}

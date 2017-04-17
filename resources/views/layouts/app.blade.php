@@ -420,6 +420,11 @@
                                     <span class="nav-label">Issues List</span>
                                 </a>
                             </li>
+                            <li class="">
+                                <a href="{{ route('issues.create') }}">
+                                    <span class="nav-label">Create Issue</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

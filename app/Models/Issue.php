@@ -15,6 +15,7 @@ use Laravel\Scout\Searchable;
  * @property int $volume_id
  * @property int $number
  * @property string $name
+ * @property string $intro
  * @property \DateTime $cover_date
  * @property \DateTime $store_date
  * @property \DateTime $created_at

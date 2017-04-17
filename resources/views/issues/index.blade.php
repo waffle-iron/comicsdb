@@ -67,7 +67,9 @@
                 <div class="col-md-3 col-lg-3">
                     <div class="panel panel-default shadow-box b-l-2 b-t-0 b-r-0 b-b-0">
                         <div class="panel-body">
-
+                            <a href="{{ route('issues.show', ['id' => $issue->id]) }}">
+                                AAA
+                            </a>
                         </div>
                         <div class="panel-footer">
                             <div class="text-center">

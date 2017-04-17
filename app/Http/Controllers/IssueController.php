@@ -43,6 +43,19 @@ class IssueController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(int $id)
+    {
+        $issue = $this->issueRepository->get($id);
+
+        return view('issues.show', [
+            'issue' => $issue
+        ]);
+    }
+
+    /**
      * @param int|null $volume
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
