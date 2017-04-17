@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\VolumeRequest;
 use App\Repositories\PublisherRepository;
 use App\Repositories\VolumeRepository;
+use Illuminate\Http\Request;
 
 class VolumeController extends Controller
 {
@@ -97,6 +98,18 @@ class VolumeController extends Controller
     public function update(VolumeRequest $request)
     {
         $this->volumeRepository->update($request);
+
+        return redirect()->route('volumes.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request)
+    {
+        $id = (int) $request->get('id');
+        $this->volumeRepository->delete($id);
 
         return redirect()->route('volumes.index');
     }

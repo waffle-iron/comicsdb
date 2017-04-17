@@ -75,4 +75,13 @@ class VolumeRepository
         $volume->fill($request->all());
         $volume->save();
     }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        Volume::find($id)->delete();
+    }
 }
