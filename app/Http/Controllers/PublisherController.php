@@ -41,6 +41,19 @@ class PublisherController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(int $id)
+    {
+        $publisher = $this->publisherRepository->get($id);
+
+        return view('publishers.show', [
+            'publisher' => $publisher
+        ]);
+    }
+
+    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -99,18 +112,5 @@ class PublisherController extends Controller
         $this->publisherRepository->delete($id);
 
         return redirect()->route('publishers.index');
-    }
-
-    /**
-     * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show(int $id)
-    {
-        $publisher = $this->publisherRepository->get($id);
-
-        return view('publishers.show', [
-            'publisher' => $publisher
-        ]);
     }
 }

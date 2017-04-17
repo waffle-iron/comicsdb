@@ -70,7 +70,7 @@
 <!-- END Head -->
 
 
-<body class="sidebar-full-height sidebar-full-height ">
+<body class="sidebar-full-height sidebar-full-height sidebar-slim">
 <script src="/assets/vendor/js/lib.min.js"></script>
 
 <div class="main-wrap">
@@ -367,7 +367,7 @@
                 <!-- START Tree Sidebar Common -->
                 <ul class="side-menu">
                     <li class="">
-                        <a href="#">
+                        <a href="{{ route('dashboard.index') }}">
                             <i class="fa fa-home fa-lg"></i><span class="nav-label">Dashboard</span>
                         </a>
                     </li>

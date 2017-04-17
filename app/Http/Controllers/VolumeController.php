@@ -38,6 +38,19 @@ class VolumeController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(int $id)
+    {
+        $volume = $this->volumeRepository->get($id);
+
+        return view('volumes.show', [
+            'volume' => $volume
+        ]);
+    }
+
+    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()

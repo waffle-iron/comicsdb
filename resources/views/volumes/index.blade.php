@@ -69,7 +69,9 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-xs-9">
-                                    <p class="f-w-300 m-t-0 m-b-0">{{ $volume->name }}</p>
+                                    <p class="f-w-300 m-t-0 m-b-0">
+                                        <a href="{{ route('volumes.show', ['id' => $volume->id]) }}">{{ $volume->name }}</a>
+                                    </p>
                                 </div>
                                 <div class="col-xs-3 text-right">
                                     <p class="f-w-300 m-t-0 m-b-0 text-gray-light">
