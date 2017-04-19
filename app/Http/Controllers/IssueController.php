@@ -62,7 +62,7 @@ class IssueController extends Controller
     public function create(int $volume = null)
     {
         $selected_volume_id = null;
-        $volumeRepository = new VolumeRepository();
+        $volumeRepository   = new VolumeRepository();
 
         if (isset($volume)) {
             $selected_volume_id = $volumeRepository->get($volume)->id;

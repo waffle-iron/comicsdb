@@ -21,8 +21,8 @@ class LogoRepository
      */
     public function store(Request $request)
     {
-        $file = $request->file('image');
-        $extension = $file->getClientOriginalExtension();
+        $file            = $request->file('image');
+        $extension       = $file->getClientOriginalExtension();
         $destinationFile = $request->get('uuid').'.'.$extension;
 
         Storage::disk('publishers')->put($destinationFile, File::get($file));
