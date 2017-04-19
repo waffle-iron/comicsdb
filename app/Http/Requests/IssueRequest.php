@@ -1,9 +1,16 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class IssueRequest
+ *
+ * @package App\Http\Requests
+ * @author Maik Pütz <maikpuetz@gmail.com>
+ */
 class IssueRequest extends FormRequest
 {
     /**
