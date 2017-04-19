@@ -41,7 +41,7 @@
     <div class="container">
         @if (count($errors) > 0)
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="alert b-l-danger bg-white b-r-a-0 b-l-3 b-r-0 b-b-0 b-t-0 shadow-box" role="alert">
                         <div class="media">
                             <div class="media-left">
@@ -65,38 +65,62 @@
         @endif
 
         <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                {!! Form::open(['route' => 'issues.store']) !!}
-                {!! Form::token() !!}
-                {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
-                <div class="form-group">
-                    {!! Form::label('volume_id', 'Volume *') !!}
-                    {!! Form::select('volume_id', $volumes, $selected_volume_id, ['class' => 'form-control select2 select2-input']) !!}
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default b-a-0 shadow-box">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Create Issue</h4>
+                    </div>
+                    <div class="panel-body">
+                        {!! Form::open(['route' => 'issues.store', 'class' => 'form-horizontal']) !!}
+                        {!! Form::token() !!}
+                        {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
+                        <div class="form-group">
+                            {!! Form::label('volume_id', 'Volume', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::select('volume_id', $volumes, $selected_volume_id, ['class' => 'form-control select2 select2-input']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('number') ? ' has-error' : '' }}">
+                            {!! Form::label('number', 'Number', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('number', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            {!! Form::label('name', 'Name', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('intro', 'Summary', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::textarea('intro', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="hr-text hr-text-left">
+                            <h6 class="text-white bg-white-i">Dates</h6>
+                        </div>
+                        <div class="form-group{{ $errors->has('cover_date') ? ' has-error' : '' }}">
+                            {!! Form::label('cover_date', 'Cover Date', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('cover_date', null, ['class' => 'form-control datepicker datepicker-empty']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('store_date') ? ' has-error' : '' }}">
+                            {!! Form::label('store_date', 'Store Date', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('store_date', null, ['class' => 'form-control datepicker']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button type="submit" class="btn btn-default">Save Issue</button>
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
                 </div>
-                <div class="form-group{{ $errors->has('number') ? ' has-error' : '' }}">
-                    {!! Form::label('number', 'Number *') !!}
-                    {!! Form::text('number', null, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    {!! Form::label('name', 'Name') !!}
-                    {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('intro', 'Intro') !!}
-                    {!! Form::textarea('intro', null, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group{{ $errors->has('cover_date') ? ' has-error' : '' }}">
-                    {!! Form::label('cover_date', 'Cover Date') !!}
-                    {!! Form::text('cover_date', null, ['class' => 'form-control datepicker datepicker-empty']) !!}
-                </div>
-                <div class="form-group{{ $errors->has('store_date') ? ' has-error' : '' }}">
-                    {!! Form::label('store_date', 'Store Date') !!}
-                    {!! Form::text('store_date', null, ['class' => 'form-control datepicker']) !!}
-                </div>
-                <div class="form-group text-right">
-                    <button type="submit" class="btn btn-primary">Save Issue</button>
-                </div>
-                {!! Form::close() !!}
             </div>
         </div>
     </div>

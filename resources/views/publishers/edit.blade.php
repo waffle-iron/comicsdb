@@ -41,7 +41,7 @@
     <div class="container">
         @if (count($errors) > 0)
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="alert b-l-danger bg-white b-r-a-0 b-l-3 b-r-0 b-b-0 b-t-0 shadow-box" role="alert">
                         <div class="media">
                             <div class="media-left">
@@ -65,63 +65,103 @@
         @endif
 
         <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                {!! Form::open(['route' => 'publishers.update']) !!}
-                {!! Form::token() !!}
-                {!! Form::hidden('id', $publisher->id) !!}
-                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    {!! Form::label('name', 'Name *') !!}
-                    {!! Form::text('name', $publisher->name, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('founded_at', 'Founded') !!}
-                    {!! Form::text('founded_at', $publisher->founded_at, ['class' => 'form-control']) !!}
-                </div>
-                <div class="hr-text hr-text-left">
-                    <h6 class="text-white">
-                        <strong>Social</strong>
-                    </h6>
-                </div>
-                <div class="form-group">
-                    {!! Form::label('twitter', 'Twitter account') !!}
-                    <div class="input-group">
-                        <span class="input-group-addon">https://twitter.com/</span>
-                        {!! Form::text('twitter', $publisher->twitter, ['class' => 'form-control']) !!}
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default b-a-0 shadow-box">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">Edit Publisher</h6>
+                    </div>
+                    <div class="panel-body">
+                        {!! Form::open(['route' => 'publishers.update', 'class' => 'form-horizontal']) !!}
+                        {!! Form::token() !!}
+                        {!! Form::hidden('id', $publisher->id) !!}
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            {!! Form::label('name', 'Name', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('name', $publisher->name, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('founded_at', 'Founded', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('founded_at', $publisher->founded_at, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="hr-text hr-text-left">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Social</strong>
+                            </h6>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('twitter', 'Twitter account', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">https://twitter.com/</span>
+                                    {!! Form::text('twitter', $publisher->twitter, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('website', 'Website', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('website', $publisher->website, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="hr-text hr-text-left">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Address</strong>
+                            </h6>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('address', 'Address', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('address', $publisher->address, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('city', 'City', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('city', $publisher->city, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('state', 'State', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('state', $publisher->state, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('zip', 'Zipcode', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('zip', $publisher->zip, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('country', 'Country', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::select('country', $countries, $publisher->country, ['id' => 'country', 'class' => 'form-control select2 select2-input']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button type="submit" class="btn btn-default">Update Publisher</button>
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
                     </div>
                 </div>
-                <div class="form-group">
-                    {!! Form::label('website', 'Website') !!}
-                    {!! Form::text('website', $publisher->website, ['class' => 'form-control']) !!}
-                </div>
-                <div class="hr-text hr-text-left">
-                    <h6 class="text-white">
-                        <strong>Address</strong>
-                    </h6>
-                </div>
-                <div class="form-group">
-                    {!! Form::label('address', 'Address') !!}
-                    {!! Form::text('address', $publisher->address, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('city', 'City') !!}
-                    {!! Form::text('city', $publisher->city, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('state', 'State') !!}
-                    {!! Form::text('state', $publisher->state, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('zip', 'Zipcode') !!}
-                    {!! Form::text('zip', $publisher->zip, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('country', 'Country') !!}
-                    {!! Form::select('country', $countries, $publisher->country, ['id' => 'country', 'class' => 'form-control select2 select2-input']) !!}
-                </div>
-                <div class="form-group text-right">
-                    <button type="submit" class="btn btn-primary">Update Publisher</button>
-                </div>
-                {!! Form::close() !!}
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
         </div>
     </div>

@@ -41,7 +41,7 @@
     <div class="container">
         @if (count($errors) > 0)
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="alert b-l-danger bg-white b-r-a-0 b-l-3 b-r-0 b-b-0 b-t-0 shadow-box" role="alert">
                         <div class="media">
                             <div class="media-left">
@@ -65,30 +65,47 @@
         @endif
 
         <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                {!! Form::open(['route' => 'volumes.store']) !!}
-                {!! Form::token() !!}
-                {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
-                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                    {!! Form::label('name', 'Name *') !!}
-                    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default b-a-0 shadow-box">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">Create Volume</h6>
+                    </div>
+                    <div class="panel-body">
+                        {!! Form::open(['route' => 'volumes.store', 'class' => 'form-horizontal']) !!}
+                        {!! Form::token() !!}
+                        {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            {!! Form::label('name', 'Name', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('number', 'Number', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('number', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
+                            {!! Form::label('year', 'Year', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('year', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('publisher_id', 'Publisher', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::select('publisher_id', $publishers, null, ['id' => 'publisher_id', 'class' => 'form-control select2 select2-input']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button type="submit" class="btn btn-default">Save Volume</button>
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
                 </div>
-                <div class="form-group">
-                    {!! Form::label('number', 'Number') !!}
-                    {!! Form::text('number', null, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('year', 'Year *') !!}
-                    {!! Form::text('year', null, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('publisher_id', 'Publisher *') !!}
-                    {!! Form::select('publisher_id', $publishers, null, ['id' => 'publisher_id', 'class' => 'form-control select2 select2-input']) !!}
-                </div>
-                <div class="form-group text-right">
-                    <button type="submit" class="btn btn-primary">Save Volume</button>
-                </div>
-                {!! Form::close() !!}
             </div>
         </div>
     </div>

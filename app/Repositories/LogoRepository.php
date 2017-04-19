@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
  * @package App\Repositories
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class LogoRepository implements StorableInterface, DeletableInterface
+class LogoRepository
 {
     /**
      * @param \Illuminate\Http\Request $request
