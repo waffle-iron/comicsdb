@@ -8,6 +8,7 @@ use App\Models\Publisher;
 
 /**
  * Class PublisherRepository
+ *
  * @package App\Repositories
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
@@ -25,8 +26,7 @@ class PublisherRepository
      */
     public function index($elementsPerPage = 6)
     {
-        $publishers = Publisher::orderBy('name')
-            ->paginate($elementsPerPage);
+        $publishers = Publisher::orderBy('name')->paginate($elementsPerPage);
 
         return $publishers;
     }
@@ -36,8 +36,7 @@ class PublisherRepository
      */
     public function all()
     {
-        $publishers = Publisher::orderBy('name')
-            ->get();
+        $publishers = Publisher::orderBy('name')->get();
 
         return $publishers;
     }

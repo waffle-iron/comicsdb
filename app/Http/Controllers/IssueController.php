@@ -9,6 +9,7 @@ use App\Repositories\VolumeRepository;
 
 /**
  * Class IssueController
+ *
  * @package App\Http\Controllers
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
@@ -20,12 +21,20 @@ class IssueController extends Controller
     private $issueRepository;
 
     /**
-     * IssueController constructor.
-     * @param IssueRepository $issueRepository
+     * @var VolumeRepository
      */
-    public function __construct(IssueRepository $issueRepository)
+    private $volumeRepository;
+
+    /**
+     * IssueController constructor.
+     *
+     * @param IssueRepository $issueRepository
+     * @param VolumeRepository $volumeRepository
+     */
+    public function __construct(IssueRepository $issueRepository, VolumeRepository $volumeRepository)
     {
-        $this->issueRepository = $issueRepository;
+        $this->issueRepository  = $issueRepository;
+        $this->volumeRepository = $volumeRepository;
     }
 
     /**
@@ -61,16 +70,8 @@ class IssueController extends Controller
      */
     public function create(int $volume = null)
     {
-        $selected_volume_id = null;
-        $volumeRepository   = new VolumeRepository();
-
-        if (isset($volume)) {
-            $selected_volume_id = $volumeRepository->get($volume)->id;
-        }
-
-        $volumes = $volumeRepository
-            ->all()
-            ->pluck('name', 'id');
+        $selected_volume_id = isset($volume) ? $this->volumeRepository->get($volume)->id : null;
+        $volumes            = $this->volumeRepository->all()->pluck('name', 'id');
 
         return view('issues.create', [
             'selected_volume_id' => $selected_volume_id,
@@ -95,9 +96,8 @@ class IssueController extends Controller
      */
     public function edit(int $id)
     {
-        $issue            = $this->issueRepository->get($id);
-        $volumeRepository = new VolumeRepository();
-        $volumes          = $volumeRepository->all()->pluck('name', 'id');
+        $issue   = $this->issueRepository->get($id);
+        $volumes = $this->volumeRepository->all()->pluck('name', 'id');
 
         return view('issues.edit', [
             'issue' => $issue,

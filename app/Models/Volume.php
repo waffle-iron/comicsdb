@@ -49,6 +49,9 @@ class Volume extends Model
         return $this->belongsTo(Publisher::class, 'publisher_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function issues()
     {
         return $this->hasMany(Issue::class, 'volume_id', 'id');

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 /**
  * Class LogoController
+ *
  * @package App\Http\Controllers
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
@@ -19,13 +20,14 @@ class LogoController extends Controller
 
     /**
      * PublisherController constructor.
+     *
      * @param PublisherRepository $publisherRepository
      * @param LogoRepository $logoRepository
      */
     public function __construct(PublisherRepository $publisherRepository, LogoRepository $logoRepository)
     {
         $this->publisherRepository = $publisherRepository;
-        $this->logoRepository = $logoRepository;
+        $this->logoRepository      = $logoRepository;
     }
 
     /**
@@ -58,7 +60,7 @@ class LogoController extends Controller
      */
     public function delete(Request $request)
     {
-        $id = (int) $request->get('id');
+        $id = $request->get('id');
         $this->logoRepository->delete($id);
 
         return redirect()->route('publishers.index');

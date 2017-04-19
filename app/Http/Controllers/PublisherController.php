@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 /**
  * Class PublisherController
+ *
  * @package App\Http\Controllers
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
@@ -19,6 +20,7 @@ class PublisherController extends Controller
 
     /**
      * PublisherController constructor.
+     *
      * @param PublisherRepository $publisherRepository
      */
     public function __construct(PublisherRepository $publisherRepository)
@@ -31,9 +33,7 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $publishers = $this
-            ->publisherRepository
-            ->index();
+        $publishers = $this->publisherRepository->index();
 
         return view('publishers.index', [
             'publishers' => $publishers
@@ -108,7 +108,7 @@ class PublisherController extends Controller
      */
     public function delete(Request $request)
     {
-        $id = (int) $request->get('id');
+        $id = $request->get('id');
         $this->publisherRepository->delete($id);
 
         return redirect()->route('publishers.index');

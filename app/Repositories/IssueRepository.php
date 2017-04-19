@@ -8,6 +8,7 @@ use App\Models\Issue;
 
 /**
  * Class IssueRepository
+ *
  * @package App\Repositories
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
@@ -19,8 +20,7 @@ class IssueRepository
      */
     public function index(int $elementsPerPage = 6)
     {
-        $issues = Issue::orderBy('number')
-            ->paginate($elementsPerPage);
+        $issues = Issue::orderBy('number')->paginate($elementsPerPage);
 
         return $issues;
     }
@@ -30,8 +30,7 @@ class IssueRepository
      */
     public function all()
     {
-        $issues = Issue::orderBy('number')
-            ->get();
+        $issues = Issue::orderBy('number')->get();
 
         return $issues;
     }
