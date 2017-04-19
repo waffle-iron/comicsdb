@@ -3,8 +3,6 @@ declare(strict_types = 1);
 
 namespace App\Repositories;
 
-use App\Interfaces\DeletableInterface;
-use App\Interfaces\StorableInterface;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
