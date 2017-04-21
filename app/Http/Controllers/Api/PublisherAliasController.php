@@ -16,12 +16,12 @@ use Illuminate\Http\Request;
 class PublisherAliasController extends Controller
 {
     /**
-     * @param int $publisher_id
+     * @param int $publisherId
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get(int $publisher_id)
+    public function get(int $publisherId)
     {
-        $aliases = PublisherAlias::where('publisher_id', $publisher_id)->get();
+        $aliases = PublisherAlias::where('publisher_id', $publisherId)->get();
 
         return response()->json($aliases);
     }
@@ -32,8 +32,8 @@ class PublisherAliasController extends Controller
      */
     public function store(Request $request)
     {
-        $alias = new PublisherAlias();
-        $alias->alias = $request->get('alias');
+        $alias               = new PublisherAlias();
+        $alias->alias        = $request->get('alias');
         $alias->publisher_id = $request->get('publisher_id');
         $alias->save();
     }

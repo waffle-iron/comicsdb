@@ -14,12 +14,12 @@ use App\Models\PublisherAlias;
 class PublisherAliasRepository
 {
     /**
-     * @param int $publisher_id
+     * @param int $publisherId
      * @return mixed
      */
-    public function byPublisher(int $publisher_id)
+    public function byPublisher(int $publisherId)
     {
-        $publisher_aliases = PublisherAlias::where('publisher_id', $publisher_id)->get();
+        $publisher_aliases = PublisherAlias::where('publisher_id', $publisherId)->get();
 
         return $publisher_aliases;
     }
