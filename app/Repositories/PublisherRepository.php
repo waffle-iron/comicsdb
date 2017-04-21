@@ -3,11 +3,12 @@ declare(strict_types = 1);
 
 namespace App\Repositories;
 
+use App\Http\Requests\PublisherRequest;
 use App\Models\Publisher;
-use Illuminate\Http\Request;
 
 /**
  * Class PublisherRepository
+ *
  * @package App\Repositories
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
@@ -25,8 +26,7 @@ class PublisherRepository
      */
     public function index($elementsPerPage = 6)
     {
-        $publishers = Publisher::orderBy('name')
-            ->paginate($elementsPerPage);
+        $publishers = Publisher::orderBy('name')->paginate($elementsPerPage);
 
         return $publishers;
     }
@@ -36,8 +36,7 @@ class PublisherRepository
      */
     public function all()
     {
-        $publishers = Publisher::orderBy('name')
-            ->get();
+        $publishers = Publisher::orderBy('name')->get();
 
         return $publishers;
     }
@@ -53,19 +52,19 @@ class PublisherRepository
     }
 
     /**
-     * @param Request $request
+     * @param PublisherRequest $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(PublisherRequest $request)
     {
         Publisher::create($request->all());
     }
 
     /**
-     * @param Request $request
+     * @param PublisherRequest $request
      * @return void
      */
-    public function update(Request $request)
+    public function update(PublisherRequest $request)
     {
         $publisher = Publisher::find(
             $request->get('id')

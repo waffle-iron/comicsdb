@@ -43,3 +43,12 @@ Route::group(['prefix' => 'volumes', 'middleware' => 'auth'], function() {
     Route::post('update', ['as' => 'volumes.update', 'uses' => 'VolumeController@update']);
     Route::delete('/', ['as' => 'volumes.delete', 'uses' => 'VolumeController@delete']);
 });
+
+Route::group(['prefix' => 'issues', 'middleware' => 'auth'], function() {
+    Route::get('/', ['as' => 'issues.index', 'uses' => 'IssueController@index']);
+    Route::get('{id}', ['as' => 'issues.show', 'uses' => 'IssueController@show'])->where(['id' => '[0-9]+']);
+    Route::get('create/{volume?}', ['as' => 'issues.create', 'uses' => 'IssueController@create'])->where(['volume' => '[0-9]+']);
+    Route::post('store', ['as' => 'issues.store', 'uses' => 'IssueController@store']);
+    Route::get('{id}/edit', ['as' => 'issues.edit', 'uses' => 'IssueController@edit'])->where(['id' => '[0-9]+']);
+    Route::post('update', ['as' => 'issues.update', 'uses' => 'IssueController@update']);
+});

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-header m-t-0">
-                        <h3 class="m-t-0">Publishers</h3>
+                        <h3 class="m-t-0">Issues</h3>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-lg-12 sub-navbar-column">
                     <div class="sub-navbar-header">
-                        <h3>Edit Publisher</h3>
+                        <h3>Create Issue</h3>
                     </div>
                     <ol class="breadcrumb navbar-text navbar-right no-bg">
                         <li class="current-parent">
@@ -29,8 +29,8 @@
                                 <i class="fa fa-fw fa-home"></i>
                             </a>
                         </li>
-                        <li><a href="{{ route('publishers.index') }}">Publishers</a></li>
-                        <li class="active">Edit Publisher</li>
+                        <li><a href="{{ route('issues.index') }}">Issues</a></li>
+                        <li class="active">Create Issue</li>
                     </ol>
                 </div>
             </div>
@@ -68,100 +68,59 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-default b-a-0 shadow-box">
                     <div class="panel-heading">
-                        <h6 class="panel-title">Edit Publisher</h6>
+                        <h4 class="panel-title">Create Issue</h4>
                     </div>
                     <div class="panel-body">
-                        {!! Form::open(['route' => 'publishers.update', 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['route' => 'issues.store', 'class' => 'form-horizontal']) !!}
                         {!! Form::token() !!}
-                        {!! Form::hidden('id', $publisher->id) !!}
+                        {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
+                        <div class="form-group">
+                            {!! Form::label('volume_id', 'Volume', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::select('volume_id', $volumes, $selected_volume_id, ['class' => 'form-control select2 select2-input']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('number') ? ' has-error' : '' }}">
+                            {!! Form::label('number', 'Number', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('number', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            {!! Form::label('name', 'Name', ['class' => 'control-label col-sm-3 required']) !!}
+                            {!! Form::label('name', 'Name', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('name', $publisher->name, ['class' => 'form-control']) !!}
+                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group">
-                            {!! Form::label('founded_at', 'Founded', ['class' => 'control-label col-sm-3 required']) !!}
+                            {!! Form::label('intro', 'Summary', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('founded_at', $publisher->founded_at, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="hr-text hr-text-left">
-                            <h6 class="text-white bg-white-i">
-                                <strong>Social</strong>
-                            </h6>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('twitter', 'Twitter account', ['class' => 'control-label col-sm-3']) !!}
-                            <div class="col-sm-6">
-                                <div class="input-group">
-                                    <span class="input-group-addon">https://twitter.com/</span>
-                                    {!! Form::text('twitter', $publisher->twitter, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('website', 'Website', ['class' => 'control-label col-sm-3']) !!}
-                            <div class="col-sm-6">
-                                {!! Form::text('website', $publisher->website, ['class' => 'form-control']) !!}
+                                {!! Form::textarea('intro', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="hr-text hr-text-left">
-                            <h6 class="text-white bg-white-i">
-                                <strong>Address</strong>
-                            </h6>
+                            <h6 class="text-white bg-white-i">Dates</h6>
                         </div>
-                        <div class="form-group">
-                            {!! Form::label('address', 'Address', ['class' => 'control-label col-sm-3']) !!}
+                        <div class="form-group{{ $errors->has('cover_date') ? ' has-error' : '' }}">
+                            {!! Form::label('cover_date', 'Cover Date', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('address', $publisher->address, ['class' => 'form-control']) !!}
+                                {!! Form::text('cover_date', null, ['class' => 'form-control datepicker datepicker-empty']) !!}
                             </div>
                         </div>
-                        <div class="form-group">
-                            {!! Form::label('city', 'City', ['class' => 'control-label col-sm-3']) !!}
+                        <div class="form-group{{ $errors->has('store_date') ? ' has-error' : '' }}">
+                            {!! Form::label('store_date', 'Store Date', ['class' => 'control-label col-sm-3 required']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('city', $publisher->city, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('state', 'State', ['class' => 'control-label col-sm-3']) !!}
-                            <div class="col-sm-6">
-                                {!! Form::text('state', $publisher->state, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('zip', 'Zipcode', ['class' => 'control-label col-sm-3']) !!}
-                            <div class="col-sm-6">
-                                {!! Form::text('zip', $publisher->zip, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('country', 'Country', ['class' => 'control-label col-sm-3']) !!}
-                            <div class="col-sm-6">
-                                {!! Form::select('country', $countries, $publisher->country, ['id' => 'country', 'class' => 'form-control select2 select2-input']) !!}
+                                {!! Form::text('store_date', null, ['class' => 'form-control datepicker']) !!}
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-3">
-                                <button type="submit" class="btn btn-default">Update Publisher</button>
+                                <button type="submit" class="btn btn-default">Save Issue</button>
                             </div>
                         </div>
                         {!! Form::close() !!}
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
         </div>
     </div>
@@ -174,7 +133,7 @@
     <script src="/assets/vendor/js/bootstrap-select.min.js"></script>
     <script>
         $(function() {
-            $('input[name="founded_at"]').daterangepicker({
+            $('.datepicker').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
                 minDate: "1960-01-01",
@@ -182,7 +141,17 @@
                 locale: {
                     format: "YYYY-MM-DD",
                 }
-            });
+            }).val('');
+
+            $('.datepicker-empty').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                minDate: "1960-01-01",
+                maxDate: "{{ \Carbon\Carbon::now()->format('Y-m-d') }}",
+                locale: {
+                    format: "YYYY-MM-DD",
+                }
+            }).val('');
         });
     </script>
 @endsection

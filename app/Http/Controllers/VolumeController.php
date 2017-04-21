@@ -8,6 +8,12 @@ use App\Repositories\PublisherRepository;
 use App\Repositories\VolumeRepository;
 use Illuminate\Http\Request;
 
+/**
+ * Class VolumeController
+ *
+ * @package App\Http\Controllers
+ * @author Maik Pütz <maikpuetz@gmail.com>
+ */
 class VolumeController extends Controller
 {
     /**
@@ -16,12 +22,19 @@ class VolumeController extends Controller
     private $volumeRepository;
 
     /**
+     * @var PublisherRepository
+     */
+    private $publisherRepository;
+
+    /**
      * VolumeController constructor.
+     *
      * @param VolumeRepository $volumeRepository
      */
-    public function __construct(VolumeRepository $volumeRepository)
+    public function __construct(VolumeRepository $volumeRepository, PublisherRepository $publisherRepository)
     {
-        $this->volumeRepository = $volumeRepository;
+        $this->volumeRepository    = $volumeRepository;
+        $this->publisherRepository = $publisherRepository;
     }
 
     /**
@@ -29,9 +42,7 @@ class VolumeController extends Controller
      */
     public function index()
     {
-        $volumes = $this
-            ->volumeRepository
-            ->index(16);
+        $volumes = $this->volumeRepository->index(16);
 
         return view('volumes.index', [
             'volumes' => $volumes
@@ -56,8 +67,7 @@ class VolumeController extends Controller
      */
     public function create()
     {
-        $publishersRepository = new PublisherRepository();
-        $publishers           = $publishersRepository->all()->pluck('name', 'id');
+        $publishers = $this->publisherRepository->all()->pluck('name', 'id');
 
         return view('volumes.create', [
             'publishers' => $publishers
@@ -81,9 +91,8 @@ class VolumeController extends Controller
      */
     public function edit(int $id)
     {
-        $publisherRepository = new PublisherRepository();
-        $publishers          = $publisherRepository->all()->pluck('name', 'id');
-        $volume              = $this->volumeRepository->get($id);
+        $publishers = $this->publisherRepository->all()->pluck('name', 'id');
+        $volume     = $this->volumeRepository->get($id);
 
         return view('volumes.edit', [
             'publishers' => $publishers,
@@ -108,7 +117,7 @@ class VolumeController extends Controller
      */
     public function delete(Request $request)
     {
-        $id = (int) $request->get('id');
+        $id = $request->get('id');
         $this->volumeRepository->delete($id);
 
         return redirect()->route('volumes.index');

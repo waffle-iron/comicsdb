@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Models;
 
@@ -7,14 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
 /**
- * Class Volume
+ * Class PublisherAlias
  *
  * @property int $id
- * @property string $uuid
- * @property string $name
- * @property int number
- * @property int $year
  * @property int $publisher_id
+ * @property string $alias
  * @property \DateTime $created_at
  * @property \DateTime $updated_at
  * @property \DateTime $deleted_at
@@ -22,15 +20,10 @@ use Laravel\Scout\Searchable;
  * @package App\Models
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class Volume extends Model
+class PublisherAlias extends Model
 {
-    use Searchable;
     use SoftDeletes;
-
-    /**
-     * @var array
-     */
-    protected $guarded = [ ];
+    use Searchable;
 
     /**
      * @var array
@@ -38,7 +31,7 @@ class Volume extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     /**
@@ -46,14 +39,6 @@ class Volume extends Model
      */
     public function publisher()
     {
-        return $this->belongsTo(Publisher::class, 'publisher_id', 'id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function issues()
-    {
-        return $this->hasMany(Issue::class, 'volume_id', 'id');
+        return $this->belongsTo(Publisher::class, 'id', 'publisher_id');
     }
 }

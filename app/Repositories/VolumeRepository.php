@@ -8,6 +8,7 @@ use App\Models\Volume;
 
 /**
  * Class VolumeRepository
+ *
  * @package App\Repositories
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
@@ -25,8 +26,7 @@ class VolumeRepository
      */
     public function index($elementsPerPage = 6)
     {
-        $volumes = Volume::orderBy('name')
-            ->paginate($elementsPerPage);
+        $volumes = Volume::orderBy('name')->paginate($elementsPerPage);
 
         return $volumes;
     }
@@ -36,8 +36,7 @@ class VolumeRepository
      */
     public function all()
     {
-        $volumes = Volume::orderBy('name')
-            ->get();
+        $volumes = Volume::orderBy('name')->get();
 
         return $volumes;
     }

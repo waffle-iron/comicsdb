@@ -4,21 +4,27 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PublisherRequest;
+use App\Models\PublisherAlias;
+use App\Repositories\PublisherAliasRepository;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;
 
 /**
  * Class PublisherController
+ *
  * @package App\Http\Controllers
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
 class PublisherController extends Controller
 {
-    /** @var PublisherRepository  */
+    /**
+     * @var PublisherRepository
+     */
     private $publisherRepository;
 
     /**
      * PublisherController constructor.
+     *
      * @param PublisherRepository $publisherRepository
      */
     public function __construct(PublisherRepository $publisherRepository)
@@ -31,9 +37,7 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $publishers = $this
-            ->publisherRepository
-            ->index();
+        $publishers = $this->publisherRepository->index();
 
         return view('publishers.index', [
             'publishers' => $publishers

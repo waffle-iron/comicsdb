@@ -6,12 +6,12 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class VolumeRequest
+ * Class IssueRequest
  *
  * @package App\Http\Requests
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class VolumeRequest extends FormRequest
+class IssueRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,22 +31,9 @@ class VolumeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'year' => 'required',
-            'publisher_id' => 'required'
-        ];
-    }
-
-    /**
-     * Set custom validation messages
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'name.required' => 'The name is required',
-            'year.required' => 'The year is required'
+            'volume_id' => 'required',
+            'number' => 'required',
+            'store_date' => 'required'
         ];
     }
 }

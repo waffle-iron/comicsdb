@@ -10,20 +10,20 @@ use Laravel\Scout\Searchable;
 /**
  * Class Publisher
  *
- * @property int id
- * @property string uuid
- * @property string name
- * @property \DateTime founded_at
- * @property string twitter
- * @property string website
- * @property string address
- * @property string city
- * @property string state
- * @property string zip
- * @property string country
- * @property \DateTime created_at
- * @property \DateTime updated_at
- * @property \DateTime deleted_at
+ * @property int $id
+ * @property string $uuid
+ * @property string $name
+ * @property \DateTime $founded_at
+ * @property string $twitter
+ * @property string $website
+ * @property string $address
+ * @property string $city
+ * @property string $state
+ * @property string $zip
+ * @property string $country
+ * @property \DateTime $created_at
+ * @property \DateTime $updated_at
+ * @property \DateTime $deleted_at
  *
  * @package App\Models
  * @author Maik Pütz <maikpuetz@gmail.com>
@@ -54,5 +54,30 @@ class Publisher extends Model
     public function volumes()
     {
         return $this->hasMany(Volume::class, 'publisher_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function aliases()
+    {
+        return $this->hasMany(PublisherAlias::class, 'publisher_id', 'id');
+    }
+
+    /**
+     * @return int
+     */
+    public function amountOfIssues() : int
+    {
+        $amount = 0;
+
+        $volumes = $this->volumes()->get();
+
+        foreach ($volumes as $volume)
+        {
+            $amount += $volume->issues()->count();
+        }
+
+        return $amount;
     }
 }

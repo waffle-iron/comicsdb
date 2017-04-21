@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="/assets/stylesheets/plugins.css">
     <link rel="stylesheet" href="/assets/vendor/css/select2.css">
     <link rel="stylesheet" href="/assets/vendor/css/select2-bootstrap.css">
+    <link rel="stylesheet" href="/assets/stylesheets/custom.css">
     <!-- endbuild -->
 
     <!-- START Favicon -->
@@ -73,7 +74,7 @@
 <body class="sidebar-full-height sidebar-full-height sidebar-slim">
 <script src="/assets/vendor/js/lib.min.js"></script>
 
-<div class="main-wrap">
+<div class="main-wrap" id="app">
     <nav class="navigation">
         <!-- START Navbar -->
         <div class="navbar-default navbar navbar-fixed-top">
@@ -408,6 +409,25 @@
                             </li>
                         </ul>
                     </li>
+
+                    <!-- Issue -->
+                    <li>
+                        <a href="#" title="Issues">
+                            <i class="fa fa-file fa-lg"></i><span class="nav-label">Issues</span><i class="fa arrow"></i>
+                        </a>
+                        <ul>
+                            <li class="">
+                                <a href="{{ route('issues.index') }}">
+                                    <span class="nav-label">Issues List</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="{{ route('issues.create') }}">
+                                    <span class="nav-label">Create Issue</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </aside>
@@ -418,11 +438,10 @@
     <div class="content">
         @yield('content')
     </div>
-
-    @yield('javascript')
 </div>
 
 <link rel="stylesheet" href="/assets/vendor/css/lib.min.css">
+<link rel="stylesheet" href="/css/custom.css">
 
 <!-- JS -->
 <script src="/assets/javascript/app/helpers.js"></script>
@@ -432,6 +451,12 @@
 <script src="/assets/javascript/app/main.js"></script>
 <script src="/assets/javascript/plugins-init.js"></script>
 <script src="/assets/javascript/holder.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.1/vue-resource.min.js"></script>
+@yield('javascript')
+<script>
+    $(".select2-container").css('width', '');
+</script>
 
 </body>
 

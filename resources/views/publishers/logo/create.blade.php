@@ -41,28 +41,29 @@
 
     <div class="container">
         <div class="row">
-            <div class="panel panel-default b-a-1 b-info shadow-box">
-                <div class="panel-heading">
-                    Information for Logo Upload
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">Upload Logo</h6>
+                    </div>
+                    <div class="panel-body">
+                        {!! Form::open(['route' => 'publishers.logo.store', 'method' => 'post', 'files' => true, 'class' => 'form-horizontal']) !!}
+                        {!! Form::hidden('id', $publisher->id) !!}
+                        {!! Form::hidden('uuid', $publisher->uuid) !!}
+                        <div class="form-group">
+                            {!! Form::label('image', 'Logo image', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::file('image', ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button type="submit" class="btn btn-default">Save uploaded image</button>
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
                 </div>
-                <div class="panel-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere lectus blandit, fermentum erat vel, facilisis libero. Vestibulum dignissim laoreet massa non hendrerit. Vestibulum placerat magna vel lobortis tempor. Nulla est tortor, ullamcorper eu justo tincidunt, auctor vulputate ante. Praesent eu ipsum a est venenatis semper nec vitae ex. Quisque tincidunt porttitor nibh, eu mattis mi laoreet non. Curabitur et ligula sed augue rhoncus egestas sit amet vitae augue. Aliquam vel egestas nibh.
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                {!! Form::open(['route' => 'publishers.logo.store', 'method' => 'post', 'files' => true]) !!}
-                {!! Form::hidden('id', $publisher->id) !!}
-                {!! Form::hidden('uuid', $publisher->uuid) !!}
-                <div class="form-group">
-                    {!! Form::label('image', 'Logo image') !!}
-                    {!! Form::file('image', ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group text-right">
-                    <button type="submit" class="btn btn-primary">Save uploaded image</button>
-                </div>
-                {!! Form::close() !!}
             </div>
         </div>
     </div>

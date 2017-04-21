@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Models;
 
@@ -7,14 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
 /**
- * Class Volume
+ * Class Issue
  *
  * @property int $id
  * @property string $uuid
+ * @property int $volume_id
+ * @property int $number
  * @property string $name
- * @property int number
- * @property int $year
- * @property int $publisher_id
+ * @property string $intro
+ * @property \DateTime $cover_date
+ * @property \DateTime $store_date
  * @property \DateTime $created_at
  * @property \DateTime $updated_at
  * @property \DateTime $deleted_at
@@ -22,7 +25,7 @@ use Laravel\Scout\Searchable;
  * @package App\Models
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class Volume extends Model
+class Issue extends Model
 {
     use Searchable;
     use SoftDeletes;
@@ -30,30 +33,32 @@ class Volume extends Model
     /**
      * @var array
      */
-    protected $guarded = [ ];
-
-    /**
-     * @var array
-     */
     protected $dates = [
+        'cover_date',
+        'store_date',
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @var array
      */
-    public function publisher()
-    {
-        return $this->belongsTo(Publisher::class, 'publisher_id', 'id');
-    }
+    protected $casts = [
+        'volume_id' => 'integer',
+        'number' => 'integer'
+    ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @var array
      */
-    public function issues()
+    protected $guarded = [ ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function volume()
     {
-        return $this->hasMany(Issue::class, 'volume_id', 'id');
+        return $this->belongsTo(Volume::class, 'volume_id', 'id');
     }
 }
