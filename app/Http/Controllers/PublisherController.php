@@ -112,7 +112,7 @@ class PublisherController extends Controller
      */
     public function delete(Request $request)
     {
-        $id = $request->get('id');
+        $id = (int)$request->get('id');
         $this->publisherRepository->delete($id);
 
         return redirect()->route('publishers.index');
