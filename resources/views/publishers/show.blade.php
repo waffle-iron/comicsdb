@@ -75,7 +75,7 @@
                 </div>
                 <ul class="nav nav-pills nav-stacked m-b-2">
                     <li v-for="(item, key, index) in aliases">
-                        <i class="fa fa-fw fa-star-o m-r-1 text-lighting-yellow"></i>
+                        <i class="fa fa-fw fa-star m-r-1 text-lighting-yellow"></i>
                         <span class="text-gray">@{{ item.alias }} <button v-show="aliasEditMode" @click="deleteAlias(item.id, key)" class="btn btn-xs btn-default pull-right"><i class="fa fa-close text-danger"></i></button></span>
                     </li>
                 </ul>
