@@ -57,6 +57,14 @@ class Publisher extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function aliases()
+    {
+        return $this->hasMany(PublisherAlias::class, 'publisher_id', 'id');
+    }
+
+    /**
      * @return int
      */
     public function amountOfIssues() : int

@@ -70,6 +70,25 @@
                 </div>
                 <div class="hr-text hr-text-left m-t-2">
                     <h6 class="text-white">
+                        <strong>Aliases</strong>
+                    </h6>
+                </div>
+                <ul class="nav nav-pills nav-stacked m-b-2">
+                    <li v-for="(item, key, index) in aliases">
+                        <i class="fa fa-fw fa-star-o m-r-1 text-lighting-yellow"></i>
+                        <span class="text-gray">@{{ item.alias }} <button v-show="aliasEditMode" @click="deleteAlias(item.id, key)" class="btn btn-xs btn-default pull-right"><i class="fa fa-close text-danger"></i></button></span>
+                    </li>
+                </ul>
+                <div class="input-group input-group-sm" v-show="aliasEditMode">
+                    <input type="text" class="form-control" id="aliasInputBox" ref="aliasInput" v-model="newAlias">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" @click="addAlias"><i class="fa fa-check text-success"></i></button>
+                    </span>
+                </div>
+                <button type="button" v-show="!aliasEditMode" @click="activateAliasEditMode" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit Aliases</button>
+                <button type="button" v-show="aliasEditMode" @click="deactivateAliasEditMode" class="btn btn-sm btn-default m-t-1"><i class="fa fa-close"></i> Hide Edit Mode</button>
+                <div class="hr-text hr-text-left m-t-2">
+                    <h6 class="text-white">
                         <strong>Address</strong>
                     </h6>
                 </div>
@@ -140,4 +159,52 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('javascript')
+    <script>
+        // create a root instance
+        var app = new Vue({
+            el: '#app',
+            data: {
+                aliases: [],
+                aliasEditMode: false,
+                newAlias: ''
+            },
+
+            mounted() {
+                this.getAliases();
+            },
+
+            methods: {
+                getAliases: function() {
+                    this.$http.get('/api/alias/{{ $publisher->id }}?api_token=f5585bad-3897-48c3-9c2d-d403dc42898a').then(response => {
+                        this.aliases = response.body;
+                    }, response => {
+                        console.log(response);
+                    });
+                },
+                activateAliasEditMode: function() {
+                    this.aliasEditMode = true;
+
+                    Vue.nextTick(() => {
+                    this.$refs['aliasInput'].focus()
+                    })
+                },
+                deactivateAliasEditMode: function() {
+                    this.aliasEditMode = false;
+                },
+                addAlias: function() {
+                    this.aliases.push({'alias': this.newAlias});
+                    this.$http.post('/api/alias?api_token=f5585bad-3897-48c3-9c2d-d403dc42898a', {alias: this.newAlias, publisher_id: '{{$publisher->id}}'});
+                    this.newAlias = '';
+                },
+                deleteAlias: function(id, index) {
+                    console.log(id, index);
+                    this.aliases.splice(index, 1);
+                    this.$http.delete('/api/alias/' + id + '?api_token=f5585bad-3897-48c3-9c2d-d403dc42898a');
+                }
+            }
+        })
+    </script>
 @endsection

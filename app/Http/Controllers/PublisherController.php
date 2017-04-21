@@ -4,6 +4,8 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PublisherRequest;
+use App\Models\PublisherAlias;
+use App\Repositories\PublisherAliasRepository;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,9 @@ use Illuminate\Http\Request;
  */
 class PublisherController extends Controller
 {
-    /** @var PublisherRepository  */
+    /**
+     * @var PublisherRepository
+     */
     private $publisherRepository;
 
     /**

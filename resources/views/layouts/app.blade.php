@@ -74,7 +74,7 @@
 <body class="sidebar-full-height sidebar-full-height sidebar-slim">
 <script src="/assets/vendor/js/lib.min.js"></script>
 
-<div class="main-wrap">
+<div class="main-wrap" id="app">
     <nav class="navigation">
         <!-- START Navbar -->
         <div class="navbar-default navbar navbar-fixed-top">
@@ -438,11 +438,10 @@
     <div class="content">
         @yield('content')
     </div>
-
-    @yield('javascript')
 </div>
 
 <link rel="stylesheet" href="/assets/vendor/css/lib.min.css">
+<link rel="stylesheet" href="/css/custom.css">
 
 <!-- JS -->
 <script src="/assets/javascript/app/helpers.js"></script>
@@ -452,6 +451,9 @@
 <script src="/assets/javascript/app/main.js"></script>
 <script src="/assets/javascript/plugins-init.js"></script>
 <script src="/assets/javascript/holder.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.1/vue-resource.min.js"></script>
+@yield('javascript')
 <script>
     $(".select2-container").css('width', '');
 </script>
