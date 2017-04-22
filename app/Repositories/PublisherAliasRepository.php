@@ -16,7 +16,7 @@ class PublisherAliasRepository
 {
     /**
      * @param int|null $publisherId
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return mixed
      */
     public function get(int $publisherId = null)
     {
@@ -24,7 +24,7 @@ class PublisherAliasRepository
             return PublisherAlias::where('publisher_id', $publisherId)->get();
         }
 
-        return PublisherAlias::all();
+        return PublisherAlias::get();
     }
 
     /**
