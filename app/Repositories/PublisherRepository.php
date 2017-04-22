@@ -24,7 +24,7 @@ class PublisherRepository
      * @param int $elementsPerPage
      * @return mixed
      */
-    public function index ($elementsPerPage = 6)
+    public function index($elementsPerPage = 6)
     {
         $publishers = Publisher::orderBy('name')->paginate($elementsPerPage);
 
@@ -34,7 +34,7 @@ class PublisherRepository
     /**
      * @return mixed
      */
-    public function all ()
+    public function all()
     {
         $publishers = Publisher::orderBy('name')->get();
 
@@ -45,7 +45,7 @@ class PublisherRepository
      * @param int $id
      * @return Publisher
      */
-    public function get (int $id) : Publisher
+    public function get(int $id) : Publisher
     {
         $publisher = Publisher::find($id);
 
@@ -56,7 +56,7 @@ class PublisherRepository
      * @param PublisherRequest $request
      * @return void
      */
-    public function store (PublisherRequest $request)
+    public function store(PublisherRequest $request)
     {
         Publisher::create($request->all());
     }
@@ -65,7 +65,7 @@ class PublisherRepository
      * @param PublisherRequest $request
      * @return void
      */
-    public function update (PublisherRequest $request)
+    public function update(PublisherRequest $request)
     {
         $publisher = Publisher::find(
             $request->get('id')
@@ -79,7 +79,7 @@ class PublisherRepository
      * @param int $id
      * @return void
      */
-    public function delete (int $id)
+    public function delete(int $id)
     {
         Publisher::find($id)->delete();
     }

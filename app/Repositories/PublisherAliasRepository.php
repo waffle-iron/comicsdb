@@ -31,7 +31,7 @@ class PublisherAliasRepository
      * @param Request $request
      * @return void
      */
-    public function store (Request $request)
+    public function store(Request $request)
     {
         PublisherAlias::create($request->except([
             'api_token',
@@ -42,7 +42,7 @@ class PublisherAliasRepository
      * @param int $id
      * @return void
      */
-    public function delete (int $id)
+    public function delete(int $id)
     {
         PublisherAlias::find($id)->delete();
     }
@@ -51,7 +51,7 @@ class PublisherAliasRepository
      * @param int $publisherId
      * @return mixed
      */
-    public function byPublisher (int $publisherId)
+    public function byPublisher(int $publisherId)
     {
         $publisher_aliases = PublisherAlias::where('publisher_id', $publisherId)->get();
 
