@@ -24,7 +24,7 @@ class LogoController extends Controller
      * @param PublisherRepository $publisherRepository
      * @param LogoRepository $logoRepository
      */
-    public function __construct (PublisherRepository $publisherRepository, LogoRepository $logoRepository)
+    public function __construct(PublisherRepository $publisherRepository, LogoRepository $logoRepository)
     {
         $this->publisherRepository = $publisherRepository;
         $this->logoRepository      = $logoRepository;
@@ -34,7 +34,7 @@ class LogoController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create (int $id)
+    public function create(int $id)
     {
         $publisher = $this->publisherRepository->get($id);
 
@@ -47,7 +47,7 @@ class LogoController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store (Request $request)
+    public function store(Request $request)
     {
         $this->logoRepository->store($request);
         return redirect()->route('publishers.index');
@@ -58,7 +58,7 @@ class LogoController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @internal param int $id
      */
-    public function delete (Request $request)
+    public function delete(Request $request)
     {
         $id = $request->get('id');
         $this->logoRepository->delete($id);

@@ -18,7 +18,7 @@ class VolumeRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize ()
+    public function authorize()
     {
         return true;
     }
@@ -28,7 +28,7 @@ class VolumeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules ()
+    public function rules()
     {
         return [
             'name' => 'required',
@@ -42,7 +42,7 @@ class VolumeRequest extends FormRequest
      *
      * @return array
      */
-    public function messages ()
+    public function messages()
     {
         return [
             'name.required' => 'The name is required',

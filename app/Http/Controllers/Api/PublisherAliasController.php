@@ -25,7 +25,7 @@ class PublisherAliasController extends Controller
      * PublisherAliasController constructor.
      * @param PublisherAliasRepository $publisherAliasRepository
      */
-    public function __construct (PublisherAliasRepository $publisherAliasRepository)
+    public function __construct(PublisherAliasRepository $publisherAliasRepository)
     {
         $this->publisherAliasRepository = $publisherAliasRepository;
     }
@@ -34,7 +34,7 @@ class PublisherAliasController extends Controller
      * @param int $publisherId
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get (int $publisherId)
+    public function get(int $publisherId)
     {
         $aliases = $this->publisherAliasRepository->get($publisherId);
 
@@ -45,7 +45,7 @@ class PublisherAliasController extends Controller
      * @param Request $request
      * @return void
      */
-    public function store (Request $request)
+    public function store(Request $request)
     {
         $this->publisherAliasRepository->store($request);
     }
@@ -54,7 +54,7 @@ class PublisherAliasController extends Controller
      * @param int $id
      * @return void
      */
-    public function delete (int $id)
+    public function delete(int $id)
     {
         $this->publisherAliasRepository->delete($id);
     }

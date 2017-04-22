@@ -24,7 +24,7 @@ class VolumeRepository
      * @param int $elementsPerPage
      * @return mixed
      */
-    public function index ($elementsPerPage = 6)
+    public function index($elementsPerPage = 6)
     {
         $volumes = Volume::orderBy('name')->paginate($elementsPerPage);
 
@@ -34,7 +34,7 @@ class VolumeRepository
     /**
      * @return mixed
      */
-    public function all ()
+    public function all()
     {
         $volumes = Volume::orderBy('name')->get();
 
@@ -45,7 +45,7 @@ class VolumeRepository
      * @param int $id
      * @return Volume
      */
-    public function get (int $id) : Volume
+    public function get(int $id) : Volume
     {
         $volume = Volume::find($id);
 
@@ -56,7 +56,7 @@ class VolumeRepository
      * @param VolumeRequest $request
      * @return void
      */
-    public function store (VolumeRequest $request)
+    public function store(VolumeRequest $request)
     {
         Volume::create($request->all());
     }
@@ -65,7 +65,7 @@ class VolumeRepository
      * @param VolumeRequest $request
      * @return void
      */
-    public function update (VolumeRequest $request)
+    public function update(VolumeRequest $request)
     {
         $volume = Volume::find(
             $request->get('id')
@@ -79,7 +79,7 @@ class VolumeRepository
      * @param int $id
      * @return void
      */
-    public function delete (int $id)
+    public function delete(int $id)
     {
         Volume::find($id)->delete();
     }

@@ -25,7 +25,7 @@ class PublisherController extends Controller
      *
      * @param PublisherRepository $publisherRepository
      */
-    public function __construct (PublisherRepository $publisherRepository)
+    public function __construct(PublisherRepository $publisherRepository)
     {
         $this->publisherRepository = $publisherRepository;
     }
@@ -33,7 +33,7 @@ class PublisherController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index ()
+    public function index()
     {
         $publishers = $this->publisherRepository->index();
 
@@ -46,7 +46,7 @@ class PublisherController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show (int $id)
+    public function show(int $id)
     {
         $publisher = $this->publisherRepository->get($id);
 
@@ -58,7 +58,7 @@ class PublisherController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create ()
+    public function create()
     {
         $countries = \Countries::all()->pluck('name.common', 'name.common');
 
@@ -71,7 +71,7 @@ class PublisherController extends Controller
      * @param PublisherRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store (PublisherRequest $request)
+    public function store(PublisherRequest $request)
     {
         $this->publisherRepository->store($request);
 
@@ -82,7 +82,7 @@ class PublisherController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit (int $id)
+    public function edit(int $id)
     {
         $countries = \Countries::all()->pluck('name.common', 'name.common');
         $publisher = $this->publisherRepository->get($id);
@@ -97,7 +97,7 @@ class PublisherController extends Controller
      * @param PublisherRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update (PublisherRequest $request)
+    public function update(PublisherRequest $request)
     {
         $this->publisherRepository->update($request);
 
@@ -108,7 +108,7 @@ class PublisherController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete (Request $request)
+    public function delete(Request $request)
     {
         $id = (int) $request->get('id');
         $this->publisherRepository->delete($id);
