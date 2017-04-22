@@ -18,7 +18,7 @@ class PublisherRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize ()
     {
         return true;
     }
@@ -28,10 +28,10 @@ class PublisherRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules ()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
         ];
     }
 
@@ -40,10 +40,10 @@ class PublisherRequest extends FormRequest
      *
      * @return array
      */
-    public function messages()
+    public function messages ()
     {
         return [
-            'name.required' => 'The name is required'
+            'name.required' => 'The name is required',
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\PublisherAlias;
+use App\Repositories\PublisherAliasRepository;
 use Illuminate\Http\Request;
 
 /**
@@ -16,12 +17,26 @@ use Illuminate\Http\Request;
 class PublisherAliasController extends Controller
 {
     /**
+     * @var PublisherAliasRepository
+     */
+    private $publisherAliasRepository;
+
+    /**
+     * PublisherAliasController constructor.
+     * @param PublisherAliasRepository $publisherAliasRepository
+     */
+    public function __construct (PublisherAliasRepository $publisherAliasRepository)
+    {
+        $this->publisherAliasRepository = $publisherAliasRepository;
+    }
+
+    /**
      * @param int $publisherId
      * @return \Illuminate\Http\JsonResponse
      */
-    public function get(int $publisherId)
+    public function get (int $publisherId)
     {
-        $aliases = PublisherAlias::where('publisher_id', $publisherId)->get();
+        $aliases = $this->publisherAliasRepository->get($publisherId);
 
         return response()->json($aliases);
     }
@@ -30,21 +45,17 @@ class PublisherAliasController extends Controller
      * @param Request $request
      * @return void
      */
-    public function store(Request $request)
+    public function store (Request $request)
     {
-        $alias               = new PublisherAlias();
-        $alias->alias        = $request->get('alias');
-        $alias->publisher_id = $request->get('publisher_id');
-        $alias->save();
+        $this->publisherAliasRepository->store($request);
     }
 
     /**
      * @param int $id
      * @return void
      */
-    public function delete(int $id)
+    public function delete (int $id)
     {
-        $alias = PublisherAlias::find($id);
-        $alias->delete();
+        $this->publisherAliasRepository->delete($id);
     }
 }

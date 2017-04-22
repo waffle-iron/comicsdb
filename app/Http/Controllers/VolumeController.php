@@ -31,7 +31,7 @@ class VolumeController extends Controller
      *
      * @param VolumeRepository $volumeRepository
      */
-    public function __construct(VolumeRepository $volumeRepository, PublisherRepository $publisherRepository)
+    public function __construct (VolumeRepository $volumeRepository, PublisherRepository $publisherRepository)
     {
         $this->volumeRepository    = $volumeRepository;
         $this->publisherRepository = $publisherRepository;
@@ -40,12 +40,12 @@ class VolumeController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index ()
     {
         $volumes = $this->volumeRepository->index(16);
 
         return view('volumes.index', [
-            'volumes' => $volumes
+            'volumes' => $volumes,
         ]);
     }
 
@@ -53,24 +53,24 @@ class VolumeController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(int $id)
+    public function show (int $id)
     {
         $volume = $this->volumeRepository->get($id);
 
         return view('volumes.show', [
-            'volume' => $volume
+            'volume' => $volume,
         ]);
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create ()
     {
         $publishers = $this->publisherRepository->all()->pluck('name', 'id');
 
         return view('volumes.create', [
-            'publishers' => $publishers
+            'publishers' => $publishers,
         ]);
     }
 
@@ -78,7 +78,7 @@ class VolumeController extends Controller
      * @param VolumeRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(VolumeRequest $request)
+    public function store (VolumeRequest $request)
     {
         $this->volumeRepository->store($request);
 
@@ -89,14 +89,14 @@ class VolumeController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(int $id)
+    public function edit (int $id)
     {
         $publishers = $this->publisherRepository->all()->pluck('name', 'id');
         $volume     = $this->volumeRepository->get($id);
 
         return view('volumes.edit', [
             'publishers' => $publishers,
-            'volume' => $volume
+            'volume' => $volume,
         ]);
     }
 
@@ -104,7 +104,7 @@ class VolumeController extends Controller
      * @param VolumeRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(VolumeRequest $request)
+    public function update (VolumeRequest $request)
     {
         $this->volumeRepository->update($request);
 
@@ -115,7 +115,7 @@ class VolumeController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(Request $request)
+    public function delete (Request $request)
     {
         $id = $request->get('id');
         $this->volumeRepository->delete($id);

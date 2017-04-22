@@ -31,7 +31,7 @@ class IssueController extends Controller
      * @param IssueRepository $issueRepository
      * @param VolumeRepository $volumeRepository
      */
-    public function __construct(IssueRepository $issueRepository, VolumeRepository $volumeRepository)
+    public function __construct (IssueRepository $issueRepository, VolumeRepository $volumeRepository)
     {
         $this->issueRepository  = $issueRepository;
         $this->volumeRepository = $volumeRepository;
@@ -40,14 +40,12 @@ class IssueController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index ()
     {
-        $issues = $this
-            ->issueRepository
-            ->index();
+        $issues = $this->issueRepository->index();
 
         return view('issues.index', [
-            'issues' => $issues
+            'issues' => $issues,
         ]);
     }
 
@@ -55,12 +53,12 @@ class IssueController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(int $id)
+    public function show (int $id)
     {
         $issue = $this->issueRepository->get($id);
 
         return view('issues.show', [
-            'issue' => $issue
+            'issue' => $issue,
         ]);
     }
 
@@ -68,14 +66,14 @@ class IssueController extends Controller
      * @param int|null $volume
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create(int $volume = null)
+    public function create (int $volume = null)
     {
         $selected_volume_id = isset($volume) ? $this->volumeRepository->get($volume)->id : null;
         $volumes            = $this->volumeRepository->all()->pluck('name', 'id');
 
         return view('issues.create', [
             'selected_volume_id' => $selected_volume_id,
-            'volumes' => $volumes
+            'volumes' => $volumes,
         ]);
     }
 
@@ -83,7 +81,7 @@ class IssueController extends Controller
      * @param IssueRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(IssueRequest $request)
+    public function store (IssueRequest $request)
     {
         $this->issueRepository->store($request);
 
@@ -94,14 +92,14 @@ class IssueController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(int $id)
+    public function edit (int $id)
     {
         $issue   = $this->issueRepository->get($id);
         $volumes = $this->volumeRepository->all()->pluck('name', 'id');
 
         return view('issues.edit', [
             'issue' => $issue,
-            'volumes' => $volumes
+            'volumes' => $volumes,
         ]);
     }
 
@@ -109,7 +107,7 @@ class IssueController extends Controller
      * @param IssueRequest $issueRequest
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(IssueRequest $issueRequest)
+    public function update (IssueRequest $issueRequest)
     {
         $this->issueRepository->update($issueRequest);
 

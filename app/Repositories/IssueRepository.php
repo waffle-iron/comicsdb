@@ -18,7 +18,7 @@ class IssueRepository
      * @param int $elementsPerPage
      * @return mixed
      */
-    public function index(int $elementsPerPage = 6)
+    public function index (int $elementsPerPage = 6)
     {
         $issues = Issue::orderBy('number')->paginate($elementsPerPage);
 
@@ -28,7 +28,7 @@ class IssueRepository
     /**
      * @return mixed
      */
-    public function all()
+    public function all ()
     {
         $issues = Issue::orderBy('number')->get();
 
@@ -39,7 +39,7 @@ class IssueRepository
      * @param int $id
      * @return Issue
      */
-    public function get(int $id) : Issue
+    public function get (int $id) : Issue
     {
         $issue = Issue::find($id);
 
@@ -50,7 +50,7 @@ class IssueRepository
      * @param IssueRequest $request
      * @return void
      */
-    public function store(IssueRequest $request)
+    public function store (IssueRequest $request)
     {
         Issue::create($request->all());
     }
@@ -59,7 +59,7 @@ class IssueRepository
      * @param IssueRequest $request
      * @return void
      */
-    public function update(IssueRequest $request)
+    public function update (IssueRequest $request)
     {
         $issue = Issue::find(
             $request->get('id')

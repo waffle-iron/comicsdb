@@ -73,8 +73,7 @@ class Publisher extends Model
 
         $volumes = $this->volumes()->get();
 
-        foreach ($volumes as $volume)
-        {
+        foreach ($volumes as $volume) {
             $amount += $volume->issues()->count();
         }
 

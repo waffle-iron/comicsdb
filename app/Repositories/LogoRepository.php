@@ -20,7 +20,7 @@ class LogoRepository
      * @param \Illuminate\Http\Request $request
      * @return void
      */
-    public function store(Request $request)
+    public function store (Request $request)
     {
         $file      = $request->file('image');
         $extension = $file->getClientOriginalExtension();
@@ -33,7 +33,7 @@ class LogoRepository
      * @param int $id
      * @return void
      */
-    public function delete(int $id)
+    public function delete (int $id)
     {
         $publisher = Publisher::find($id);
         Storage::disk('publishers')->delete($publisher->uuid.'.png');

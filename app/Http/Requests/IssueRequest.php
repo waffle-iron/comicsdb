@@ -18,7 +18,7 @@ class IssueRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize ()
     {
         return true;
     }
@@ -28,12 +28,12 @@ class IssueRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules ()
     {
         return [
             'volume_id' => 'required',
             'number' => 'required',
-            'store_date' => 'required'
+            'store_date' => 'required',
         ];
     }
 }
