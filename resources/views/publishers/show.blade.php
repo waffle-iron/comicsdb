@@ -178,7 +178,7 @@
 
             methods: {
                 getAliases: function() {
-                    this.$http.get('/api/alias/{{ $publisher->id }}?api_token=f5585bad-3897-48c3-9c2d-d403dc42898a').then(response => {
+                    this.$http.get('/api/alias/{{ $publisher->id }}?api_token={{ Auth::user()->api_token }}').then(response => {
                         this.aliases = response.body;
                     }, response => {
                         console.log(response);
@@ -196,13 +196,13 @@
                 },
                 addAlias: function() {
                     this.aliases.push({'alias': this.newAlias});
-                    this.$http.post('/api/alias?api_token=f5585bad-3897-48c3-9c2d-d403dc42898a', {alias: this.newAlias, publisher_id: '{{$publisher->id}}'});
+                    this.$http.post('/api/alias?api_token={{ Auth::user()->api_token }}', {alias: this.newAlias, publisher_id: '{{$publisher->id}}'});
                     this.newAlias = '';
                 },
                 deleteAlias: function(id, index) {
                     console.log(id, index);
                     this.aliases.splice(index, 1);
-                    this.$http.delete('/api/alias/' + id + '?api_token=f5585bad-3897-48c3-9c2d-d403dc42898a');
+                    this.$http.delete('/api/alias/' + id + '?api_token={{ Auth::user()->api_token }}');
                 }
             }
         })

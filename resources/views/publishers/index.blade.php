@@ -65,7 +65,7 @@
         <div class="row m-t-3">
             @foreach($publishers as $publisher)
                 <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class=" panel panel-default">
+                    <div class=" panel panel-default shadow-box">
                         <div class="panel-body">
                             <div class="media">
                                 <a href="{{ route('publishers.show', ['id' => $publisher->id]) }}">
