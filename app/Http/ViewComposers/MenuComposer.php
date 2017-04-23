@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Http\ViewComposers;
 
@@ -24,23 +24,23 @@ class MenuComposer
     {
         $menu = Menu::new()
             ->route('dashboard.index', '<i class="fa fa-home fa-lg"></i><span class="nav-label">Dashboard</span>')
-            ->submenu('<a href="#"><i class="fa fa-newspaper-o fa-lg"></i><span class="nav-label">Publishers</span><i class="fa arrow"></i></a>', function (Menu $menu) {
+            ->submenu('<a href="#"><i class="fa fa-newspaper-o fa-lg"></i><span class="nav-label">Publishers</span><i class="fa arrow"></i></a>', function(Menu $menu) {
                 $menu
                     ->route('publishers.index', '<span class="nav-label">Publisher List</span>')
                     ->route('publishers.create', '<span class="nav-label">Create Publisher</span>');
             })
-            ->submenu('<a href="#"><i class="fa fa-cubes fa-lg"></i><span class="nav-label">Volumes</span><i class="fa arrow"></i></a>', function (Menu $menu) {
+            ->submenu('<a href="#"><i class="fa fa-cubes fa-lg"></i><span class="nav-label">Volumes</span><i class="fa arrow"></i></a>', function(Menu $menu) {
                 $menu
                     ->route('volumes.index', '<span class="nav-label">Volumes List</span>')
                     ->route('volumes.create', '<span class="nav-label">Create Volumes</span>');
             })
-            ->submenu('<a href="#"><i class="fa fa-file fa-lg"></i><span class="nav-label">Issues</span><i class="fa arrow"></i></a>', function (Menu $menu) {
+            ->submenu('<a href="#"><i class="fa fa-file fa-lg"></i><span class="nav-label">Issues</span><i class="fa arrow"></i></a>', function(Menu $menu) {
                 $menu
                     ->route('issues.index', '<span class="nav-label">Issues List</span>')
                     ->route('issues.create', '<span class="nav-label">Create Issue</span>');
             })
             ->setAttribute('class', 'side-menu')
-            ->setActive(function (Link $link) {
+            ->setActive(function(Link $link) {
                 return Url::fromString($link->url())->getSegment(1) == request()->segment(1);
             });
 
