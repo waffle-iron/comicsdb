@@ -10,7 +10,7 @@ use Spatie\Url\Url;
 
 /**
  * Class MenuComposer
- * 
+ *
  * @package App\Http\ViewComposers
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
