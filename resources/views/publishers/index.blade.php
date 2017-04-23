@@ -39,18 +39,9 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-5 col-xs-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">
-                            <i class="fa fa-fw fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
 
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 col-sm-offset-2 col-lg-offset-3 col-md-offset-1 col-sm-4 col-sm-offset-2 hidden-xs">
+
+            <div class="col-xs-12">
                 <!-- START Toolbar -->
                 <div class="btn-toolbar pull-right">
                     <div class="btn-group" role="group">
@@ -64,67 +55,23 @@
 
         <div class="row m-t-3">
             @foreach($publishers as $publisher)
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class=" panel panel-default shadow-box">
-                        <div class="panel-body">
-                            <div class="media">
-                                <a href="{{ route('publishers.show', ['id' => $publisher->id]) }}">
-                                    <div class="media-body text-center">
-                                        <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}" style="height: 80px;">
-                                        <h5 class="m-b-0 m-t-2">
-                                            <span>{{ $publisher->name }}</span>
-                                        </h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="panel-footer text-gray-light">
-                            <i class="fa fa-newspaper-o m-r-1"></i> {{ $publisher->amountOfIssues()}} Issues
-                            <div class="pull-right">
-                                <div class="btn-group pull-left dropup">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-fw fa-gear"></i>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <!-- View publisher in detail -->
-                                        <li>
-                                            <a href="{{ route('publishers.show', ['id' => $publisher->id]) }}">
-                                                <i class="fa fa-fw fa-eye text-gray-lighter m-r-1"></i> View
-                                            </a>
-                                        </li>
-                                        <li role="separator" class="divider"></li>
-                                        <!-- Edit publisher -->
-                                        <li>
-                                            <a href="{{ route('publishers.edit', ['id' => $publisher->id]) }}">
-                                                <i class="fa fa-fw fa-edit text-gray-lighter m-r-1"></i> Edit
-                                            </a>
-                                        </li>
-                                        <!-- Delete publisher -->
-                                        <li>
-                                            <a href="#deletePublisherModal" class="deletePublisher" data-toggle="modal" data-id="{{ $publisher->id }}">
-                                                <i class="fa fa-fw fa-trash text-gray-lighter m-r-1"></i> Delete
-                                            </a>
-                                        </li>
-                                        <li role="separator" class="divider"></li>
-                                    @if (!Storage::disk('publishers')->exists($publisher->uuid . '.png'))
-                                        <!-- Upload publishers logo -->
-                                            <li>
-                                                <a href="{{ route('publishers.logo.add', ['id' => $publisher->id]) }}">
-                                                    <i class="fa fa-fw fa-image text-gray-lighter m-r-1"></i> Upload Logo
-                                                </a>
-                                            </li>
-                                    @endif
-                                    @if (Storage::disk('publishers')->exists($publisher->uuid . '.png'))
-                                        <!-- Remove publishers logo -->
-                                            <li>
-                                                <a href="#deleteLogoModal" class="deleteLogo" data-toggle="modal" data-id="{{ $publisher->id }}">
-                                                    <i class="fa fa-fw fa-image text-gray-lighter m-r-1"></i> Remove Logo
-                                                </a>
-                                            </li>
-                                        @endif
-                                    </ul>
-                                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="thumbnail shadow-box b-a-0">
+                        <a href="{{ route('publishers.show', ['id' => $publisher->id]) }}">
+                            <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}">
+                        </a>
+                        <div class="caption">
+                            <h5 class="m-b-0">
+                                <span>{{ $publisher->name }}</span>
+                                <small class="pull-right">
+                                    <i class="fa fa-calendar"></i> {{ $publisher->founded_at->year }}
+                                </small>
+                            </h5>
+                            <p class="text-gray-light m-t-1 m-b-1">
+                                {{ nl2br($publisher->description) }}
+                            </p>
+                            <div class="label label-success">
+                                <span>{{ $publisher->amountOfIssues() }} Issues</span>
                             </div>
                         </div>
                     </div>

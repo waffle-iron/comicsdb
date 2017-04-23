@@ -70,6 +70,12 @@
                 </div>
                 <div class="hr-text hr-text-left m-t-2">
                     <h6 class="text-white">
+                        <strong>Description</strong>
+                    </h6>
+                </div>
+                <p>{{ nl2br($publisher->description) }}</p>
+                <div class="hr-text hr-text-left m-t-2">
+                    <h6 class="text-white">
                         <strong>Aliases</strong>
                     </h6>
                 </div>

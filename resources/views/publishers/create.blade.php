@@ -81,6 +81,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('description', 'Description', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('founded_at', 'Founded', ['class' => 'control-label col-sm-3 required']) !!}
                             <div class="col-sm-6">
                                 {!! Form::text('founded_at', null, ['class' => 'form-control']) !!}
@@ -177,7 +183,7 @@
             $('input[name="founded_at"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
-                minDate: "1960-01-01",
+                minDate: "1930-01-01",
                 maxDate: "{{ \Carbon\Carbon::now()->format('Y-m-d') }}",
                 locale: {
                     format: "YYYY-MM-DD",

@@ -13,6 +13,7 @@ use Laravel\Scout\Searchable;
  * @property int $id
  * @property string $uuid
  * @property string $name
+ * @property string description
  * @property \DateTime $founded_at
  * @property string $twitter
  * @property string $website
