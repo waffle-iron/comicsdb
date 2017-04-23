@@ -5,6 +5,12 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Http\ViewComposers\MenuComposer;
 
+/**
+ * Class MenuComposerServiceProvider
+ *
+ * @package App\Providers
+ * @author Maik Pütz <maikpuetz@gmail.com>
+ */
 class MenuComposerServiceProvider extends ServiceProvider
 {
     /**

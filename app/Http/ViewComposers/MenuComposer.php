@@ -3,19 +3,23 @@ declare(strict_types=1);
 
 namespace App\Http\ViewComposers;
 
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Spatie\Menu\Laravel\Menu;
 use Spatie\Menu\Link;
 use Spatie\Url\Url;
 
+/**
+ * Class MenuComposer
+ * 
+ * @package App\Http\ViewComposers
+ * @author Maik Pütz <maikpuetz@gmail.com>
+ */
 class MenuComposer
 {
-    public function __construct()
-    {
-
-    }
-
+    /**
+     * @param View $view
+     * @return void
+     */
     public function compose(View $view)
     {
         $menu = Menu::new()
