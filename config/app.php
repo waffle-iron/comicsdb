@@ -182,6 +182,9 @@ return [
 
         PragmaRX\Countries\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Spatie\Menu\Laravel\MenuServiceProvider::class,
+
+        App\Providers\MenuComposerServiceProvider::class,
     ],
 
     /*
@@ -235,6 +238,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Uuid' => Webpatser\Uuid\Uuid::class,
+        'Menu' => Spatie\Menu\Laravel\MenuFacade::class,
     ],
 
 ];

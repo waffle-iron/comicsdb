@@ -10,6 +10,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.3.0",
         "pragmarx/countries": "^0.1.0",
+        "spatie/laravel-menu": "^2.1",
         "tamayo/laravel-scout-elastic": "^3.0",
         "webpatser/laravel-uuid": "2.*"
     },
