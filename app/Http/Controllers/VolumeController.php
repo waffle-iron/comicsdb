@@ -117,7 +117,7 @@ class VolumeController extends Controller
      */
     public function delete(Request $request)
     {
-        $id = $request->get('id');
+        $id = (int) $request->get('id');
         $this->volumeRepository->delete($id);
 
         return redirect()->route('volumes.index');
