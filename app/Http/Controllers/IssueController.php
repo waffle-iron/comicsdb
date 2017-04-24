@@ -68,7 +68,7 @@ class IssueController extends Controller
      */
     public function create(int $volumeId = null)
     {
-        $volumes            = $this->volumeRepository->all()->pluck('name', 'id');
+        $volumes = $this->volumeRepository->all()->pluck('name', 'id');
 
         return view('issues.create', [
             'selected_volume_id' => $volumeId,
