@@ -39,9 +39,11 @@
 
     <div class="container">
         <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-5 col-xs-12">
+                <h4>{{ $publishers->count() . ' Publishers' }}</h4>
+            </div>
 
-
-            <div class="col-xs-12">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 col-sm-offset-2 col-lg-offset-3 col-md-offset-1 col-sm-4 col-sm-offset-2 hidden-xs">
                 <!-- START Toolbar -->
                 <div class="btn-toolbar pull-right">
                     <div class="btn-group" role="group">
@@ -55,7 +57,7 @@
 
         <div class="row m-t-3">
             @foreach($publishers as $publisher)
-                <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="col-lg-3 col-md-3 col-sm-6">
                     <div class="thumbnail shadow-box b-a-0">
                         <a href="{{ route('publishers.show', ['id' => $publisher->id]) }}">
                             <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}">
