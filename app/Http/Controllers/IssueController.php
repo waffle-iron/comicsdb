@@ -63,7 +63,7 @@ class IssueController extends Controller
     }
 
     /**
-     * @param int|null $volume
+     * @param int|null $volumeId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(int $volumeId = null)
