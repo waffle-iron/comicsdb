@@ -66,13 +66,12 @@ class IssueController extends Controller
      * @param int|null $volume
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create(int $volume = null)
+    public function create(int $volumeId = null)
     {
-        $selected_volume_id = isset($volume) ? $this->volumeRepository->get($volume)->id : null;
         $volumes            = $this->volumeRepository->all()->pluck('name', 'id');
 
         return view('issues.create', [
-            'selected_volume_id' => $selected_volume_id,
+            'selected_volume_id' => $volumeId,
             'volumes' => $volumes,
         ]);
     }
