@@ -65,6 +65,11 @@
                                     <i class="fa fa-fw fa-trash"></i>
                                 </a>
                             </div>
+                            <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Add Volume">
+                                <a role="button" href="{{ route('volumes.create', ['publisher' => $publisher->id]) }}" class="btn btn-primary">
+                                    Add Volume
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

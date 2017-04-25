@@ -65,11 +65,12 @@ class VolumeController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(int $publisherId = null)
     {
         $publishers = $this->publisherRepository->all()->pluck('name', 'id');
 
         return view('volumes.create', [
+            'selected_publisher_id' => $publisherId,
             'publishers' => $publishers,
         ]);
     }

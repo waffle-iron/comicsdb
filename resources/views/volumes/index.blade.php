@@ -40,14 +40,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-5 col-xs-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">
-                            <i class="fa fa-fw fa-search"></i>
-                        </button>
-                    </span>
-                </div>
+                <h4>{{ $volumes->count() . ' Volumes' }}</h4>
             </div>
 
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 col-sm-offset-2 col-lg-offset-3 col-md-offset-1 col-sm-4 col-sm-offset-2 hidden-xs">
@@ -62,39 +55,33 @@
             </div>
         </div>
 
-        <div class="row m-t-3">
+        <div class="row m-t-3" id="grid" data-columns>
             @foreach ($volumes as $volume)
-                <div class="col-md-4 col-lg-3">
-                    <div class="panel panel-default shadow-box b-l-2 b-t-0 b-r-0 b-b-0">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-9">
-                                    <p class="f-w-300 m-t-0 m-b-0">
-                                        <a href="{{ route('volumes.show', ['id' => $volume->id]) }}">{{ $volume->name }}</a>
-                                    </p>
-                                </div>
-                                <div class="col-xs-3 text-right">
-                                    <p class="f-w-300 m-t-0 m-b-0 text-gray-light">
-                                        <small>
-                                            &nbsp;
-                                            @if (isset($volume->number))
-                                                Vol. {{ $volume->number }}
-                                            @endif
-                                        </small>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer text-gray-light">
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <i class="m-r-1 fa fa-newspaper-o"></i>
-                                    {{ $volume->publisher()->first()->name }}
-                                </div>
-                                <div class="col-xs-4 text-right">
-                                    <i class="m-r-1 fa fa-file"></i>
-                                    0
-                                </div>
+                <div class="box">
+                    <div class="thumbnail shadow-box b-a-0">
+                        <a href="{{ route('volumes.show', ['id' => $volume->id]) }}">
+                            <img data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/volumes/'.$volume->uuid.'.png') }}">
+                        </a>
+                        <div class="caption">
+                            <h5 class="m-b-0">
+                                <span>
+                                    {{ $volume->name }}
+                                    <span class="pull-right text-gray-light">
+                                        <i class="fa fa-calendar"></i> {{ $volume->year }}
+                                    </span>
+                                </span>
+                                @if (isset($volume->number))
+                                    <br><small>Volume {{ $volume->number }}</small>
+                                @endif
+                            </h5>
+                            <p class="text-gray-light m-t-1 m-b-1">
+                                {{ nl2br($volume->description) }}
+                            </p>
+                            <p class="text-gray m-t-1 m-b-1">
+                                {{ $volume->publisher()->first()->name }}
+                            </p>
+                            <div class="label label-success">
+                                <span>{{ $volume->issues()->count() }} Issues</span>
                             </div>
                         </div>
                     </div>
