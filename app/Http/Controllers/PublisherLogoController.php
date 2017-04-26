@@ -26,8 +26,8 @@ class PublisherLogoController extends Controller
      */
     public function __construct(PublisherRepository $publisherRepository, PublisherLogoRepository $publisherLogoRepository)
     {
-        $this->publisherRepository = $publisherRepository;
-        $this->publisherLogoRepository      = $publisherLogoRepository;
+        $this->publisherRepository     = $publisherRepository;
+        $this->publisherLogoRepository = $publisherLogoRepository;
     }
 
     /**
