@@ -739,16 +739,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.38",
+            "version": "1.0.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "4ba6e13f5116204b21c3afdf400ecf2b9eb1c482"
+                "reference": "2474325ee924134bb05848663b12531f6f2e9fbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/4ba6e13f5116204b21c3afdf400ecf2b9eb1c482",
-                "reference": "4ba6e13f5116204b21c3afdf400ecf2b9eb1c482",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2474325ee924134bb05848663b12531f6f2e9fbe",
+                "reference": "2474325ee924134bb05848663b12531f6f2e9fbe",
                 "shasum": ""
             },
             "require": {
@@ -818,7 +818,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-04-22T18:59:19+00:00"
+            "time": "2017-04-25T15:24:43+00:00"
         },
         {
             "name": "mledoze/countries",
@@ -2577,16 +2577,16 @@
         },
         {
             "name": "tamayo/laravel-scout-elastic",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ErickTamayo/laravel-scout-elastic.git",
-                "reference": "6b4c806888dd4bce2afdc9ee91fc4070f3ffb88f"
+                "reference": "929184da8e4aef1fe6ba458cbd8ae433ea1008d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ErickTamayo/laravel-scout-elastic/zipball/6b4c806888dd4bce2afdc9ee91fc4070f3ffb88f",
-                "reference": "6b4c806888dd4bce2afdc9ee91fc4070f3ffb88f",
+                "url": "https://api.github.com/repos/ErickTamayo/laravel-scout-elastic/zipball/929184da8e4aef1fe6ba458cbd8ae433ea1008d9",
+                "reference": "929184da8e4aef1fe6ba458cbd8ae433ea1008d9",
                 "shasum": ""
             },
             "require": {
@@ -2616,7 +2616,7 @@
                 "laravel",
                 "scout"
             ],
-            "time": "2017-03-31T23:12:49+00:00"
+            "time": "2017-04-24T18:21:22+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

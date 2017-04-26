@@ -71,7 +71,7 @@
                         <h6 class="panel-title">Create Publisher</h6>
                     </div>
                     <div class="panel-body">
-                        {!! Form::open(['route' => 'publishers.store', 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['route' => 'publishers.store', 'class' => 'form-horizontal', 'files' => true]) !!}
                         {!! Form::token() !!}
                         {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -90,6 +90,19 @@
                             {!! Form::label('founded_at', 'Founded', ['class' => 'control-label col-sm-3 required']) !!}
                             <div class="col-sm-6">
                                 {!! Form::text('founded_at', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('image', 'Logo', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" readonly>
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-default">
+                                            Browse&hellip; <input name="image" id="image" type="file" style="display: none;">
+                                        </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="hr-text hr-text-left">
@@ -155,19 +168,6 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
         </div>
     </div>
@@ -189,6 +189,34 @@
                     format: "YYYY-MM-DD",
                 }
             });
+        });
+
+        $(function() {
+
+            // We can attach the `fileselect` event to all file inputs on the page
+            $(document).on('change', ':file', function() {
+                var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [numFiles, label]);
+            });
+
+            // We can watch for our custom `fileselect` event like this
+            $(document).ready( function() {
+                $(':file').on('fileselect', function(event, numFiles, label) {
+
+                    var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                    if( input.length ) {
+                        input.val(log);
+                    } else {
+                        if( log ) alert(log);
+                    }
+
+                });
+            });
+
         });
     </script>
 @endsection

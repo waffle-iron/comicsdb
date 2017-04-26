@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Repositories\LogoRepository;
+use App\Repositories\PublisherLogoRepository;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;
 
@@ -13,21 +13,21 @@ use Illuminate\Http\Request;
  * @package App\Http\Controllers
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class LogoController extends Controller
+class PublisherLogoController extends Controller
 {
     private $publisherRepository;
-    private $logoRepository;
+    private $publisherLogoRepository;
 
     /**
      * PublisherController constructor.
      *
      * @param PublisherRepository $publisherRepository
-     * @param LogoRepository $logoRepository
+     * @param PublisherLogoRepository $publisherLogoRepository
      */
-    public function __construct(PublisherRepository $publisherRepository, LogoRepository $logoRepository)
+    public function __construct(PublisherRepository $publisherRepository, PublisherLogoRepository $publisherLogoRepository)
     {
         $this->publisherRepository = $publisherRepository;
-        $this->logoRepository      = $logoRepository;
+        $this->publisherLogoRepository      = $publisherLogoRepository;
     }
 
     /**
@@ -49,7 +49,7 @@ class LogoController extends Controller
      */
     public function store(Request $request)
     {
-        $this->logoRepository->store($request);
+        $this->publisherLogoRepository->store($request);
         return redirect()->route('publishers.index');
     }
 
@@ -61,7 +61,7 @@ class LogoController extends Controller
     public function delete(Request $request)
     {
         $id = $request->get('id');
-        $this->logoRepository->delete($id);
+        $this->publisherLogoRepository->delete($id);
 
         return redirect()->route('publishers.index');
     }
