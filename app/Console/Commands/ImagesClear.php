@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Console\Commands;
 
@@ -59,8 +59,8 @@ class ImagesClear extends Command
 
         $trashed_volumes = Volume::onlyTrashed()->get();
         foreach ($trashed_volumes as $trashed_volume) {
-            Storage::disk('public')->delete('volumes/' . $trashed_volume->uuid . '.png');
-            $this->info($trashed_volume->uuid . '.png removed');
+            Storage::disk('public')->delete('volumes/'.$trashed_volume->uuid.'.png');
+            $this->info($trashed_volume->uuid.'.png removed');
         }
     }
 
