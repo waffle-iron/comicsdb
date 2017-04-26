@@ -59,6 +59,7 @@ class PublisherRepository
     public function store(PublisherRequest $request)
     {
         Publisher::create($request->all());
+        $this->storeImage($request);
     }
 
     /**
@@ -82,5 +83,17 @@ class PublisherRepository
     public function delete(int $id)
     {
         Publisher::find($id)->delete();
+    }
+
+    /**
+     * @param PublisherRequest $request
+     * @return void
+     */
+    public function storeImage(PublisherRequest $request)
+    {
+        if ($request->hasFile('image')) {
+            $logoRepository = new PublisherLogoRepository();
+            $logoRepository->store($request);
+        }
     }
 }

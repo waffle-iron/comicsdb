@@ -55,9 +55,9 @@
             </div>
         </div>
 
-        <div class="row m-t-3">
+        <div class="row m-t-3" id="grid" data-columns>
             @foreach($publishers as $publisher)
-                <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="box">
                     <div class="thumbnail shadow-box b-a-0">
                         <a href="{{ route('publishers.show', ['id' => $publisher->id]) }}">
                             <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}">
@@ -83,28 +83,6 @@
 
         <div class="text-center">
             {{ $publishers->links() }}
-        </div>
-    </div>
-
-    <!-- Delete Logo Modal -->
-    <div class="modal fade" id="deleteLogoModal" tabindex="-1" role="dialog" aria-labelledby="deleteLogoModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content b-a-0">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#xD7;</span></button>
-                    <h4 class="modal-title" id="deleteLogoModalLabel">Remove Publishers Logo</h4>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to remove the Publisher Logo?
-                </div>
-                <div class="modal-footer">
-                    {!! Form::open(['route' => ['publishers.logo.delete'], 'method' => 'delete']) !!}
-                    {!! Form::hidden('id', 0) !!}
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Remove Logo</button>
-                    {!! Form::close() !!}
-                </div>
-            </div>
         </div>
     </div>
 

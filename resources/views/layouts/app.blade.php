@@ -391,6 +391,7 @@
 <script src="/assets/javascript/holder.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.1/vue-resource.min.js"></script>
+<script src="/js/salvattore.min.js"></script>
 @yield('javascript')
 <script>
     $(".select2-container").css('width', '');

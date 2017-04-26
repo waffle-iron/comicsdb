@@ -32,6 +32,7 @@ class PublisherRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'image' => 'required|image|mimes:png|max:2048'
         ];
     }
 

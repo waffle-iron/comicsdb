@@ -41,38 +41,28 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 m-b-2">
-                <div class="media">
-                    <div class="media-left p-r-2">
-                        <div class="center-block">
-                            <div class="avatar avatar-image avatar-lg center-block">
-                                <img class="img-circle center-block m-t-1 m-b-2" src="{{ Storage::url('/volumes/'.$volume->uuid.'.png') }}">
-                            </div>
-                        </div>
+                <img class="img-thumbnail m-t-1 m-b-2 shadow-box" src="{{ Storage::url('/volumes/'.$volume->uuid.'.png') }}" width="100%">
+                <h4 class="m-b-0">{{ $volume->name }}</h4>
+                @if (!empty($volume->number))
+                    <p class="m-t-0">
+                        Volume {{ $volume->number }}
+                    </p>
+                @endif
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group" role="group">
+                        <a role="button" href="{{ route('volumes.edit', ['id' => $volume->id]) }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </a>
                     </div>
-                    <div class="media-body">
-                        <h4 class="m-b-0">{{ $volume->name }}</h4>
-                        @if (!empty($volume->number))
-                            <p class="m-t-0">
-                                Volume {{ $volume->number }}
-                            </p>
-                        @endif
-                        <div class="btn-toolbar" role="toolbar">
-                            <div class="btn-group" role="group">
-                                <a role="button" href="{{ route('volumes.edit', ['id' => $volume->id]) }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
-                                    <i class="fa fa-fw fa-pencil"></i>
-                                </a>
-                            </div>
-                            <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Delete">
-                                <a role="button" href="#deleteVolumeModal" class="btn btn-default deleteVolume" data-toggle="modal">
-                                    <i class="fa fa-fw fa-trash"></i>
-                                </a>
-                            </div>
-                            <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Add Issue">
-                                <a role="button" href="{{ route('issues.create', ['volume' => $volume->id]) }}" class="btn btn-primary">
-                                    Add Issue
-                                </a>
-                            </div>
-                        </div>
+                    <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Delete">
+                        <a role="button" href="#deleteVolumeModal" class="btn btn-default deleteVolume" data-toggle="modal">
+                            <i class="fa fa-fw fa-trash"></i>
+                        </a>
+                    </div>
+                    <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Add Issue">
+                        <a role="button" href="{{ route('issues.create', ['volume' => $volume->id]) }}" class="btn btn-primary">
+                            Add Issue
+                        </a>
                     </div>
                 </div>
                 <div class="hr-text hr-text-left m-t-2">
@@ -90,6 +80,11 @@
             </div>
 
             <div class="col-lg-8 m-b-2">
+                <div class="hr-text hr-text-left m-b-1">
+                    <h6 class="text-white">
+                        <strong>Issues</strong>
+                    </h6>
+                </div>
                 <div class="row">
                     @foreach($volume->issues()->get() as $issue)
                         <div class="col-md-4 col-lg-4">

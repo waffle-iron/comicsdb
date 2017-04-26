@@ -37,7 +37,9 @@ class Publisher extends Model
     /**
      * @var array
      */
-    protected $guarded = [ ];
+    protected $guarded = [
+        'image'
+    ];
 
     /**
      * @var array

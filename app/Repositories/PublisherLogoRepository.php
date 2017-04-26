@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
  * @package App\Repositories
  * @author Maik Pütz <maikpuetz@gmail.com>
  */
-class LogoRepository
+class PublisherLogoRepository
 {
     /**
      * @param \Illuminate\Http\Request $request
