@@ -34,6 +34,9 @@ class Volume extends Model
      */
     protected $guarded = [ ];
 
+    /**
+     * @var array
+     */
     protected $cascadeDeletes = [
         'issues',
     ];
