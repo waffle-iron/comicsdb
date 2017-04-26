@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
@@ -33,12 +34,21 @@ class Publisher extends Model
 {
     use SoftDeletes;
     use Searchable;
+    use CascadeSoftDeletes;
 
     /**
      * @var array
      */
     protected $guarded = [
         'image'
+    ];
+
+    /**
+     * @var array
+     */
+    protected $cascadeDeletes = [
+        'volumes',
+        'aliases',
     ];
 
     /**

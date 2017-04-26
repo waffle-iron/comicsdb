@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
@@ -26,11 +27,16 @@ class Volume extends Model
 {
     use Searchable;
     use SoftDeletes;
+    use CascadeSoftDeletes;
 
     /**
      * @var array
      */
     protected $guarded = [ ];
+
+    protected $cascadeDeletes = [
+        'issues',
+    ];
 
     /**
      * @var array
