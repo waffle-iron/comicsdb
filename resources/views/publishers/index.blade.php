@@ -63,14 +63,14 @@
                             <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}">
                         </a>
                         <div class="caption">
-                            <h5 class="m-b-0">
+                            <h5 class="m-b-1">
                                 <span>{{ $publisher->name }}</span>
-                                <small class="pull-right">
+                                <span class="pull-right text-gray-light">
                                     <i class="fa fa-calendar"></i> {{ $publisher->founded_at->year }}
-                                </small>
+                                </span>
                             </h5>
-                            <p class="text-gray-light m-t-1 m-b-1">
-                                {{ nl2br($publisher->description) }}
+                            <p class="text-gray-light m-t-2 m-b-1">
+                                {!! nl2br($publisher->description) !!}
                             </p>
                             <div class="label label-success">
                                 <span>{{ $publisher->amountOfIssues() }} Issues</span>

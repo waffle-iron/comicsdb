@@ -45,7 +45,7 @@
                     <div class="media-left p-r-2">
                         <div class="center-block">
                             <div class="avatar avatar-image avatar-lg center-block">
-                                <img class="img-circle center-block m-t-1 m-b-2" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}">
+                                <img class="img-thumbnail center-block m-t-1 m-b-2" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}">
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         <strong>Description</strong>
                     </h6>
                 </div>
-                <p>{{ nl2br($publisher->description) }}</p>
+                <p>{!! nl2br($publisher->description) !!}</p>
                 <div class="hr-text hr-text-left m-t-2">
                     <h6 class="text-white">
                         <strong>Aliases</strong>

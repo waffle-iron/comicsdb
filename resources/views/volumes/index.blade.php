@@ -75,7 +75,7 @@
                                 @endif
                             </h5>
                             <p class="text-gray-light m-t-1 m-b-1">
-                                {{ nl2br($volume->description) }}
+                                {!! nl2br($volume->description) !!}
                             </p>
                             <p class="text-gray m-t-1 m-b-1">
                                 {{ $volume->publisher()->first()->name }}
