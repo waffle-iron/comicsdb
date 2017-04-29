@@ -65,4 +65,13 @@ class Volume extends Model
     {
         return $this->hasMany(Issue::class, 'volume_id', 'id');
     }
+
+    /**
+     * @return Issue
+     */
+    public function getLastIssue()
+    {
+        $issue = $this->issues()->orderBy('number', 'desc')->first();
+        return isset($issue) ? $issue : new Issue();
+    }
 }

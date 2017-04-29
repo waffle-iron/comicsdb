@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('images:clear')->daily();
+        $schedule->command('quicksand:run')->daily();
     }
 
     /**

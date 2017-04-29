@@ -60,7 +60,7 @@
                 <div class="box">
                     <div class="thumbnail shadow-box b-a-0">
                         <a href="{{ route('volumes.show', ['id' => $volume->id]) }}">
-                            <img data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/volumes/'.$volume->uuid.'.png') }}">
+                            <img data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/issues/'.$volume->getLastIssue()->uuid.'.png') }}">
                         </a>
                         <div class="caption">
                             <h5 class="m-b-0">

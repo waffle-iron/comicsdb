@@ -41,7 +41,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 m-b-2">
-                <img class="img-thumbnail m-t-1 m-b-2 shadow-box" src="{{ Storage::url('/volumes/'.$volume->uuid.'.png') }}" width="100%">
+                <img class="img-thumbnail m-t-1 m-b-2 shadow-box" data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/issues/'.$volume->getLastIssue()->uuid.'.png') }}" width="100%">
                 <h4 class="m-b-0">{{ $volume->name }}</h4>
                 @if (!empty($volume->number))
                     <p class="m-t-0">
@@ -70,7 +70,9 @@
                         <strong>Publisher</strong>
                     </h6>
                 </div>
-                {{ $volume->publisher()->first()->name }}
+                <a href="{{ route('publishers.show', ['id' => $volume->publisher()->first()->id]) }}">
+                    {{ $volume->publisher()->first()->name }}
+                </a>
                 <div class="hr-text hr-text-left m-t-2">
                     <h6 class="text-white">
                         <strong>Year</strong>
@@ -93,22 +95,24 @@
                         <strong>Issues</strong>
                     </h6>
                 </div>
-                <div class="row">
-                    @foreach($volume->issues()->get() as $issue)
-                        <div class="col-md-4 col-lg-4">
-                            <div class="panel panel-default shadow-box b-l-2 b-t-0 b-r-0 b-b-0">
-                                <div class="panel-body">
+                <div class="row m-t-3" id="grid" data-columns>
+                    @foreach($volume->issues()->orderBy('number', 'desc')->get() as $issue)
+                        <div class="box">
+                            <div class="shadow-box-dark">
+                                <div class="thumbnail b-a-0">
                                     <a href="{{ route('issues.show', ['id' => $issue->id]) }}">
-                                        AAA
+                                        <img data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/issues/'.$issue->uuid.'.png') }}">
                                     </a>
                                 </div>
-                                <div class="panel-footer">
-                                    <div class="text-center">
-                                        <p class="m-l-0 m-r-0 m-t-0 m-b-0"><strong>Issue #{{ $issue->number }}</strong></p>
-                                        <p class="m-l-0 m-r-0 m-t-0 m-b-0"><small>{{ $issue->name }}</small></p>
-                                        <p class="text-muted m-l-0 m-r-0 m-t-0 m-b-0"><small>{{ $issue->store_date->format('F Y') }}</small></p>
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="caption text-center m-t-0 p-t-0 p-b-0">
+                                <h6 class="m-b-0">
+                                    Issue #{{ $issue->number }}
+                                </h6>
+                                <small>{{ $issue->name }}</small>
+                                <p class="small text-gray-light">
+                                    {{  $issue->cover_date->format('F Y') }}
+                                </p>
                             </div>
                         </div>
                     @endforeach

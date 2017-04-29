@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Console\Commands;
 
+use App\Models\Issue;
 use App\Models\Publisher;
 use App\Models\Volume;
 use Illuminate\Console\Command;
@@ -48,6 +49,7 @@ class ImagesClear extends Command
     {
         $this->removeRedundantPublisherImages();
         $this->removeRedundantVolumeImages();
+        $this->removeRedundantIssueImages();
     }
 
     /**
@@ -75,6 +77,21 @@ class ImagesClear extends Command
         foreach ($trashed_publishers as $trashed_publisher) {
             Storage::disk('public')->delete('publishers/'.$trashed_publisher->uuid.'.png');
             $this->info($trashed_publisher->uuid.'.png removed');
+        }
+
+    }
+
+    /**
+     * @return void
+     */
+    private function removeRedundantIssueImages()
+    {
+        $this->line('Removing issues images...');
+
+        $trashed_issues = Issue::onlyTrashed()->get();
+        foreach ($trashed_issues as $trashed_issue) {
+            Storage::disk('public')->delete('issues/'.$trashed_issue->uuid.'.png');
+            $this->info($trashed_issue->uuid.'.png removed');
         }
 
     }

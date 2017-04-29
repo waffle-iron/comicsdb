@@ -41,40 +41,33 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 m-b-2">
-                <div class="media">
-                    <div class="media-left p-r-2">
-                        <div class="center-block">
-                            <div class="avatar avatar-image avatar-lg center-block">
-                                <img class="img-circle center-block m-t-1 m-b-2" src="{{ Storage::url('/issues/'.$issue->uuid.'.png') }}">
-                            </div>
-                        </div>
+                <img class="img-thumbnail m-t-1 m-b-2 shadow-box" data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/issues/'.$issue->uuid.'.png') }}" width="100%">
+                <h4 class="m-b-0">{{ $issue->name }}</h4>
+                <p class="m-t-0">
+                    Issue #{{ $issue->number }}
+                </p>
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group" role="group">
+                        <a role="button" href="{{ route('issues.edit', ['id' => $issue->id]) }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </a>
                     </div>
-                    <div class="media-body">
-                        <h4 class="m-b-0">{{ $issue->name }}</h4>
-                        <p class="m-t-0">
-                            Issue #{{ $issue->number }}
-                        </p>
-                        <div class="btn-toolbar" role="toolbar">
-                            <div class="btn-group" role="group">
-                                <a role="button" href="{{ route('issues.edit', ['id' => $issue->id]) }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
-                                    <i class="fa fa-fw fa-pencil"></i>
-                                </a>
-                            </div>
-                            <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Delete">
-                                <a role="button" href="#deleteIssueModal" class="btn btn-default deleteIssue" data-toggle="modal">
-                                    <i class="fa fa-fw fa-trash"></i>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Delete">
+                        <a role="button" href="#deleteIssueModal" class="btn btn-default deleteIssue" data-toggle="modal">
+                            <i class="fa fa-fw fa-trash"></i>
+                        </a>
                     </div>
                 </div>
-
                 <div class="hr-text hr-text-left m-t-2">
                     <h6 class="text-white">
                         <strong>Volume</strong>
                     </h6>
                 </div>
-                <p>{{ $issue->volume()->first()->name }}</p>
+                <p>
+                    <a href="{{ route('volumes.show', ['id' => $issue->volume()->first()->id]) }}">
+                        {{ $issue->volume()->first()->name }}
+                    </a>
+                </p>
 
                 <div class="hr-text hr-text-left m-t-2">
                     <h6 class="text-white">

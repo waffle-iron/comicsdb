@@ -25,6 +25,8 @@
     }
 }
 
+.shadow-box-dark {
+    box-shadow: 0 0 5px #333; }
 /* Again, you’re free to use and define the classes: */
 .column { float: left; }
 .size-1of1 { width: 100%; }

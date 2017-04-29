@@ -36,6 +36,7 @@ Route::group(['prefix' => 'publishers', 'middleware' => 'auth'], function() {
 
 Route::group(['prefix' => 'volumes', 'middleware' => 'auth'], function() {
     Route::get('/', ['as' => 'volumes.index', 'uses' => 'VolumeController@index']);
+    Route::get('/publisher/{publisherId}', ['as' => 'volumes.index.byPublisher', 'uses' => 'VolumeController@index']);
     Route::get('{id}', ['as' => 'volumes.show', 'uses' => 'VolumeController@show'])->where(['id' => '[0-9]+']);
     Route::get('create/{publisher?}', ['as' => 'volumes.create', 'uses' => 'VolumeController@create']);
     Route::post('store', ['as' => 'volumes.store', 'uses' => 'VolumeController@store']);
