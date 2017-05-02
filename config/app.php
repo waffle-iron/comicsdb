@@ -183,6 +183,7 @@ return [
         PragmaRX\Countries\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Spatie\Menu\Laravel\MenuServiceProvider::class,
+        Tightenco\Quicksand\QuicksandServiceProvider::class,
 
         App\Providers\MenuComposerServiceProvider::class,
     ],

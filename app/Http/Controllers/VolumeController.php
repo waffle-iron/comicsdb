@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VolumeRequest;
+use App\Models\Issue;
 use App\Repositories\PublisherRepository;
 use App\Repositories\VolumeRepository;
 use Illuminate\Http\Request;
@@ -38,11 +39,14 @@ class VolumeController extends Controller
     }
 
     /**
+     * @param int|null $publisherId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(int $publisherId = null)
     {
-        $volumes = $this->volumeRepository->index(16);
+        $volumes = !isset($publisherId)
+            ? $this->volumeRepository->index(16)
+            : $this->volumeRepository->byPublisher($publisherId);
 
         return view('volumes.index', [
             'volumes' => $volumes,
