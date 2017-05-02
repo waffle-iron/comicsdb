@@ -32,6 +32,16 @@ class VolumeRepository
     }
 
     /**
+     * @param int $publisherId
+     * @param int $elementsPerPage
+     * @return mixed
+     */
+    public function byPublisher(int $publisherId, $elementsPerPage = 6)
+    {
+        return Volume::where('publisher_id', $publisherId)->paginate($elementsPerPage);
+    }
+
+    /**
      * @return mixed
      */
     public function all()
@@ -82,14 +92,5 @@ class VolumeRepository
     public function delete(int $id)
     {
         Volume::find($id)->delete();
-    }
-
-    /**
-     * @param int $publisherId
-     * @return mixed
-     */
-    public function byPublisher(int $publisherId, $elementsPerPage = 6)
-    {
-        return Volume::where('publisher_id', $publisherId)->paginate($elementsPerPage);
     }
 }

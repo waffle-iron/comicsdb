@@ -41,36 +41,33 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 m-b-2">
-                <div class="media">
-                    <div class="media-left p-r-2">
-                        <div class="center-block">
-                            <div class="avatar avatar-image avatar-lg center-block">
-                                <img class="img-thumbnail center-block m-t-1 m-b-2" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}">
-                            </div>
-                        </div>
+                <div class="img-container">
+                    <img class="img-thumbnail m-t-0 m-b-2 shadow-box" id="publisherImage" data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}" width="100%">
+                    <div class="editContainer">
+                        <a href="#changeLogoModal" type="button" class="btn btn-sm btn-default" data-toggle="modal">
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </a>
                     </div>
-                    <div class="media-body">
-                        <h4 class="m-b-0">{{ $publisher->name }}</h4>
-                        <p class="m-t-0">
-                            Founded at {{ $publisher->founded_at->format('Y') }}
-                        </p>
-                        <div class="btn-toolbar" role="toolbar">
-                            <div class="btn-group" role="group">
-                                <a role="button" href="{{ route('publishers.edit', ['id' => $publisher->id]) }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
-                                    <i class="fa fa-fw fa-pencil"></i>
-                                </a>
-                            </div>
-                            <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Delete">
-                                <a role="button" href="#deletePublisherModal" class="btn btn-default deletePublisher" data-toggle="modal">
-                                    <i class="fa fa-fw fa-trash"></i>
-                                </a>
-                            </div>
-                            <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Add Volume">
-                                <a role="button" href="{{ route('volumes.create', ['publisher' => $publisher->id]) }}" class="btn btn-primary">
-                                    Add Volume
-                                </a>
-                            </div>
-                        </div>
+                </div>
+                <h4 class="m-b-0">{{ $publisher->name }}</h4>
+                <p class="m-t-0">
+                    Founded at {{ $publisher->founded_at->format('Y') }}
+                </p>
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group" role="group">
+                        <a role="button" href="{{ route('publishers.edit', ['id' => $publisher->id]) }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </a>
+                    </div>
+                    <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Delete">
+                        <a role="button" href="#deletePublisherModal" class="btn btn-default deletePublisher" data-toggle="modal">
+                            <i class="fa fa-fw fa-trash"></i>
+                        </a>
+                    </div>
+                    <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Add Volume">
+                        <a role="button" href="{{ route('volumes.create', ['publisher' => $publisher->id]) }}" class="btn btn-primary">
+                            Add Volume
+                        </a>
                     </div>
                 </div>
                 <div class="hr-text hr-text-left m-t-2">
@@ -178,6 +175,28 @@
             </div>
         </div>
     </div>
+
+    <!-- Change Logo Modal -->
+    <div class="modal fade" id="changeLogoModal" tabindex="-1" role="dialog" aria-labelledby="changeLogoModalLabel">
+        <div class="modal-dialog" role="document">
+            <form @submit.prevent="saveLogo" enctype="multipart/form-data">
+            <div class="modal-content b-a-0">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#xD7;</span></button>
+                    <h4 class="modal-title" id="changeLogoModalLabel">Change Publisher Logo</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="file" name="image" id="image">
+                </div>
+                <div class="modal-footer">
+                    {!! Form::hidden('uuid', $publisher->uuid, ['v-model' => 'uuid']) !!}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-danger" value="Change Logo">
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 @section('javascript')
@@ -188,7 +207,9 @@
             data: {
                 aliases: [],
                 aliasEditMode: false,
-                newAlias: ''
+                newAlias: '',
+                uuid: '{!! $publisher->uuid !!}',
+                image: ''
             },
 
             mounted() {
@@ -222,8 +243,30 @@
                     console.log(id, index);
                     this.aliases.splice(index, 1);
                     this.$http.delete('/api/alias/' + id + '?api_token={{ Auth::user()->api_token }}');
+                },
+                saveLogo: function(e) {
+                    e.preventDefault();
+                    data = new FormData();
+                    this.image = e.target[1].files[0];
+                    data.append('uuid', this.uuid);
+                    data.append('image', this.image);
+
+                    this.$http.post('/api/publishers/logo?api_token={{ Auth::user()->api_token }}', data).then(response => {
+                        d = new Date();
+                        $('#publisherImage').attr("src", "{{ Storage::url('/publishers/'.$publisher->uuid.'.png?') }}"+d.getTime());
+                        $('#changeLogoModal').modal('hide');
+                        this.image = '';
+                    });
                 }
             }
         })
+    </script>
+@endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            $('.editContainer').hide();
+        });
     </script>
 @endsection

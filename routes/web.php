@@ -29,9 +29,9 @@ Route::group(['prefix' => 'publishers', 'middleware' => 'auth'], function() {
     Route::post('update', ['as' => 'publishers.update', 'uses' => 'PublisherController@update']);
     Route::delete('/', ['as' => 'publishers.delete', 'uses' => 'PublisherController@delete']);
 
-    Route::get('{id}/logo', ['as' => 'publishers.logo.add', 'uses' => 'LogoController@create'])->where(['id' => '[0-9]+']);
-    Route::post('logo', ['as' => 'publishers.logo.store', 'uses' => 'LogoController@store']);
-    Route::delete('logo', ['as' => 'publishers.logo.delete', 'uses' => 'LogoController@delete']);
+    Route::get('{id}/logo', ['as' => 'publishers.logo.add', 'uses' => 'PublisherLogoController@create'])->where(['id' => '[0-9]+']);
+    Route::post('logo', ['as' => 'publishers.logo.store', 'uses' => 'PublisherLogoController@store']);
+    Route::delete('logo', ['as' => 'publishers.logo.delete', 'uses' => 'PublisherLogoController@delete']);
 });
 
 Route::group(['prefix' => 'volumes', 'middleware' => 'auth'], function() {

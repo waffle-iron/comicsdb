@@ -37,3 +37,20 @@
 .box {
     margin: 5px 10px;
 }
+
+.img-container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.editContainer {
+    position: absolute;
+    right: 15px;
+    bottom: 22px;
+    padding: 4px;
+}
+ button:focus, a:focus {
+     outline: none;
+ }

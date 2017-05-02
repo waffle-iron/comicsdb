@@ -1,8 +1,9 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Repositories\PublisherLogoRepository;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;

@@ -21,4 +21,6 @@ Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
     Route::get('/alias/{publisher_id}', ['as' => 'api.alias.get', 'uses' => 'PublisherAliasController@get']);
     Route::post('/alias', ['as' => 'api.alias.store', 'uses' => 'PublisherAliasController@store']);
     Route::delete('/alias/{id}', ['as' => 'api.alias.delete', 'uses' => 'PublisherAliasController@delete']);
+
+    Route::post('/publishers/logo', ['as' => 'publishers.logo.store', 'uses' => 'PublisherLogoController@store']);
 });

@@ -41,44 +41,74 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 m-b-2">
-                <img class="img-thumbnail m-t-1 m-b-2 shadow-box" data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/issues/'.$volume->getLastIssue()->uuid.'.png') }}" width="100%">
-                <h4 class="m-b-0">{{ $volume->name }}</h4>
-                @if (!empty($volume->number))
-                    <p class="m-t-0">
-                        Volume {{ $volume->number }}
-                    </p>
-                @endif
-                <div class="btn-toolbar" role="toolbar">
-                    <div class="btn-group" role="group">
-                        <a role="button" href="{{ route('volumes.edit', ['id' => $volume->id]) }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
-                            <i class="fa fa-fw fa-pencil"></i>
-                        </a>
+                <div class="panel panel-default shadow-box">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{ $volume->name }}
+                            <div class="pull-right">
+                                <a role="button" href="{{ route('volumes.edit', ['id' => $volume->id]) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
+                                    <i class="fa fa-fw fa-pencil"></i>
+                                </a>
+                                <span data-toggle="tooltip" title data-original-title="Delete">
+                                    <a role="button" href="#deleteVolumeModal" class="btn btn-xs btn-default deleteVolume" data-toggle="modal">
+                                        <i class="fa fa-fw fa-trash"></i>
+                                    </a>
+                                </span>
+                                <a role="button" href="{{ route('issues.create', ['volume' => $volume->id]) }}" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title data-original-title="Add Issue">
+                                    Add Issue
+                                </a>
+                            </div>
+                        </h3>
                     </div>
-                    <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Delete">
-                        <a role="button" href="#deleteVolumeModal" class="btn btn-default deleteVolume" data-toggle="modal">
-                            <i class="fa fa-fw fa-trash"></i>
+                    <div class="panel-body">
+                        @if (!empty($volume->number))
+                            <div class="hr-text hr-text-left m-t-0">
+                                <h6 class="text-white bg-white-i">
+                                    <strong>Volume</strong>
+                                </h6>
+                            </div>
+                            <p>{{ $volume->number }}</p>
+                        @endif
+
+                        <div class="hr-text hr-text-left m-t-0">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Issues</strong>
+                            </h6>
+                        </div>
+                        <p>{{ $volume->issues()->count() }}</p>
+
+                        <div class="hr-text hr-text-left m-t-0">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Publisher</strong>
+                            </h6>
+                        </div>
+                        <a href="{{ route('publishers.show', ['id' => $volume->publisher()->first()->id]) }}">
+                            {{ $volume->publisher()->first()->name }}
                         </a>
-                    </div>
-                    <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Add Issue">
-                        <a role="button" href="{{ route('issues.create', ['volume' => $volume->id]) }}" class="btn btn-primary">
-                            Add Issue
-                        </a>
+
+                        <div class="hr-text hr-text-left m-t-2">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Year</strong>
+                            </h6>
+                        </div>
+                        {{ $volume->year }}
+
+                        <div class="hr-text hr-text-left m-t-2">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Internal information</strong>
+                            </h6>
+                        </div>
+                        <p>
+                            Created<span class="pull-right">{{ $volume->created_at->format('m/d/Y') }} <i class="fa fa-fw fa-clock-o"></i> {{ $volume->created_at->format('h:iA') }}</span>
+                        </p>
+                        <p>
+                            Last updated <span class="pull-right">{{ $volume->updated_at->format('m/d/Y') }} <i class="fa fa-fw fa-clock-o"></i> {{ $volume->updated_at->format('h:iA') }}</span>
+                        </p>
+                        <p>
+                            UUID <span class="pull-right"><samp>{{ $volume->uuid }}</samp></span>
+                        </p>
                     </div>
                 </div>
-                <div class="hr-text hr-text-left m-t-2">
-                    <h6 class="text-white">
-                        <strong>Publisher</strong>
-                    </h6>
-                </div>
-                <a href="{{ route('publishers.show', ['id' => $volume->publisher()->first()->id]) }}">
-                    {{ $volume->publisher()->first()->name }}
-                </a>
-                <div class="hr-text hr-text-left m-t-2">
-                    <h6 class="text-white">
-                        <strong>Year</strong>
-                    </h6>
-                </div>
-                {{ $volume->year }}
             </div>
 
             <div class="col-lg-8 m-b-2">
