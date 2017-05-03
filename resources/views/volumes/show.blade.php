@@ -92,20 +92,24 @@
                             </h6>
                         </div>
                         {{ $volume->year }}
-
-                        <div class="hr-text hr-text-left m-t-2">
-                            <h6 class="text-white bg-white-i">
-                                <strong>Internal information</strong>
-                            </h6>
-                        </div>
-                        <p>
-                            Created<span class="pull-right">{{ $volume->created_at->format('m/d/Y') }} <i class="fa fa-fw fa-clock-o"></i> {{ $volume->created_at->format('h:iA') }}</span>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Internal Information
+                    </div>
+                    <div class="panel-body">
+                        <p style="line-height: 10px;">
+                            <strong>Created</strong>
+                            <span class="pull-right"><small class="text-gray-light"><i class="fa fa-fw fa-calendar"></i> {{ $volume->created_at->format('m/d/Y') }} <i class="fa fa-fw fa-clock-o"></i> {{ $volume->created_at->format('h:iA') }}</small></span>
                         </p>
-                        <p>
-                            Last updated <span class="pull-right">{{ $volume->updated_at->format('m/d/Y') }} <i class="fa fa-fw fa-clock-o"></i> {{ $volume->updated_at->format('h:iA') }}</span>
+                        <p style="line-height: 10px;">
+                            <strong>Last updated</strong>
+                            <span class="pull-right"><small class="text-gray-light"><i class="fa fa-fw fa-calendar"></i> {{ $volume->updated_at->format('m/d/Y') }} <i class="fa fa-fw fa-clock-o"></i> {{ $volume->updated_at->format('h:iA') }}</small></span>
                         </p>
-                        <p>
-                            UUID <span class="pull-right"><samp>{{ $volume->uuid }}</samp></span>
+                        <p style="line-height: 10px;">
+                            <strong>UUID</strong>
+                            <span class="pull-right"><samp><small class="text-gray-light">{{ $volume->uuid }}</small></samp></span>
                         </p>
                     </div>
                 </div>
