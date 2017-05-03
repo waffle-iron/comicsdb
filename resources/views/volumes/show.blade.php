@@ -133,18 +133,18 @@
                     @foreach($volume->issues()->orderBy('number', 'desc')->get() as $issue)
                         <div class="box">
                             <div class="shadow-box-dark">
-                                <div class="thumbnail b-a-0">
+                                <div class="thumbnail b-a-0 m-b-1">
                                     <a href="{{ route('issues.show', ['id' => $issue->id]) }}">
                                         <img data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/issues/'.$issue->uuid.'.png') }}">
                                     </a>
                                 </div>
                             </div>
-                            <div class="caption text-center m-t-0 p-t-0 p-b-0">
-                                <h6 class="m-b-0">
+                            <div class="caption text-center">
+                                <h6 class="p-t-0 m-t-0 m-b-0" style="line-height: 12px;">
                                     Issue #{{ $issue->number }}
                                 </h6>
                                 <small>{{ $issue->name }}</small>
-                                <p class="small text-gray-light">
+                                <p class="small text-gray-light p-b-2">
                                     {{  $issue->cover_date->format('F Y') }}
                                 </p>
                             </div>
