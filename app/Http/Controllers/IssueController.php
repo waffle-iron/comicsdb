@@ -42,7 +42,7 @@ class IssueController extends Controller
      */
     public function index()
     {
-        $issues = $this->issueRepository->index();
+        $issues = $this->issueRepository->index(100);
 
         return view('issues.index', [
             'issues' => $issues,

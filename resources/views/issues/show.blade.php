@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-lg-12 sub-navbar-column">
                     <div class="sub-navbar-header">
-                        <h3>#{{ $issue->number }} <small>{{ $issue->name }}</small></h3>
+                        <h3>{{ $issue->volume()->first()->name }} #{{ $issue->number }} <small>{{ $issue->name }}</small></h3>
                     </div>
                     <ol class="breadcrumb navbar-text navbar-right no-bg">
                         <li class="current-parent">
