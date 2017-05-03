@@ -38,7 +38,7 @@ class VolumeRepository
      */
     public function byPublisher(int $publisherId, $elementsPerPage = 6)
     {
-        return Volume::where('publisher_id', $publisherId)->paginate($elementsPerPage);
+        return Volume::where('publisher_id', $publisherId)->orderBy('name')->paginate($elementsPerPage);
     }
 
     /**
