@@ -52,4 +52,5 @@ Route::group(['prefix' => 'issues', 'middleware' => 'auth'], function() {
     Route::post('store', ['as' => 'issues.store', 'uses' => 'IssueController@store']);
     Route::get('{id}/edit', ['as' => 'issues.edit', 'uses' => 'IssueController@edit'])->where(['id' => '[0-9]+']);
     Route::post('update', ['as' => 'issues.update', 'uses' => 'IssueController@update']);
+    Route::delete('/', ['as' => 'issues.delete', 'uses' => 'IssueController@delete']);
 });

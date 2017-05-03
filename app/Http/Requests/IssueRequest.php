@@ -34,6 +34,7 @@ class IssueRequest extends FormRequest
             'volume_id' => 'required',
             'number' => 'required',
             'store_date' => 'required',
+            'image' => 'required|image|mimes:png|max:2048'
         ];
     }
 }

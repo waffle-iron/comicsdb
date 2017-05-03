@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\IssueRequest;
 use App\Repositories\IssueRepository;
 use App\Repositories\VolumeRepository;
+use Illuminate\Http\Request;
 
 /**
  * Class IssueController
@@ -109,6 +110,18 @@ class IssueController extends Controller
     public function update(IssueRequest $issueRequest)
     {
         $this->issueRepository->update($issueRequest);
+
+        return redirect()->route('issues.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request)
+    {
+        $id = (int) $request->get('id');
+        $this->issueRepository->delete($id);
 
         return redirect()->route('issues.index');
     }

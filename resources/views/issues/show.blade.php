@@ -97,7 +97,7 @@
         </div>
     </div>
 
-    <!-- Delete Publisher Modal -->
+    <!-- Delete Issue Modal -->
     <div class="modal fade" id="deleteIssueModal" tabindex="-1" role="dialog" aria-labelledby="deleteIssueModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content b-a-0">
@@ -109,7 +109,7 @@
                     Are you sure you want to remove the Issue?
                 </div>
                 <div class="modal-footer">
-                    {!! Form::open(['route' => ['volumes.delete'], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['issues.delete'], 'method' => 'delete']) !!}
                     {!! Form::hidden('id', $issue->id) !!}
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-danger">Remove Issue</button>
