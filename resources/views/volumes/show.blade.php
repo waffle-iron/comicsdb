@@ -41,7 +41,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 m-b-2">
-                <div class="panel panel-default shadow-box">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             {{ $volume->name }}

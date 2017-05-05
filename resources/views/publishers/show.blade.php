@@ -49,75 +49,103 @@
                         </a>
                     </div>
                 </div>
-                <h4 class="m-b-0">{{ $publisher->name }}</h4>
-                <p class="m-t-0">
-                    Founded at {{ $publisher->founded_at->format('Y') }}
-                </p>
-                <div class="btn-toolbar" role="toolbar">
-                    <div class="btn-group" role="group">
-                        <a role="button" href="{{ route('publishers.edit', ['id' => $publisher->id]) }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
-                            <i class="fa fa-fw fa-pencil"></i>
-                        </a>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{ $publisher->name }}
+                            <div class="pull-right">
+                                <a role="button" href="{{ route('publishers.edit', ['id' => $publisher->id]) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
+                                    <i class="fa fa-fw fa-pencil"></i>
+                                </a>
+                                <a role="button" href="#deletePublisherModal" class="btn btn-xs btn-default deletePublisher" data-toggle="modal">
+                                    <i class="fa fa-fw fa-trash"></i>
+                                </a>
+                                <a role="button" href="{{ route('volumes.create', ['publisher' => $publisher->id]) }}" class="btn btn-xs btn-primary">
+                                    Add Volume
+                                </a>
+                            </div>
+                        </h3>
                     </div>
-                    <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Delete">
-                        <a role="button" href="#deletePublisherModal" class="btn btn-default deletePublisher" data-toggle="modal">
-                            <i class="fa fa-fw fa-trash"></i>
-                        </a>
-                    </div>
-                    <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Add Volume">
-                        <a role="button" href="{{ route('volumes.create', ['publisher' => $publisher->id]) }}" class="btn btn-primary">
-                            Add Volume
-                        </a>
-                    </div>
-                </div>
-                <div class="hr-text hr-text-left m-t-2">
-                    <h6 class="text-white">
-                        <strong>Description</strong>
-                    </h6>
-                </div>
-                <p>{!! nl2br($publisher->description) !!}</p>
-                <div class="hr-text hr-text-left m-t-2">
-                    <h6 class="text-white">
-                        <strong>Aliases</strong>
-                    </h6>
-                </div>
-                <ul class="nav nav-pills nav-stacked m-b-2">
-                    <li v-for="(item, key, index) in aliases">
-                        <i class="fa fa-fw fa-star m-r-1 text-lighting-yellow"></i>
-                        <span class="text-gray">@{{ item.alias }} <button v-show="aliasEditMode" @click="deleteAlias(item.id, key)" class="btn btn-xs btn-default pull-right"><i class="fa fa-close text-danger"></i></button></span>
-                    </li>
-                </ul>
-                <div class="input-group input-group-sm" v-show="aliasEditMode">
-                    <input type="text" class="form-control" id="aliasInputBox" ref="aliasInput" v-model="newAlias">
-                    <span class="input-group-btn">
+                    <div class="panel-body">
+                        <div class="hr-text hr-text-left">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Founded at</strong>
+                            </h6>
+                        </div>
+                        <p>
+                            <i class="fa fa-fw fa-calendar"></i> {{ $publisher->founded_at->format('Y') }}
+                        </p>
+                        <div class="hr-text hr-text-left m-t-2">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Description</strong>
+                            </h6>
+                        </div>
+                        <p>{!! nl2br($publisher->description) !!}</p>
+                        <div class="hr-text hr-text-left m-t-2">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Aliases</strong>
+                            </h6>
+                        </div>
+                        <ul class="nav nav-pills nav-stacked m-b-2">
+                            <li v-for="(item, key, index) in aliases">
+                                <i class="fa fa-fw fa-star m-r-1 text-lighting-yellow"></i>
+                                <span class="text-gray">@{{ item.alias }} <button v-show="aliasEditMode" @click="deleteAlias(item.id, key)" class="btn btn-xs btn-default pull-right"><i class="fa fa-close text-danger"></i></button></span>
+                            </li>
+                        </ul>
+                        <div class="input-group input-group-sm" v-show="aliasEditMode">
+                            <input type="text" class="form-control" id="aliasInputBox" ref="aliasInput" v-model="newAlias">
+                            <span class="input-group-btn">
                         <button class="btn btn-default" type="button" @click="addAlias"><i class="fa fa-check text-success"></i></button>
                     </span>
+                        </div>
+                        <button type="button" v-show="!aliasEditMode" @click="activateAliasEditMode" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit Aliases</button>
+                        <button type="button" v-show="aliasEditMode" @click="deactivateAliasEditMode" class="btn btn-sm btn-default m-t-1"><i class="fa fa-close"></i> Hide Edit Mode</button>
+                        <div class="hr-text hr-text-left m-t-2">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Address</strong>
+                            </h6>
+                        </div>
+                        {{ $publisher->address }}<br>
+                        {{ $publisher->city }}, {{ $publisher->state }} {{ $publisher->zip }}<br>
+                        {{ $publisher->country }}
+                        <div class="hr-text hr-text-left m-t-2">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Social</strong>
+                            </h6>
+                        </div>
+                        @if($publisher->twitter)
+                            <a href="https://twitter.com/{{ $publisher->twitter }}" target="_blank" data-toggle="tooltip" data-placement="top" title data-original-title="Twitter Profile">
+                                <i class="fa fa-fw fa-twitter-square text-muted fa-lg"></i>
+                            </a>
+                        @endif
+                        @if($publisher->website)
+                            <a href="{{ $publisher->website }}" target="_blank" data-toggle="tooltip" data-placement="top" title data-original-title="Website">
+                                <i class="fa fa-fw fa-globe text-muted fa-lg"></i>
+                            </a>
+                        @endif
+                    </div>
                 </div>
-                <button type="button" v-show="!aliasEditMode" @click="activateAliasEditMode" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit Aliases</button>
-                <button type="button" v-show="aliasEditMode" @click="deactivateAliasEditMode" class="btn btn-sm btn-default m-t-1"><i class="fa fa-close"></i> Hide Edit Mode</button>
-                <div class="hr-text hr-text-left m-t-2">
-                    <h6 class="text-white">
-                        <strong>Address</strong>
-                    </h6>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Internal Information
+                    </div>
+                    <div class="panel-body">
+                        <p style="line-height: 10px;">
+                            <strong>Created</strong>
+                            <span class="pull-right"><small class="text-gray-light"><i class="fa fa-fw fa-calendar"></i> {{ $publisher->created_at->format('m/d/Y') }} <i class="fa fa-fw fa-clock-o"></i> {{ $publisher->created_at->format('h:iA') }}</small></span>
+                        </p>
+                        <p style="line-height: 10px;">
+                            <strong>Last updated</strong>
+                            <span class="pull-right"><small class="text-gray-light"><i class="fa fa-fw fa-calendar"></i> {{ $publisher->updated_at->format('m/d/Y') }} <i class="fa fa-fw fa-clock-o"></i> {{ $publisher->updated_at->format('h:iA') }}</small></span>
+                        </p>
+                        <p style="line-height: 10px;">
+                            <strong>UUID</strong>
+                            <span class="pull-right"><samp><small class="text-gray-light">{{ $publisher->uuid }}</small></samp></span>
+                        </p>
+                    </div>
                 </div>
-                {{ $publisher->address }}<br>
-                {{ $publisher->city }}, {{ $publisher->state }} {{ $publisher->zip }}<br>
-                {{ $publisher->country }}
-                <div class="hr-text hr-text-left m-t-2">
-                    <h6 class="text-white">
-                        <strong>Social</strong>
-                    </h6>
-                </div>
-                @if($publisher->twitter)
-                <a href="https://twitter.com/{{ $publisher->twitter }}" target="_blank" data-toggle="tooltip" data-placement="top" title data-original-title="Twitter Profile">
-                    <i class="fa fa-fw fa-twitter-square text-muted fa-lg"></i>
-                </a>
-                @endif
-                @if($publisher->website)
-                <a href="{{ $publisher->website }}" target="_blank" data-toggle="tooltip" data-placement="top" title data-original-title="Website">
-                    <i class="fa fa-fw fa-globe text-muted fa-lg"></i>
-                </a>
-                @endif
             </div>
 
             <div class="col-lg-8 m-b-2">
