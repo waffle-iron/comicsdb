@@ -41,7 +41,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 m-b-2">
-                <img class="img-thumbnail m-t-1 m-b-2 shadow-box" data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/issues/'.$issue->uuid.'.png') }}" width="100%">
+                <div class="img-container">
+                    <img class="img-thumbnail m-t-1 m-b-2 shadow-box" id="issueImage" data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/issues/'.$issue->uuid.'.png') }}" width="100%">
+                    <div class="editContainer">
+                        <a href="#changeLogoModal" type="button" class="btn btn-sm btn-gray-darker" data-toggle="modal">
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </a>
+                    </div>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
@@ -153,4 +160,64 @@
             </div>
         </div>
     </div>
+
+    <!-- Change Logo Modal -->
+    <div class="modal fade" id="changeLogoModal" tabindex="-1" role="dialog" aria-labelledby="changeLogoModalLabel">
+        <div class="modal-dialog" role="document">
+            <form @submit.prevent="saveLogo" enctype="multipart/form-data">
+                <div class="modal-content b-a-0">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#xD7;</span></button>
+                        <h4 class="modal-title" id="changeLogoModalLabel">Change Issue Logo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="file" name="image" id="image">
+                    </div>
+                    <div class="modal-footer">
+                        {!! Form::hidden('uuid', $issue->uuid, ['v-model' => 'uuid']) !!}
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-danger" value="Change Logo">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
+
+@section('javascript')
+    <script>
+        // create a root instance
+        var app = new Vue({
+            el: '#app',
+            data: {
+                uuid: '{!! $issue->uuid !!}',
+                image: ''
+            },
+
+            methods: {
+                saveLogo: function(e) {
+                    e.preventDefault();
+                    data = new FormData();
+                    this.image = e.target[1].files[0];
+                    data.append('uuid', this.uuid);
+                    data.append('image', this.image);
+
+                    this.$http.post('/api/issues/logo?api_token={{ Auth::user()->api_token }}', data).then(response => {
+                        d = new Date();
+                        $('#issueImage').attr("src", "{{ Storage::url('/issues/'.$issue->uuid.'.png?') }}"+d.getTime());
+                        $('#changeLogoModal').modal('hide');
+                        this.image = '';
+                    });
+                }
+            }
+        })
+    </script>
+@endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            $('.editContainer').hide();
+        });
+    </script>
 @endsection

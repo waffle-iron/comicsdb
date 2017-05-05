@@ -16,7 +16,14 @@ use Illuminate\Http\Request;
  */
 class PublisherLogoController extends Controller
 {
+    /**
+     * @var PublisherRepository
+     */
     private $publisherRepository;
+
+    /**
+     * @var PublisherLogoRepository
+     */
     private $publisherLogoRepository;
 
     /**

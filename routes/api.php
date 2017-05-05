@@ -23,4 +23,5 @@ Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function() {
     Route::delete('/alias/{id}', ['as' => 'api.alias.delete', 'uses' => 'PublisherAliasController@delete']);
 
     Route::post('/publishers/logo', ['as' => 'publishers.logo.store', 'uses' => 'PublisherLogoController@store']);
+    Route::post('/issues/logo', ['as' => 'issues.logo.store', 'uses' => 'IssueLogoController@store']);
 });
