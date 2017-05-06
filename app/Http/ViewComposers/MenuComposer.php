@@ -39,6 +39,11 @@ class MenuComposer
                     ->route('issues.index', '<span class="nav-label">Issues List</span>')
                     ->route('issues.create', '<span class="nav-label">Create Issue</span>');
             })
+            ->submenu('<a href="#"><i class="fa fa-user fa-lg"></i><span class="nav-label">Creators</span><i class="fa arrow"></i></a>', function(Menu $menu) {
+                $menu
+                    ->route('creators.index', '<span class="nav-label">Creators List</span>')
+                    ->route('creators.create', '<span class="nav-label">Create Creator</span>');
+            })
             ->setAttribute('class', 'side-menu')
             ->setActive(function(Link $link) {
                 return Url::fromString($link->url())->getSegment(1) == request()->segment(1);

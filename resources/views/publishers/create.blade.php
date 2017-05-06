@@ -187,7 +187,10 @@
                 maxDate: "{{ \Carbon\Carbon::now()->format('Y-m-d') }}",
                 locale: {
                     format: "YYYY-MM-DD",
-                }
+                },
+                autoUpdateInput: false
+            }, function (chosen_date) {
+                $('input[name="founded_at"]').val(chosen_date.format('YYYY-MM-DD'));
             });
         });
 

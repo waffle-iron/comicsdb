@@ -54,3 +54,13 @@ Route::group(['prefix' => 'issues', 'middleware' => 'auth'], function() {
     Route::post('update', ['as' => 'issues.update', 'uses' => 'IssueController@update']);
     Route::delete('/', ['as' => 'issues.delete', 'uses' => 'IssueController@delete']);
 });
+
+Route::group(['prefix' => 'creators', 'middleware' => 'auth'], function() {
+    Route::get('/', ['as' => 'creators.index', 'uses' => 'CreatorController@index']);
+    Route::get('{id}', ['as' => 'creators.show', 'uses' => 'CreatorController@show'])->where(['id' => '[0-9]+']);
+    Route::get('create', ['as' => 'creators.create', 'uses' => 'CreatorController@create']);
+    Route::post('store', ['as' => 'creators.store', 'uses' => 'CreatorController@store']);
+    Route::get('{id}/edit', ['as' => 'creators.edit', 'uses' => 'CreatorController@edit'])->where(['id' => '[0-9]+']);
+    Route::post('update', ['as' => 'creators.update', 'uses' => 'CreatorController@update']);
+    Route::delete('/', ['as' => 'creators.delete', 'uses' => 'CreatorController@delete']);
+});

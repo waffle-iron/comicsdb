@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-header m-t-0">
-                        <h3 class="m-t-0">Issues</h3>
+                        <h3 class="m-t-0">Creators</h3>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-lg-12 sub-navbar-column">
                     <div class="sub-navbar-header">
-                        <h3>Create Issue</h3>
+                        <h3>Create Creator</h3>
                     </div>
                     <ol class="breadcrumb navbar-text navbar-right no-bg">
                         <li class="current-parent">
@@ -29,8 +29,8 @@
                                 <i class="fa fa-fw fa-home"></i>
                             </a>
                         </li>
-                        <li><a href="{{ route('issues.index') }}">Issues</a></li>
-                        <li class="active">Create Issue</li>
+                        <li><a href="{{ route('creators.index') }}">Creators</a></li>
+                        <li class="active">Create Creator</li>
                     </ol>
                 </div>
             </div>
@@ -66,40 +66,42 @@
 
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="panel panel-default b-a-0 shadow-box">
+                <div class="panel panel-default b-a-0 box-shadow">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Create Issue</h4>
+                        <h6 class="panel-title">Create Creator</h6>
                     </div>
                     <div class="panel-body">
-                        {!! Form::open(['route' => 'issues.store', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::open(['route' => 'creators.store', 'class' => 'form-horizontal', 'files' => true]) !!}
                         {!! Form::token() !!}
                         {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
+                        <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
+                            {!! Form::label('firstname', 'First Name', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('firstname', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
+                            {!! Form::label('lastname', 'Last Name', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('lastname', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                            {!! Form::label('gender', 'Gender', ['class' => 'control-label col-sm-3 required']) !!}
+                            <div class="col-sm-6">
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="male" checked>
+                                    Male
+                                </label>
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="gender" value="female">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
                         <div class="form-group">
-                            {!! Form::label('volume_id', 'Volume', ['class' => 'control-label col-sm-3 required']) !!}
-                            <div class="col-sm-6">
-                                {!! Form::select('volume_id', $volumes, $selected_volume_id, ['class' => 'form-control select2 select2-input']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('number') ? ' has-error' : '' }}">
-                            {!! Form::label('number', 'Number', ['class' => 'control-label col-sm-3 required']) !!}
-                            <div class="col-sm-6">
-                                {!! Form::text('number', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            {!! Form::label('name', 'Name', ['class' => 'control-label col-sm-3']) !!}
-                            <div class="col-sm-6">
-                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('intro', 'Summary', ['class' => 'control-label col-sm-3']) !!}
-                            <div class="col-sm-6">
-                                {!! Form::textarea('intro', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('image', 'Logo', ['class' => 'control-label col-sm-3 required']) !!}
+                            {!! Form::label('image', 'Portrait', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
                                 <div class="input-group">
                                     <input type="text" class="form-control" readonly>
@@ -112,23 +114,69 @@
                             </div>
                         </div>
                         <div class="hr-text hr-text-left">
-                            <h6 class="text-white bg-white-i">Dates</h6>
+                            <h6 class="text-white bg-white-i">
+                                <strong>Dates</strong>
+                            </h6>
                         </div>
-                        <div class="form-group{{ $errors->has('cover_date') ? ' has-error' : '' }}">
-                            {!! Form::label('cover_date', 'Cover Date', ['class' => 'control-label col-sm-3']) !!}
+                        <div class="form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
+                            {!! Form::label('birthdate', 'Birthdate', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('cover_date', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('birthdate', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('store_date') ? ' has-error' : '' }}">
-                            {!! Form::label('store_date', 'Store Date', ['class' => 'control-label col-sm-3 required']) !!}
+                        <div class="form-group{{ $errors->has('deathdate') ? ' has-error' : '' }}">
+                            {!! Form::label('deathdate', 'Date of Death', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('store_date', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('deathdate', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="hr-text hr-text-left">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Address</strong>
+                            </h6>
+                        </div>
+                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            {!! Form::label('city', 'City', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('city', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('country', 'Country', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::select('country', $countries, null, ['id' => 'country', 'class' => 'form-control select2 select2-input']) !!}
+                            </div>
+                        </div>
+                        <div class="hr-text hr-text-left">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Social</strong>
+                            </h6>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('twitter', 'Twitter account', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">https://twitter.com/</span>
+                                    {!! Form::text('twitter', null, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('website', 'Website', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('website', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('email', 'Email', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::text('email', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-3">
-                                <button type="submit" class="btn btn-default">Save Issue</button>
+                                <button type="submit" class="btn btn-default">Save Creator</button>
                             </div>
                         </div>
                         {!! Form::close() !!}
@@ -146,7 +194,7 @@
     <script src="/assets/vendor/js/bootstrap-select.min.js"></script>
     <script>
         $(function() {
-            $('input[name="store_date"]').daterangepicker({
+            $('input[name="birthdate"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
                 minDate: "1930-01-01",
@@ -156,10 +204,10 @@
                 },
                 autoUpdateInput: false
             }, function (chosen_date) {
-                $('input[name="store_date"]').val(chosen_date.format('YYYY-MM-DD'));
+                $('input[name="birthdate"]').val(chosen_date.format('YYYY-MM-DD'));
             });
 
-            $('input[name="cover_date"]').daterangepicker({
+            $('input[name="deathdate"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
                 minDate: "1930-01-01",
@@ -169,7 +217,7 @@
                 },
                 autoUpdateInput: false
             }, function (chosen_date) {
-                $('input[name="cover_date"]').val(chosen_date.format('YYYY-MM-DD'));
+                $('input[name="deathdate"]').val(chosen_date.format('YYYY-MM-DD'));
             });
         });
 
