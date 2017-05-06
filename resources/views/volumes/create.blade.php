@@ -81,6 +81,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('description', 'Description', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('number', 'Number', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
                                 {!! Form::text('number', null, ['class' => 'form-control']) !!}
@@ -95,7 +101,7 @@
                         <div class="form-group">
                             {!! Form::label('publisher_id', 'Publisher', ['class' => 'control-label col-sm-3 required']) !!}
                             <div class="col-sm-6">
-                                {!! Form::select('publisher_id', $publishers, null, ['id' => 'publisher_id', 'class' => 'form-control select2 select2-input']) !!}
+                                {!! Form::select('publisher_id', $publishers, $selected_publisher_id, ['id' => 'publisher_id', 'class' => 'form-control select2 select2-input']) !!}
                             </div>
                         </div>
                         <div class="form-group">

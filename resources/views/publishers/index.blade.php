@@ -40,14 +40,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-5 col-xs-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">
-                            <i class="fa fa-fw fa-search"></i>
-                        </button>
-                    </span>
-                </div>
+                <h4>{{ $publishers->count() . ' Publishers' }}</h4>
             </div>
 
             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 col-sm-offset-2 col-lg-offset-3 col-md-offset-1 col-sm-4 col-sm-offset-2 hidden-xs">
@@ -62,67 +55,26 @@
             </div>
         </div>
 
-        <div class="row m-t-3">
+        <div class="row m-t-3" id="grid" data-columns>
             @foreach($publishers as $publisher)
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="box">
                     <div class="thumbnail shadow-box b-a-0">
-                        <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}" data-holder style="width: 100%; height: 200px">
+                        <a href="{{ route('publishers.show', ['id' => $publisher->id]) }}">
+                            <img data-src="holder.js/100px200?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}">
+                        </a>
                         <div class="caption">
-                            <div class="pull-right m-t-1">
-                                <i class="fa fa-star-o"></i> {{ $publisher->founded_at->format('Y') }}
-                            </div>
-                            <h4>{{ $publisher->name }}</h4>
-                            <div class="btn-group pull-left dropup">
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-fw fa-gear"></i>
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <!-- View publisher in detail -->
-                                    <li>
-                                        <a href="{{ route('publishers.show', ['id' => $publisher->id]) }}">
-                                            <i class="fa fa-fw fa-eye text-gray-lighter m-r-1"></i> View
-                                        </a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <!-- Edit publisher -->
-                                    <li>
-                                        <a href="{{ route('publishers.edit', ['id' => $publisher->id]) }}">
-                                            <i class="fa fa-fw fa-edit text-gray-lighter m-r-1"></i> Edit
-                                        </a>
-                                    </li>
-                                    <!-- Delete publisher -->
-                                    <li>
-                                        <a href="#deletePublisherModal" class="deletePublisher" data-toggle="modal" data-id="{{ $publisher->id }}">
-                                            <i class="fa fa-fw fa-trash text-gray-lighter m-r-1"></i> Delete
-                                        </a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    @if (!Storage::disk('publishers')->exists($publisher->uuid . '.png'))
-                                        <!-- Upload publishers logo -->
-                                        <li>
-                                            <a href="{{ route('publishers.logo.add', ['id' => $publisher->id]) }}">
-                                                <i class="fa fa-fw fa-image text-gray-lighter m-r-1"></i> Upload Logo
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if (Storage::disk('publishers')->exists($publisher->uuid . '.png'))
-                                        <!-- Remove publishers logo -->
-                                        <li>
-                                            <a href="#deleteLogoModal" class="deleteLogo" data-toggle="modal" data-id="{{ $publisher->id }}">
-                                                <i class="fa fa-fw fa-image text-gray-lighter m-r-1"></i> Remove Logo
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </div>
-                            <p class="text-gray-light m-t-1 m-b-0 text-right" style="line-height: 10px;">
-                                <small>
-                                    {{ $publisher->address }}<br>
-                                    {{ $publisher->city }}, {{ $publisher->state }} {{ $publisher->zip }}<br>
-                                    {{ $publisher->country }}
-                                </small>
+                            <h5 class="m-b-1">
+                                <span>{{ $publisher->name }}</span>
+                                <span class="pull-right text-gray-light">
+                                    <i class="fa fa-calendar"></i> {{ $publisher->founded_at->year }}
+                                </span>
+                            </h5>
+                            <p class="text-gray-light m-t-2 m-b-1">
+                                {!! nl2br($publisher->description) !!}
                             </p>
+                            <div class="label label-success">
+                                <span>{{ $publisher->amountOfIssues() }} Issues</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,28 +83,6 @@
 
         <div class="text-center">
             {{ $publishers->links() }}
-        </div>
-    </div>
-
-    <!-- Delete Logo Modal -->
-    <div class="modal fade" id="deleteLogoModal" tabindex="-1" role="dialog" aria-labelledby="deleteLogoModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content b-a-0">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#xD7;</span></button>
-                    <h4 class="modal-title" id="deleteLogoModalLabel">Remove Publishers Logo</h4>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to remove the Publisher Logo?
-                </div>
-                <div class="modal-footer">
-                    {!! Form::open(['route' => ['publishers.logo.delete'], 'method' => 'delete']) !!}
-                    {!! Form::hidden('id', 0) !!}
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Remove Logo</button>
-                    {!! Form::close() !!}
-                </div>
-            </div>
         </div>
     </div>
 

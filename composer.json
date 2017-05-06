@@ -5,12 +5,16 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.6.4",
+        "php": "7.*",
+        "iatstuti/laravel-cascade-soft-deletes": "1.2.*",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.3.0",
+        "pda/pheanstalk": "^3.1",
         "pragmarx/countries": "^0.1.0",
+        "spatie/laravel-menu": "^2.1",
         "tamayo/laravel-scout-elastic": "^3.0",
+        "tightenco/quicksand": "^0.2.2",
         "webpatser/laravel-uuid": "2.*"
     },
     "require-dev": {

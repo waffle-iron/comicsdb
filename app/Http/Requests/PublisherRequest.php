@@ -31,7 +31,8 @@ class PublisherRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
+            'image' => 'required|image|mimes:png|max:2048'
         ];
     }
 
@@ -43,7 +44,7 @@ class PublisherRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'The name is required'
+            'name.required' => 'The name is required',
         ];
     }
 }

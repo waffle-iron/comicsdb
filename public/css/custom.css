@@ -1,6 +1,54 @@
-.fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
+@media screen and (max-width: 480px){
+    #grid[data-columns]::before {
+        content: '2 .column.size-1of2';
+    }
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-    opacity: 0
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    #grid[data-columns]::before {
+        content: '3 .column.size-1of3';
+    }
 }
+@media screen and (min-width: 769px) and (max-width: 992px) {
+    #grid[data-columns]::before {
+        content: '4 .column.size-1of4';
+    }
+}
+
+@media screen and (min-width: 993px) {
+    #grid[data-columns]::before {
+        content: '5 .column.size-1of5';
+    }
+}
+
+.shadow-box-dark {
+    box-shadow: 0 0 5px #333; }
+/* Again, you’re free to use and define the classes: */
+.column { float: left; }
+.size-1of1 { width: 100%; }
+.size-1of2 { width: 50%; }
+.size-1of3 { width: 33.333%; }
+.size-1of4 { width: 25%; }
+.size-1of5 { width: 20%; }
+.size-1of6 { width: 16.666%; }
+
+.box {
+    margin: 5px 10px;
+}
+
+.img-container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.editContainer {
+    position: absolute;
+    right: 15px;
+    bottom: 22px;
+    padding: 4px;
+}
+ button:focus, a:focus {
+     outline: none;
+ }

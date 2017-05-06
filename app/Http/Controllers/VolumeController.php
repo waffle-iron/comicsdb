@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VolumeRequest;
+use App\Models\Issue;
 use App\Repositories\PublisherRepository;
 use App\Repositories\VolumeRepository;
 use Illuminate\Http\Request;
@@ -38,14 +39,17 @@ class VolumeController extends Controller
     }
 
     /**
+     * @param int|null $publisherId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(int $publisherId = null)
     {
-        $volumes = $this->volumeRepository->index(16);
+        $volumes = !isset($publisherId)
+            ? $this->volumeRepository->index(16)
+            : $this->volumeRepository->byPublisher($publisherId);
 
         return view('volumes.index', [
-            'volumes' => $volumes
+            'volumes' => $volumes,
         ]);
     }
 
@@ -58,19 +62,20 @@ class VolumeController extends Controller
         $volume = $this->volumeRepository->get($id);
 
         return view('volumes.show', [
-            'volume' => $volume
+            'volume' => $volume,
         ]);
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(int $publisherId = null)
     {
         $publishers = $this->publisherRepository->all()->pluck('name', 'id');
 
         return view('volumes.create', [
-            'publishers' => $publishers
+            'selected_publisher_id' => $publisherId,
+            'publishers' => $publishers,
         ]);
     }
 
@@ -96,7 +101,7 @@ class VolumeController extends Controller
 
         return view('volumes.edit', [
             'publishers' => $publishers,
-            'volume' => $volume
+            'volume' => $volume,
         ]);
     }
 
@@ -117,7 +122,7 @@ class VolumeController extends Controller
      */
     public function delete(Request $request)
     {
-        $id = $request->get('id');
+        $id = (int) $request->get('id');
         $this->volumeRepository->delete($id);
 
         return redirect()->route('volumes.index');

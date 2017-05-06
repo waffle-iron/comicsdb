@@ -366,69 +366,7 @@
                 </div>
 
                 <!-- START Tree Sidebar Common -->
-                <ul class="side-menu">
-                    <li class="">
-                        <a href="{{ route('dashboard.index') }}">
-                            <i class="fa fa-home fa-lg"></i><span class="nav-label">Dashboard</span>
-                        </a>
-                    </li>
-                    <!-- Publishers -->
-                    <li>
-                        <a href="#" title="Publisher">
-                            <i class="fa fa-newspaper-o fa-lg"></i><span class="nav-label">Publishers</span><i class="fa arrow"></i>
-                        </a>
-                        <ul>
-                            <li class="">
-                                <a href="{{ route('publishers.index') }}">
-                                    <span class="nav-label">Publishers List</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="{{ route('publishers.create') }}">
-                                    <span class="nav-label">Create Publisher</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <!-- Volumes -->
-                    <li>
-                        <a href="#" title="Volumes">
-                            <i class="fa fa-cubes fa-lg"></i><span class="nav-label">Volumes</span><i class="fa arrow"></i>
-                        </a>
-                        <ul>
-                            <li class="">
-                                <a href="{{ route('volumes.index') }}">
-                                    <span class="nav-label">Volumes List</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="{{ route('volumes.create') }}">
-                                    <span class="nav-label">Create Volume</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <!-- Issue -->
-                    <li>
-                        <a href="#" title="Issues">
-                            <i class="fa fa-file fa-lg"></i><span class="nav-label">Issues</span><i class="fa arrow"></i>
-                        </a>
-                        <ul>
-                            <li class="">
-                                <a href="{{ route('issues.index') }}">
-                                    <span class="nav-label">Issues List</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="{{ route('issues.create') }}">
-                                    <span class="nav-label">Create Issue</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                {{ $menu }}
             </div>
         </aside>
         <!-- END Sidebars -->
@@ -453,6 +391,7 @@
 <script src="/assets/javascript/holder.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.1/vue-resource.min.js"></script>
+<script src="/js/salvattore.min.js"></script>
 @yield('javascript')
 <script>
     $(".select2-container").css('width', '');

@@ -4,8 +4,6 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PublisherRequest;
-use App\Models\PublisherAlias;
-use App\Repositories\PublisherAliasRepository;
 use App\Repositories\PublisherRepository;
 use Illuminate\Http\Request;
 
@@ -37,10 +35,10 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $publishers = $this->publisherRepository->index();
+        $publishers = $this->publisherRepository->index(12);
 
         return view('publishers.index', [
-            'publishers' => $publishers
+            'publishers' => $publishers,
         ]);
     }
 
@@ -53,7 +51,7 @@ class PublisherController extends Controller
         $publisher = $this->publisherRepository->get($id);
 
         return view('publishers.show', [
-            'publisher' => $publisher
+            'publisher' => $publisher,
         ]);
     }
 
@@ -65,7 +63,7 @@ class PublisherController extends Controller
         $countries = \Countries::all()->pluck('name.common', 'name.common');
 
         return view('publishers.create', [
-            'countries' => $countries
+            'countries' => $countries,
         ]);
     }
 
@@ -91,7 +89,7 @@ class PublisherController extends Controller
 
         return view('publishers.edit', [
             'publisher' => $publisher,
-            'countries' => $countries
+            'countries' => $countries,
         ]);
     }
 

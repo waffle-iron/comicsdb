@@ -62,16 +62,14 @@
             </div>
         </div>
 
-        <div class="row m-t-3">
+        <div class="row m-t-3" id="grid" data-columns>
             @foreach ($issues as $issue)
-                <div class="col-md-3 col-lg-3">
-                    <div class="panel panel-default shadow-box b-l-2 b-t-0 b-r-0 b-b-0">
-                        <div class="panel-body">
-                            <a href="{{ route('issues.show', ['id' => $issue->id]) }}">
-                                AAA
-                            </a>
-                        </div>
-                        <div class="panel-footer">
+                <div class="box">
+                    <div class="thumbnail shadow-box b-a-0">
+                        <a href="{{ route('issues.show', ['id' => $issue->id]) }}">
+                            <img data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/issues/'.$issue->uuid.'.png') }}">
+                        </a>
+                        <div class="caption">
                             <div class="text-center">
                                 <p class="m-l-0 m-r-0 m-t-0 m-b-0"><strong>Issue #{{ $issue->number }}</strong></p>
                                 <p class="m-l-0 m-r-0 m-t-0 m-b-0"><small>{{ $issue->name }}</small></p>

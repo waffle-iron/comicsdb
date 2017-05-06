@@ -1,17 +1,10 @@
 <?php
-declare(strict_types = 1);
 
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-/**
- * Class IssueRequest
- *
- * @package App\Http\Requests
- * @author Maik Pütz <maikpuetz@gmail.com>
- */
-class IssueRequest extends FormRequest
+class CreatorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,10 +24,9 @@ class IssueRequest extends FormRequest
     public function rules()
     {
         return [
-            'volume_id' => 'required',
-            'number' => 'required',
-            'store_date' => 'required',
-            'image' => 'required|image|mimes:png|max:2048'
+            'lastname' => 'required',
+            'gender' => 'required',
+            'image' => 'image|mimes:png|max:2048'
         ];
     }
 }

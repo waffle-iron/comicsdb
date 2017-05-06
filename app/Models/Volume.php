@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
@@ -26,11 +27,19 @@ class Volume extends Model
 {
     use Searchable;
     use SoftDeletes;
+    use CascadeSoftDeletes;
 
     /**
      * @var array
      */
     protected $guarded = [ ];
+
+    /**
+     * @var array
+     */
+    protected $cascadeDeletes = [
+        'issues',
+    ];
 
     /**
      * @var array
@@ -55,5 +64,14 @@ class Volume extends Model
     public function issues()
     {
         return $this->hasMany(Issue::class, 'volume_id', 'id');
+    }
+
+    /**
+     * @return Issue
+     */
+    public function getLastIssue()
+    {
+        $issue = $this->issues()->orderBy('number', 'desc')->first();
+        return isset($issue) ? $issue : new Issue();
     }
 }

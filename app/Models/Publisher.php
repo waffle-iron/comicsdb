@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
@@ -13,6 +14,7 @@ use Laravel\Scout\Searchable;
  * @property int $id
  * @property string $uuid
  * @property string $name
+ * @property string description
  * @property \DateTime $founded_at
  * @property string $twitter
  * @property string $website
@@ -32,11 +34,22 @@ class Publisher extends Model
 {
     use SoftDeletes;
     use Searchable;
+    use CascadeSoftDeletes;
 
     /**
      * @var array
      */
-    protected $guarded = [ ];
+    protected $guarded = [
+        'image'
+    ];
+
+    /**
+     * @var array
+     */
+    protected $cascadeDeletes = [
+        'volumes',
+        'aliases',
+    ];
 
     /**
      * @var array
@@ -73,8 +86,7 @@ class Publisher extends Model
 
         $volumes = $this->volumes()->get();
 
-        foreach ($volumes as $volume)
-        {
+        foreach ($volumes as $volume) {
             $amount += $volume->issues()->count();
         }
 

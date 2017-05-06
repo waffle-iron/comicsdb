@@ -62,6 +62,20 @@ return [
             'visibility' => 'public',
         ],
 
+        'issues' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/issues'),
+            'url' => env('APP_URL').'/storage/issues',
+            'visibility' => 'public',
+        ],
+
+        'creators' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/creators'),
+            'url' => env('APP_URL').'/storage/creators',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_KEY'),

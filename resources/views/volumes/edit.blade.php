@@ -81,6 +81,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('description', 'Description', ['class' => 'control-label col-sm-3']) !!}
+                            <div class="col-sm-6">
+                                {!! Form::textarea('description', $volume->description, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('number', 'Number', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
                                 {!! Form::text('number', $volume->number, ['class' => 'form-control']) !!}

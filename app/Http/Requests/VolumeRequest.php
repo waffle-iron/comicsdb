@@ -33,7 +33,7 @@ class VolumeRequest extends FormRequest
         return [
             'name' => 'required',
             'year' => 'required',
-            'publisher_id' => 'required'
+            'publisher_id' => 'required',
         ];
     }
 
@@ -46,7 +46,7 @@ class VolumeRequest extends FormRequest
     {
         return [
             'name.required' => 'The name is required',
-            'year.required' => 'The year is required'
+            'year.required' => 'The year is required',
         ];
     }
 }

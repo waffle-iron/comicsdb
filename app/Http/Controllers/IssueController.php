@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\IssueRequest;
 use App\Repositories\IssueRepository;
 use App\Repositories\VolumeRepository;
+use Illuminate\Http\Request;
 
 /**
  * Class IssueController
@@ -42,12 +43,10 @@ class IssueController extends Controller
      */
     public function index()
     {
-        $issues = $this
-            ->issueRepository
-            ->index();
+        $issues = $this->issueRepository->index(100);
 
         return view('issues.index', [
-            'issues' => $issues
+            'issues' => $issues,
         ]);
     }
 
@@ -60,22 +59,21 @@ class IssueController extends Controller
         $issue = $this->issueRepository->get($id);
 
         return view('issues.show', [
-            'issue' => $issue
+            'issue' => $issue,
         ]);
     }
 
     /**
-     * @param int|null $volume
+     * @param int|null $volumeId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create(int $volume = null)
+    public function create(int $volumeId = null)
     {
-        $selected_volume_id = isset($volume) ? $this->volumeRepository->get($volume)->id : null;
-        $volumes            = $this->volumeRepository->all()->pluck('name', 'id');
+        $volumes = $this->volumeRepository->all()->pluck('name', 'id');
 
         return view('issues.create', [
-            'selected_volume_id' => $selected_volume_id,
-            'volumes' => $volumes
+            'selected_volume_id' => $volumeId,
+            'volumes' => $volumes,
         ]);
     }
 
@@ -101,7 +99,7 @@ class IssueController extends Controller
 
         return view('issues.edit', [
             'issue' => $issue,
-            'volumes' => $volumes
+            'volumes' => $volumes,
         ]);
     }
 
@@ -112,6 +110,18 @@ class IssueController extends Controller
     public function update(IssueRequest $issueRequest)
     {
         $this->issueRepository->update($issueRequest);
+
+        return redirect()->route('issues.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request)
+    {
+        $id = (int) $request->get('id');
+        $this->issueRepository->delete($id);
 
         return redirect()->route('issues.index');
     }

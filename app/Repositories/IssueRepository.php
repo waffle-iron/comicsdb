@@ -53,6 +53,7 @@ class IssueRepository
     public function store(IssueRequest $request)
     {
         Issue::create($request->all());
+        $this->storeImage($request);
     }
 
     /**
@@ -67,5 +68,26 @@ class IssueRepository
 
         $issue->fill($request->all());
         $issue->save();
+    }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function delete(int $id)
+    {
+        Issue::find($id)->delete();
+    }
+
+    /**
+     * @param IssueRequest $request
+     * @return void
+     */
+    public function storeImage(IssueRequest $request)
+    {
+        if ($request->hasFile('image')) {
+            $logoRepository = new IssueLogoRepository();
+            $logoRepository->store($request);
+        }
     }
 }

@@ -52,7 +52,9 @@ class Issue extends Model
     /**
      * @var array
      */
-    protected $guarded = [ ];
+    protected $guarded = [
+        'image'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

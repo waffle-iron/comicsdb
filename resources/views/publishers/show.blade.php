@@ -41,84 +41,126 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 m-b-2">
-                <div class="media">
-                    <div class="media-left p-r-2">
-                        <div class="center-block">
-                            <div class="avatar avatar-image avatar-lg center-block">
-                                <img class="img-circle center-block m-t-1 m-b-2" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}">
-                            </div>
-                        </div>
+                <div class="img-container">
+                    <img class="img-thumbnail m-t-0 m-b-2 shadow-box" id="publisherImage" data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/publishers/'.$publisher->uuid.'.png') }}" width="100%">
+                    <div class="editContainer">
+                        <a href="#changeLogoModal" type="button" class="btn btn-sm btn-default" data-toggle="modal">
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </a>
                     </div>
-                    <div class="media-body">
-                        <h4 class="m-b-0">{{ $publisher->name }}</h4>
-                        <p class="m-t-0">
-                            Founded at {{ $publisher->founded_at->format('Y') }}
-                        </p>
-                        <div class="btn-toolbar" role="toolbar">
-                            <div class="btn-group" role="group">
-                                <a role="button" href="{{ route('publishers.edit', ['id' => $publisher->id]) }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{ $publisher->name }}
+                            <div class="pull-right">
+                                <a role="button" href="{{ route('publishers.edit', ['id' => $publisher->id]) }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title data-original-title="Edit">
                                     <i class="fa fa-fw fa-pencil"></i>
                                 </a>
-                            </div>
-                            <div class="btn-group" role="group" data-toggle="tooltip" data-placement="top" title data-original-title="Delete">
-                                <a role="button" href="#deletePublisherModal" class="btn btn-default deletePublisher" data-toggle="modal">
+                                <a role="button" href="#deletePublisherModal" class="btn btn-xs btn-default deletePublisher" data-toggle="modal">
                                     <i class="fa fa-fw fa-trash"></i>
                                 </a>
+                                <a role="button" href="{{ route('volumes.create', ['publisher' => $publisher->id]) }}" class="btn btn-xs btn-primary">
+                                    Add Volume
+                                </a>
                             </div>
-                        </div>
+                        </h3>
                     </div>
-                </div>
-                <div class="hr-text hr-text-left m-t-2">
-                    <h6 class="text-white">
-                        <strong>Aliases</strong>
-                    </h6>
-                </div>
-                <ul class="nav nav-pills nav-stacked m-b-2">
-                    <li v-for="(item, key, index) in aliases">
-                        <i class="fa fa-fw fa-star-o m-r-1 text-lighting-yellow"></i>
-                        <span class="text-gray">@{{ item.alias }} <button v-show="aliasEditMode" @click="deleteAlias(item.id, key)" class="btn btn-xs btn-default pull-right"><i class="fa fa-close text-danger"></i></button></span>
-                    </li>
-                </ul>
-                <div class="input-group input-group-sm" v-show="aliasEditMode">
-                    <input type="text" class="form-control" id="aliasInputBox" ref="aliasInput" v-model="newAlias">
-                    <span class="input-group-btn">
+                    <div class="panel-body">
+                        <div class="hr-text hr-text-left">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Founded at</strong>
+                            </h6>
+                        </div>
+                        <p>
+                            <i class="fa fa-fw fa-calendar"></i> {{ $publisher->founded_at->format('Y') }}
+                        </p>
+                        <div class="hr-text hr-text-left m-t-2">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Description</strong>
+                            </h6>
+                        </div>
+                        <p>{!! nl2br($publisher->description) !!}</p>
+                        <div class="hr-text hr-text-left m-t-2">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Aliases</strong>
+                            </h6>
+                        </div>
+                        <ul class="nav nav-pills nav-stacked m-b-2">
+                            <li v-for="(item, key, index) in aliases">
+                                <i class="fa fa-fw fa-star m-r-1 text-lighting-yellow"></i>
+                                <span class="text-gray">@{{ item.alias }} <button v-show="aliasEditMode" @click="deleteAlias(item.id, key)" class="btn btn-xs btn-default pull-right"><i class="fa fa-close text-danger"></i></button></span>
+                            </li>
+                        </ul>
+                        <div class="input-group input-group-sm" v-show="aliasEditMode">
+                            <input type="text" class="form-control" id="aliasInputBox" ref="aliasInput" v-model="newAlias">
+                            <span class="input-group-btn">
                         <button class="btn btn-default" type="button" @click="addAlias"><i class="fa fa-check text-success"></i></button>
                     </span>
+                        </div>
+                        <button type="button" v-show="!aliasEditMode" @click="activateAliasEditMode" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit Aliases</button>
+                        <button type="button" v-show="aliasEditMode" @click="deactivateAliasEditMode" class="btn btn-sm btn-default m-t-1"><i class="fa fa-close"></i> Hide Edit Mode</button>
+                        <div class="hr-text hr-text-left m-t-2">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Address</strong>
+                            </h6>
+                        </div>
+                        {{ $publisher->address }}<br>
+                        {{ $publisher->city }}, {{ $publisher->state }} {{ $publisher->zip }}<br>
+                        {{ $publisher->country }}
+                        <div class="hr-text hr-text-left m-t-2">
+                            <h6 class="text-white bg-white-i">
+                                <strong>Social</strong>
+                            </h6>
+                        </div>
+                        @if($publisher->twitter)
+                            <a href="https://twitter.com/{{ $publisher->twitter }}" target="_blank" data-toggle="tooltip" data-placement="top" title data-original-title="Twitter Profile">
+                                <i class="fa fa-fw fa-twitter-square text-muted fa-lg"></i>
+                            </a>
+                        @endif
+                        @if($publisher->website)
+                            <a href="{{ $publisher->website }}" target="_blank" data-toggle="tooltip" data-placement="top" title data-original-title="Website">
+                                <i class="fa fa-fw fa-globe text-muted fa-lg"></i>
+                            </a>
+                        @endif
+                    </div>
                 </div>
-                <button type="button" v-show="!aliasEditMode" @click="activateAliasEditMode" class="btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit Aliases</button>
-                <button type="button" v-show="aliasEditMode" @click="deactivateAliasEditMode" class="btn btn-sm btn-default m-t-1"><i class="fa fa-close"></i> Hide Edit Mode</button>
-                <div class="hr-text hr-text-left m-t-2">
-                    <h6 class="text-white">
-                        <strong>Address</strong>
-                    </h6>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Internal Information
+                    </div>
+                    <div class="panel-body">
+                        <p style="line-height: 10px;">
+                            <strong>Created</strong>
+                            <span class="pull-right"><small class="text-gray-light"><i class="fa fa-fw fa-calendar"></i> {{ $publisher->created_at->format('m/d/Y') }} <i class="fa fa-fw fa-clock-o"></i> {{ $publisher->created_at->format('h:iA') }}</small></span>
+                        </p>
+                        <p style="line-height: 10px;">
+                            <strong>Last updated</strong>
+                            <span class="pull-right"><small class="text-gray-light"><i class="fa fa-fw fa-calendar"></i> {{ $publisher->updated_at->format('m/d/Y') }} <i class="fa fa-fw fa-clock-o"></i> {{ $publisher->updated_at->format('h:iA') }}</small></span>
+                        </p>
+                        <p style="line-height: 10px;">
+                            <strong>UUID</strong>
+                            <span class="pull-right"><samp><small class="text-gray-light">{{ $publisher->uuid }}</small></samp></span>
+                        </p>
+                    </div>
                 </div>
-                {{ $publisher->address }}<br>
-                {{ $publisher->city }}, {{ $publisher->state }} {{ $publisher->zip }}<br>
-                {{ $publisher->country }}
-                <div class="hr-text hr-text-left m-t-2">
-                    <h6 class="text-white">
-                        <strong>Social</strong>
-                    </h6>
-                </div>
-                @if($publisher->twitter)
-                <a href="https://twitter.com/{{ $publisher->twitter }}" target="_blank" data-toggle="tooltip" data-placement="top" title data-original-title="Twitter Profile">
-                    <i class="fa fa-fw fa-twitter-square text-muted fa-lg"></i>
-                </a>
-                @endif
-                @if($publisher->website)
-                <a href="{{ $publisher->website }}" target="_blank" data-toggle="tooltip" data-placement="top" title data-original-title="Website">
-                    <i class="fa fa-fw fa-globe text-muted fa-lg"></i>
-                </a>
-                @endif
             </div>
 
             <div class="col-lg-8 m-b-2">
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="panel panel-default shadow-box b-t-2 b-t-primary b-r-0 b-l-0 b-b-0">
                         <div class="panel-body">
-                            <h3 class="display-4 text-center m-t-2">{{ $publisher->volumes()->count() }}</h3>
-                            <p class="text-muted small text-uppercase m-t-0 m-b-2 text-center">
-                                <strong>Volumes</strong>
+                            <h3 class="display-4 text-center m-t-2">
+                                <a href="{{ route('volumes.index.byPublisher', ['publisherId' => $publisher->id]) }}">
+                                    {{ $publisher->volumes()->count() }}
+                                </a>
+                            </h3>
+                            <p class="text-muted small text-uppercase m-t-0 m-b-3 text-center">
+                                <strong>
+                                    <span class="text-gray-light">Volumes</span>
+                                </strong>
                             </p>
                         </div>
                     </div>
@@ -128,8 +170,10 @@
                     <div class="panel panel-default shadow-box b-t-2 b-t-primary b-r-0 b-l-0 b-b-0">
                         <div class="panel-body">
                             <h3 class="display-4 text-center m-t-2">{{ $publisher->amountOfIssues() }}</h3>
-                            <p class="text-muted small text-uppercase m-t-0 m-b-2 text-center">
-                                <strong>Issues</strong>
+                            <p class="text-muted small text-uppercase m-t-0 m-b-3 text-center">
+                                <strong>
+                                    <span class="text-gray-light">Issues</span>
+                                </strong>
                             </p>
                         </div>
                     </div>
@@ -159,6 +203,28 @@
             </div>
         </div>
     </div>
+
+    <!-- Change Logo Modal -->
+    <div class="modal fade" id="changeLogoModal" tabindex="-1" role="dialog" aria-labelledby="changeLogoModalLabel">
+        <div class="modal-dialog" role="document">
+            <form @submit.prevent="saveLogo" enctype="multipart/form-data">
+            <div class="modal-content b-a-0">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#xD7;</span></button>
+                    <h4 class="modal-title" id="changeLogoModalLabel">Change Publisher Logo</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="file" name="image" id="image">
+                </div>
+                <div class="modal-footer">
+                    {!! Form::hidden('uuid', $publisher->uuid, ['v-model' => 'uuid']) !!}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-danger" value="Change Logo">
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 @section('javascript')
@@ -169,7 +235,9 @@
             data: {
                 aliases: [],
                 aliasEditMode: false,
-                newAlias: ''
+                newAlias: '',
+                uuid: '{!! $publisher->uuid !!}',
+                image: ''
             },
 
             mounted() {
@@ -178,7 +246,7 @@
 
             methods: {
                 getAliases: function() {
-                    this.$http.get('/api/alias/{{ $publisher->id }}?api_token=f5585bad-3897-48c3-9c2d-d403dc42898a').then(response => {
+                    this.$http.get('/api/alias/{{ $publisher->id }}?api_token={{ Auth::user()->api_token }}').then(response => {
                         this.aliases = response.body;
                     }, response => {
                         console.log(response);
@@ -196,15 +264,37 @@
                 },
                 addAlias: function() {
                     this.aliases.push({'alias': this.newAlias});
-                    this.$http.post('/api/alias?api_token=f5585bad-3897-48c3-9c2d-d403dc42898a', {alias: this.newAlias, publisher_id: '{{$publisher->id}}'});
+                    this.$http.post('/api/alias?api_token={{ Auth::user()->api_token }}', {alias: this.newAlias, publisher_id: '{{$publisher->id}}'});
                     this.newAlias = '';
                 },
                 deleteAlias: function(id, index) {
                     console.log(id, index);
                     this.aliases.splice(index, 1);
-                    this.$http.delete('/api/alias/' + id + '?api_token=f5585bad-3897-48c3-9c2d-d403dc42898a');
+                    this.$http.delete('/api/alias/' + id + '?api_token={{ Auth::user()->api_token }}');
+                },
+                saveLogo: function(e) {
+                    e.preventDefault();
+                    data = new FormData();
+                    this.image = e.target[1].files[0];
+                    data.append('uuid', this.uuid);
+                    data.append('image', this.image);
+
+                    this.$http.post('/api/publishers/logo?api_token={{ Auth::user()->api_token }}', data).then(response => {
+                        d = new Date();
+                        $('#publisherImage').attr("src", "{{ Storage::url('/publishers/'.$publisher->uuid.'.png?') }}"+d.getTime());
+                        $('#changeLogoModal').modal('hide');
+                        this.image = '';
+                    });
                 }
             }
         })
+    </script>
+@endsection
+
+@section('javascript')
+    <script>
+        $(document).ready(function() {
+            $('.editContainer').hide();
+        });
     </script>
 @endsection
