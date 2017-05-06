@@ -22,7 +22,7 @@ class CreatorLogoController extends Controller
     private $creatorLogoRepository;
 
     /**
-     * IssueController constructor.
+     * CreatorController constructor.
      * @param CreatorLogoRepository $creatorLogoRepository
      */
     public function __construct(CreatorLogoRepository $creatorLogoRepository)
