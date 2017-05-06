@@ -133,25 +133,31 @@
     <script src="/assets/vendor/js/bootstrap-select.min.js"></script>
     <script>
         $(function() {
-            $('.datepicker').daterangepicker({
+            $('input[name="store_date"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
-                minDate: "1960-01-01",
+                minDate: "1930-01-01",
                 maxDate: "{{ \Carbon\Carbon::now()->format('Y-m-d') }}",
                 locale: {
                     format: "YYYY-MM-DD",
-                }
+                },
+                autoUpdateInput: false
+            }, function (chosen_date) {
+                $('input[name="store_date"]').val(chosen_date.format('YYYY-MM-DD'));
             });
 
-            $('.datepicker-empty').daterangepicker({
+            $('input[name="cover_date"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
-                minDate: "1960-01-01",
+                minDate: "1930-01-01",
                 maxDate: "{{ \Carbon\Carbon::now()->format('Y-m-d') }}",
                 locale: {
                     format: "YYYY-MM-DD",
-                }
-            }).val('');
+                },
+                autoUpdateInput: false
+            }, function (chosen_date) {
+                $('input[name="cover_date"]').val(chosen_date.format('YYYY-MM-DD'));
+            });
         });
     </script>
 @endsection

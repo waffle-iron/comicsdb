@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-lg-12 sub-navbar-column">
                     <div class="sub-navbar-header">
-                        <h3>Create Creator</h3>
+                        <h3>Edit Creator</h3>
                     </div>
                     <ol class="breadcrumb navbar-text navbar-right no-bg">
                         <li class="current-parent">
@@ -30,7 +30,7 @@
                             </a>
                         </li>
                         <li><a href="{{ route('creators.index') }}">Creators</a></li>
-                        <li class="active">Create Creator</li>
+                        <li class="active">Edit Creator</li>
                     </ol>
                 </div>
             </div>
@@ -71,19 +71,19 @@
                         <h6 class="panel-title">Create Creator</h6>
                     </div>
                     <div class="panel-body">
-                        {!! Form::open(['route' => 'creators.store', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::open(['route' => 'creators.update', 'class' => 'form-horizontal', 'files' => true]) !!}
                         {!! Form::token() !!}
-                        {!! Form::hidden('uuid', \Webpatser\Uuid\Uuid::generate(4)) !!}
+                        {!! Form::hidden('id', $creator->id) !!}
                         <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
                             {!! Form::label('firstname', 'First Name', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('firstname', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('firstname', $creator->firstname, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
                             {!! Form::label('lastname', 'Last Name', ['class' => 'control-label col-sm-3 required']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('lastname', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('lastname', $creator->lastname, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
@@ -121,13 +121,13 @@
                         <div class="form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
                             {!! Form::label('birthdate', 'Birthdate', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('birthdate', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('birthdate', $creator->birthdate ? $creator->birthdate->format('Y-m-d') : null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('deathdate') ? ' has-error' : '' }}">
                             {!! Form::label('deathdate', 'Date of Death', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('deathdate', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('deathdate', $creator->deathdate ? $creator->deathdate->format('Y-m-d') : null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="hr-text hr-text-left">
@@ -138,13 +138,13 @@
                         <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                             {!! Form::label('city', 'City', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('city', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('city', $creator->city, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('country', 'Country', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::select('country', $countries, null, ['id' => 'country', 'class' => 'form-control select2 select2-input']) !!}
+                                {!! Form::select('country', $countries, $creator->country, ['id' => 'country', 'class' => 'form-control select2 select2-input']) !!}
                             </div>
                         </div>
                         <div class="hr-text hr-text-left">
@@ -157,26 +157,26 @@
                             <div class="col-sm-6">
                                 <div class="input-group">
                                     <span class="input-group-addon">https://twitter.com/</span>
-                                    {!! Form::text('twitter', null, ['class' => 'form-control']) !!}
+                                    {!! Form::text('twitter', $creator->twitter, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('website', 'Website', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('website', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('website', $creator->website, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('email', 'Email', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::text('email', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('email', $creator->email, ['class' => 'form-control']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-3">
-                                <button type="submit" class="btn btn-default">Save Creator</button>
+                                <button type="submit" class="btn btn-default">Update Creator</button>
                             </div>
                         </div>
                         {!! Form::close() !!}

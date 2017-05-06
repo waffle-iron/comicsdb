@@ -26,6 +26,17 @@ class CreatorRepository
     }
 
     /**
+     * @param int $id
+     * @return Creator
+     */
+    public function get(int $id) : Creator
+    {
+        $creator = Creator::find($id);
+
+        return $creator;
+    }
+
+    /**
      * @param CreatorRequest $request
      */
     public function store(CreatorRequest $request)
@@ -44,5 +55,27 @@ class CreatorRepository
             $logoRepository = new CreatorLogoRepository();
             $logoRepository->store($request);
         }
+    }
+
+    /**
+     * @param CreatorRequest $request
+     * @return void
+     */
+    public function update(CreatorRequest $request)
+    {
+        $creator = Creator::find(
+            $request->get('id')
+        );
+
+        $creator->fill($request->all());
+        $creator->save();
+    }
+
+    /**
+     * @param int $id
+     */
+    public function delete(int $id)
+    {
+        Creator::find($id)->delete();
     }
 }

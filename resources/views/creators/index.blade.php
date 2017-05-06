@@ -65,16 +65,21 @@
         <div class="row m-t-3" id="grid" data-columns>
             @foreach ($creators as $creator)
                 <div class="box">
-                    <div class="panel panel-default shadow-box b-a-0">
-                        <div class="panel-body">
-                            <div class="avatar avatar-lg center-block">
-                                <img class="img-circle img-thumbnail center-block m-t-1 m-b-2" data-src="holder.js/80x80?theme=image&font=FontAwesome" src="{{ Storage::url('/creators/'.$creator->uuid.'.png') }}">
+                    <a href="{{ route('creators.show', ['id' => $creator->id]) }}">
+                        <div class="panel panel-default shadow-box b-a-0">
+                            <div class="panel-body">
+                                <div class="avatar avatar-lg center-block">
+                                    <img class="img-circle img-thumbnail center-block m-t-1 m-b-2" data-src="holder.js/80x80?theme=image&font=FontAwesome" src="{{ Storage::url('/creators/'.$creator->uuid.'.png') }}">
+                                </div>
+                                <h5 class="text-center">
+                                    <span>{{ $creator->firstname }} {{ $creator->lastname }}</span><br>
+                                </h5>
+                                <p class="m-t-0 text-center">
+                                <div class="label label-primary pull-right">0 Issues</div>
+                                </p>
                             </div>
-                            <h5 class="text-center">
-                                <span>{{ $creator->firstname }} {{ $creator->lastname }}</span><br>
-                            </h5>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
         </div>

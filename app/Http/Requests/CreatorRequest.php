@@ -26,7 +26,7 @@ class CreatorRequest extends FormRequest
         return [
             'lastname' => 'required',
             'gender' => 'required',
-            'image' => 'required|image|mimes:png|max:2048'
+            'image' => 'image|mimes:png|max:2048'
         ];
     }
 }
