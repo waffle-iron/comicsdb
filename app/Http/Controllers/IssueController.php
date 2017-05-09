@@ -40,8 +40,8 @@ class IssueController extends Controller
      */
     public function __construct(IssueRepository $issueRepository, VolumeRepository $volumeRepository, CreatorRepository $creatorRepository)
     {
-        $this->issueRepository  = $issueRepository;
-        $this->volumeRepository = $volumeRepository;
+        $this->issueRepository   = $issueRepository;
+        $this->volumeRepository  = $volumeRepository;
         $this->creatorRepository = $creatorRepository;
     }
 
@@ -63,7 +63,7 @@ class IssueController extends Controller
      */
     public function show(int $id)
     {
-        $issue = $this->issueRepository->get($id);
+        $issue    = $this->issueRepository->get($id);
         $creators = $this->creatorRepository->index(99999);
 
         return view('issues.show', [

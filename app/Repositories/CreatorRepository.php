@@ -85,7 +85,7 @@ class CreatorRepository
      */
     public function byIssue(int $issueId)
     {
-        $issue = (new IssueRepository())->get($issueId);
+        $issue   = (new IssueRepository())->get($issueId);
         $creator = $issue->creators()->orderBy('lastname')->orderBy('firstname')->get();
 
         return $creator;
