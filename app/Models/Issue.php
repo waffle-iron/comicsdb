@@ -63,4 +63,12 @@ class Issue extends Model
     {
         return $this->belongsTo(Volume::class, 'volume_id', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function creators()
+    {
+        return $this->belongsToMany(Creator::class);
+    }
 }

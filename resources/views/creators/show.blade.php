@@ -153,6 +153,24 @@
                         <strong>Issues</strong>
                     </h6>
                 </div>
+                <div class="row" id="grid" data-columns>
+                    @foreach ($creator->issues()->get() as $issue)
+                        <div class="box">
+                            <div class="thumbnail shadow-box b-a-0">
+                                <a href="{{ route('issues.show', ['id' => $issue->id]) }}">
+                                    <img data-src="holder.js/100px200p?theme=image&font=FontAwesome" src="{{ Storage::url('/issues/'.$issue->uuid.'.png') }}">
+                                </a>
+                                <div class="caption">
+                                    <div class="text-center">
+                                        <p class="m-l-0 m-r-0 m-t-0 m-b-0"><strong>Issue #{{ $issue->number }}</strong></p>
+                                        <p class="m-l-0 m-r-0 m-t-0 m-b-0"><small>{{ $issue->name }}</small></p>
+                                        <p class="text-muted m-l-0 m-r-0 m-t-0 m-b-0"><small>{{ $issue->store_date->format('F Y') }}</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

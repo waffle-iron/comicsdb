@@ -78,4 +78,16 @@ class CreatorRepository
     {
         Creator::find($id)->delete();
     }
+
+    /**
+     * @param int $issueId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function byIssue(int $issueId)
+    {
+        $issue   = (new IssueRepository())->get($issueId);
+        $creator = $issue->creators()->orderBy('lastname')->orderBy('firstname')->get();
+
+        return $creator;
+    }
 }
