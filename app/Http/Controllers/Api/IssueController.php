@@ -42,8 +42,8 @@ class IssueController extends Controller
      */
     public function addCreator($issueId, $creatorId)
     {
-        $issue = $this->issueRepository->get((int)$issueId);
-        $creator = $this->creatorRepository->get((int)$creatorId);
+        $issue = $this->issueRepository->get((int) $issueId);
+        $creator = $this->creatorRepository->get((int) $creatorId);
         $issue->creators()->save($creator);
     }
 
@@ -53,8 +53,8 @@ class IssueController extends Controller
      */
     public function deleteCreator($issueId, $creatorId)
     {
-        $issue = $this->issueRepository->get((int)$issueId);
-        $creator = $this->creatorRepository->get((int)$creatorId);
+        $issue = $this->issueRepository->get((int) $issueId);
+        $creator = $this->creatorRepository->get((int) $creatorId);
 
         $issue->creators()->detach($creator);
     }
