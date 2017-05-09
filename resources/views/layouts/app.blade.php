@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="/assets/vendor/css/select2.css">
     <link rel="stylesheet" href="/assets/vendor/css/select2-bootstrap.css">
     <link rel="stylesheet" href="/assets/stylesheets/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
     <!-- endbuild -->
 
     <!-- START Favicon -->
@@ -392,6 +393,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.1/vue-resource.min.js"></script>
 <script src="/js/salvattore.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 @yield('javascript')
 <script>
     $(".select2-container").css('width', '');

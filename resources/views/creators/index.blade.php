@@ -75,7 +75,7 @@
                                     <span>{{ $creator->firstname }} {{ $creator->lastname }}</span><br>
                                 </h5>
                                 <p class="m-t-0 text-center">
-                                <div class="label label-primary pull-right">0 Issues</div>
+                                <div class="label label-primary pull-right">{{ $creator->issues()->count() }} Issues</div>
                                 </p>
                             </div>
                         </div>

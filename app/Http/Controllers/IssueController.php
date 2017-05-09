@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\IssueRequest;
+use App\Repositories\CreatorRepository;
 use App\Repositories\IssueRepository;
 use App\Repositories\VolumeRepository;
 use Illuminate\Http\Request;
@@ -27,15 +28,21 @@ class IssueController extends Controller
     private $volumeRepository;
 
     /**
+     * @var
+     */
+    private $creatorRepository;
+
+    /**
      * IssueController constructor.
      *
      * @param IssueRepository $issueRepository
      * @param VolumeRepository $volumeRepository
      */
-    public function __construct(IssueRepository $issueRepository, VolumeRepository $volumeRepository)
+    public function __construct(IssueRepository $issueRepository, VolumeRepository $volumeRepository, CreatorRepository $creatorRepository)
     {
         $this->issueRepository  = $issueRepository;
         $this->volumeRepository = $volumeRepository;
+        $this->creatorRepository = $creatorRepository;
     }
 
     /**
@@ -57,9 +64,11 @@ class IssueController extends Controller
     public function show(int $id)
     {
         $issue = $this->issueRepository->get($id);
+        $creators = $this->creatorRepository->index(99999);
 
         return view('issues.show', [
             'issue' => $issue,
+            'creators' => $creators
         ]);
     }
 

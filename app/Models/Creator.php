@@ -50,4 +50,12 @@ class Creator extends Model
     protected $guarded = [
         'image'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function issues()
+    {
+        return $this->belongsToMany(Issue::class);
+    }
 }
