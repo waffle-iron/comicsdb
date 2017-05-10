@@ -48,22 +48,7 @@ class ImagesClear extends Command
     public function handle()
     {
         $this->removeRedundantPublisherImages();
-        $this->removeRedundantVolumeImages();
         $this->removeRedundantIssueImages();
-    }
-
-    /**
-     * @return void
-     */
-    private function removeRedundantVolumeImages()
-    {
-        $this->line('Removing volumes images...');
-
-        $trashed_volumes = Volume::onlyTrashed()->get();
-        foreach ($trashed_volumes as $trashed_volume) {
-            Storage::disk('public')->delete('volumes/'.$trashed_volume->uuid.'.png');
-            $this->info($trashed_volume->uuid.'.png removed');
-        }
     }
 
     /**

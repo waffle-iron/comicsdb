@@ -96,4 +96,14 @@ class PublisherRepository
             $logoRepository->store($request);
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function latest()
+    {
+        $publishers = new Publisher();
+
+        return $publishers->latest()->get();
+    }
 }

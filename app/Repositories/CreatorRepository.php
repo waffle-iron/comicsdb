@@ -90,4 +90,14 @@ class CreatorRepository
 
         return $creator;
     }
+
+    /**
+     * @return mixed
+     */
+    public function latest()
+    {
+        $creators = new Creator();
+
+        return $creators->latest()->get();
+    }
 }

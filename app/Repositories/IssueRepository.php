@@ -90,4 +90,14 @@ class IssueRepository
             $logoRepository->store($request);
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function latest()
+    {
+        $issues = new Issue();
+
+        return $issues->latest()->get();
+    }
 }
