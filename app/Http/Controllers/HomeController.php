@@ -6,7 +6,6 @@ use App\Repositories\CreatorRepository;
 use App\Repositories\IssueRepository;
 use App\Repositories\PublisherRepository;
 use App\Repositories\VolumeRepository;
-use Carbon\Carbon;
 
 /**
  * Class HomeController
