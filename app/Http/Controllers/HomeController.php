@@ -60,9 +60,9 @@ class HomeController extends Controller
     public function index()
     {
         $newestPublishers = $this->publisherRepository->latest();
-        $newestVolumes = $this->volumeRepository->latest();
-        $newestIssues = $this->issueRepository->latest();
-        $newestCreators = $this->creatorRepository->latest();
+        $newestVolumes    = $this->volumeRepository->latest();
+        $newestIssues     = $this->issueRepository->latest();
+        $newestCreators   = $this->creatorRepository->latest();
 
         return view('home', [
             'newestPublishers' => $newestPublishers,
