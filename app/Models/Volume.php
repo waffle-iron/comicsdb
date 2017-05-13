@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -49,6 +50,14 @@ class Volume extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    /**
+     * @return mixed
+     */
+    public function latest()
+    {
+        return $this->where('created_at', '>=', Carbon::now()->subDays(30))->orderBy('created_at', 'desc');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

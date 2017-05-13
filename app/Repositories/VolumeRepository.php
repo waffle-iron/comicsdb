@@ -93,4 +93,14 @@ class VolumeRepository
     {
         Volume::find($id)->delete();
     }
+
+    /**
+     * @return mixed
+     */
+    public function latest()
+    {
+        $volumes = new Volume();
+
+        return $volumes->latest()->get();
+    }
 }

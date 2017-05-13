@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
@@ -50,6 +51,14 @@ class Creator extends Model
     protected $guarded = [
         'image'
     ];
+
+    /**
+     * @return mixed
+     */
+    public function latest()
+    {
+        return $this->where('created_at', '>=', Carbon::now()->subDays(30))->orderBy('created_at', 'desc');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
