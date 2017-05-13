@@ -77,7 +77,7 @@
                         <div class="form-group">
                             {!! Form::label('volume_id', 'Volume', ['class' => 'control-label col-sm-3 required']) !!}
                             <div class="col-sm-6">
-                                {!! Form::select('volume_id', $volumes, $selected_volume_id, ['class' => 'form-control select2 select2-input']) !!}
+                                {!! Form::select('volume_id', $volumes, $selected_volume_id, ['class' => 'form-control selectpicker', 'data-live-search' => true]) !!}
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('number') ? ' has-error' : '' }}">

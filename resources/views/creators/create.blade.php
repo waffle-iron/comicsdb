@@ -144,7 +144,7 @@
                         <div class="form-group">
                             {!! Form::label('country', 'Country', ['class' => 'control-label col-sm-3']) !!}
                             <div class="col-sm-6">
-                                {!! Form::select('country', $countries, null, ['id' => 'country', 'class' => 'form-control select2 select2-input']) !!}
+                                {!! Form::select('country', $countries, null, ['id' => 'country', 'class' => 'form-control selectpicker', 'data-live-search' => true]) !!}
                             </div>
                         </div>
                         <div class="hr-text hr-text-left">
@@ -246,7 +246,6 @@
 
                 });
             });
-
         });
     </script>
 @endsection

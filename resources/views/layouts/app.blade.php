@@ -396,7 +396,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 @yield('javascript')
 <script>
-    $(".select2-container").css('width', '');
+    $('.selectpicker').selectpicker({
+        style: 'btn-default',
+        size: 4
+    });
 </script>
 
 </body>
