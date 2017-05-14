@@ -56,7 +56,7 @@ class Volume extends Model
      */
     public function latest()
     {
-        return $this->where('created_at', '>=', Carbon::now()->subDays(30))->orderBy('created_at', 'desc');
+        return $this->orderBy('created_at', 'desc');
     }
 
     /**
