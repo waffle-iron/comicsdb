@@ -52,14 +52,6 @@ class Volume extends Model
     ];
 
     /**
-     * @return mixed
-     */
-    public function latest()
-    {
-        return $this->orderBy('created_at', 'desc');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function publisher()
