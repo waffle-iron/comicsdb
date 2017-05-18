@@ -148,9 +148,9 @@
                 </div>
             </div>
 
-            <div class="col-lg-8 m-b-2">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="panel panel-default shadow-box b-t-2 b-t-primary b-r-0 b-l-0 b-b-0">
+            <div class="col-lg-4 m-b-2">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="panel panel-default shadow-box b-t-0 b-l-primary b-r-0 b-l-2 b-b-0">
                         <div class="panel-body">
                             <h3 class="display-4 text-center m-t-2">
                                 <a href="{{ route('volumes.index.byPublisher', ['publisherId' => $publisher->id]) }}">
@@ -166,16 +166,49 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="panel panel-default shadow-box b-t-2 b-t-primary b-r-0 b-l-0 b-b-0">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="panel panel-default shadow-box b-t-0 b-l-primary b-r-0 b-l-2 b-b-0">
                         <div class="panel-body">
-                            <h3 class="display-4 text-center m-t-2">{{ $publisher->amountOfIssues() }}</h3>
+                            <h3 class="display-4 text-center m-t-2">{{ $publisher->issues()->count() }}</h3>
                             <p class="text-muted small text-uppercase m-t-0 m-b-3 text-center">
                                 <strong>
                                     <span class="text-gray-light">Issues</span>
                                 </strong>
                             </p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 m-b-2">
+                <div class="row">
+                    <div class="panel panel-default b-a-0 shadow-box">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-lg-6">Creators</div>
+                                <div class="col-lg-6 text-right">
+                                    <div class="label label-primary">
+                                        {{ $publisher->creators()->unique()->count() }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-group scroll-600 custom-scrollbar">
+                            @foreach($publisher->creators()->sortBy('lastname')->unique() as $creator)
+                                <li class="list-group-item no-bg">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="avatar">
+                                                <img class="img-circle" data-src="holder.js/35x35?theme=image&font=FontAwesome" src="{{ Storage::url('/creators/'.$creator->uuid.'.png') }}">
+                                            </div>
+                                        </div>
+                                        <div class="media-body media-middle">
+                                            {{ $creator->firstname }} {{ $creator->lastname }}
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
