@@ -3,7 +3,6 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -86,6 +85,9 @@ class Publisher extends Model
         return $this->hasManyThrough(Issue::class, Volume::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function creators()
     {
         return \DB::table('publishers')
