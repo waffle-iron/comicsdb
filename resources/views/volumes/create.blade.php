@@ -101,7 +101,7 @@
                         <div class="form-group">
                             {!! Form::label('publisher_id', 'Publisher', ['class' => 'control-label col-sm-3 required']) !!}
                             <div class="col-sm-6">
-                                {!! Form::select('publisher_id', $publishers, $selected_publisher_id, ['id' => 'publisher_id', 'class' => 'form-control select2 select2-input']) !!}
+                                {!! Form::select('publisher_id', $publishers, $selected_publisher_id, ['id' => 'publisher_id', 'class' => 'form-control selectpicker', 'data-live-search' => true]) !!}
                             </div>
                         </div>
                         <div class="form-group">

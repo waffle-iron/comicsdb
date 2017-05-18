@@ -176,7 +176,9 @@
                             </div>
                             <div class="media-left media-middle">
                                 <div class="avatar avatar-lg">
-                                    <img class="img-thumbnail" :src="'/storage/creators/' + creator.uuid + '.png'">
+                                    <a :href="'/creators/' + creator.id">
+                                        <img class="img-thumbnail" :src="'/storage/creators/' + creator.uuid + '.png'">
+                                    </a>
                                 </div>
                             </div>
                             <div class="media-body media-middle">

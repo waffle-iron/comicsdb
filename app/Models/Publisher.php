@@ -3,7 +3,6 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -63,14 +62,6 @@ class Publisher extends Model
     ];
 
     /**
-     * @return mixed
-     */
-    public function latest()
-    {
-        return $this->where('created_at', '>=', Carbon::now()->subDays(30))->orderBy('created_at', 'desc');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function volumes()
@@ -87,18 +78,25 @@ class Publisher extends Model
     }
 
     /**
-     * @return int
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function amountOfIssues() : int
+    public function issues()
     {
-        $amount = 0;
+        return $this->hasManyThrough(Issue::class, Volume::class);
+    }
 
-        $volumes = $this->volumes()->get();
-
-        foreach ($volumes as $volume) {
-            $amount += $volume->issues()->count();
-        }
-
-        return $amount;
+    /**
+     * @return mixed
+     */
+    public function creators()
+    {
+        return \DB::table('publishers')
+            ->join('volumes', 'volumes.publisher_id', '=', 'publishers.id')
+            ->join('issues', 'issues.volume_id', '=', 'volumes.id')
+            ->join('creator_issue', 'creator_issue.issue_id', '=', 'issues.id')
+            ->join('creators', 'creators.id', '=', 'creator_issue.creator_id')
+            ->select('creators.*')
+            ->where('publishers.id', '=', $this->id)
+            ->get();
     }
 }

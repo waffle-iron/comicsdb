@@ -65,15 +65,14 @@
                         <div class="caption">
                             <h5 class="m-b-1">
                                 <span>{{ $publisher->name }}</span>
-                                <span class="pull-right text-gray-light">
+                            </h5>
+                            <p>
+                                <span class="text-gray-light">
                                     <i class="fa fa-calendar"></i> {{ $publisher->founded_at->year }}
                                 </span>
-                            </h5>
-                            <p class="text-gray-light m-t-2 m-b-1">
-                                {!! nl2br($publisher->description) !!}
                             </p>
                             <div class="label label-success">
-                                <span>{{ $publisher->amountOfIssues() }} Issues</span>
+                                <span>{{ $publisher->issues()->count() }} Issues</span>
                             </div>
                         </div>
                     </div>

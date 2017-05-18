@@ -42,13 +42,22 @@
 
     <!-- START Content -->
     <div class="row">
+        <div class="col-lg-12">
+            <div class="hr-text hr-text-left">
+                <h6 class="text-white">
+                    <strong>New since last 30 days</strong>
+                </h6>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-3 col-md-4">
             <div class="panel panel-default b-l-2 b-l-primary shadow-box b-t-0 b-r-0 b-b-0">
                 <div class="panel-heading b-b-0">
                     Publishers
                 </div>
                 <div class="panel-body text-center p-t-0">
-                    <h1 class="m-t-0 m-b-0 f-w-300">{{ $newestPublishers->count() }}</h1>
+                    <h1 class="m-t-0 m-b-0 f-w-300">{{ $newestPublishers->where('created_at', '>=', Carbon\Carbon::now()->subdays(30))->count() }}</h1>
                     <p>New Publishers</p>
                 </div>
                 <div class="panel-footer text-center">
@@ -65,7 +74,7 @@
                     Volumes
                 </div>
                 <div class="panel-body text-center p-t-0">
-                    <h1 class="m-t-0 m-b-0 f-w-300">{{ $newestVolumes->count() }}</h1>
+                    <h1 class="m-t-0 m-b-0 f-w-300">{{ $newestVolumes->where('created_at', '>=', Carbon\Carbon::now()->subdays(30))->count() }}</h1>
                     <p>New Volumes</p>
                 </div>
                 <div class="panel-footer text-center">
@@ -82,7 +91,7 @@
                     Issues
                 </div>
                 <div class="panel-body text-center p-t-0">
-                    <h1 class="m-t-0 m-b-0 f-w-300">{{ $newestIssues->count() }}</h1>
+                    <h1 class="m-t-0 m-b-0 f-w-300">{{ $newestIssues->where('created_at', '>=', Carbon\Carbon::now()->subdays(30))->count() }}</h1>
                     <p>New Issues</p>
                 </div>
                 <div class="panel-footer text-center">
@@ -99,7 +108,7 @@
                     Creators
                 </div>
                 <div class="panel-body text-center p-t-0">
-                    <h1 class="m-t-0 m-b-0 f-w-300">{{ $newestCreators->count() }}</h1>
+                    <h1 class="m-t-0 m-b-0 f-w-300">{{ $newestCreators->where('created_at', '>=', Carbon\Carbon::now()->subdays(30))->count() }}</h1>
                     <p>New Creators</p>
                 </div>
                 <div class="panel-footer text-center">

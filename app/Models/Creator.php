@@ -53,14 +53,6 @@ class Creator extends Model
     ];
 
     /**
-     * @return mixed
-     */
-    public function latest()
-    {
-        return $this->where('created_at', '>=', Carbon::now()->subDays(30))->orderBy('created_at', 'desc');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function issues()
