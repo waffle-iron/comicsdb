@@ -4,6 +4,7 @@ namespace Tests\User;
 
 use App\Models\Creator;
 use App\Models\Issue;
+use App\Models\Volume;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
