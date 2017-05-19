@@ -70,3 +70,22 @@ $factory->define(\App\Models\Volume::class, function (Faker\Generator $faker) {
         'updated_at' => $faker->dateTime
     ];
 });
+
+$factory->define(\App\Models\Publisher::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->numberBetween(999999, 9999999),
+        'uuid' => $faker->uuid,
+        'name' => $faker->text(100),
+        'description' => $faker->text,
+        'founded_at' => $faker->date(),
+        'twitter' => $faker->text(150),
+        'website' => $faker->text(190),
+        'address' => $faker->streetAddress,
+        'city' => $faker->city,
+        'state' => $faker->text(50),
+        'zip' => $faker->postcode,
+        'country' => $faker->country,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime
+    ];
+});
