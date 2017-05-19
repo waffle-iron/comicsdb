@@ -14,7 +14,7 @@ class AlterVolumesTableAddUuidColumn extends Migration
     public function up()
     {
         Schema::table('volumes', function (Blueprint $table) {
-            $table->char('uuid', 36)->after('id');
+            $table->char('uuid', 36)->after('id')->nullable();
         });
     }
 

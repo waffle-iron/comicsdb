@@ -4,6 +4,16 @@ php:
   - '7.0'
   - '7.1'
 
+env:
+  global:
+    - APP_ENV=testing
+    - APP_DEBUG=true
+    - APP_KEY=base64:JfHUpmIdSvi1ALWKwvQEmrhzlI1T3yTn5011j1RKvLI=
+    - DB_CONNECTION=sqlite
+    - CACHE_DRIVER=file
+    - SESSION_DRIVER=file
+    - QUEUE_DRIVER=sync
+
 before_script:
   - composer self-update
   - composer install --prefer-source
