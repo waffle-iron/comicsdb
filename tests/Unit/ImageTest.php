@@ -23,7 +23,7 @@ class ImageTest extends TestCase
 
         $issue = factory(Issue::class)->create();
         $issue->deleted_at = Carbon::now();
-        $publisher->save();
+        $issue->save();
 
         Artisan::call('images:clear');
 
