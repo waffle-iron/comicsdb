@@ -22,3 +22,37 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(\App\Models\Creator::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->numberBetween(999999, 9999999),
+        'uuid' => $faker->uuid,
+        'firstname' => $faker->firstNameMale,
+        'lastname' => $faker->lastName,
+        'gender' => 'male',
+        'birthdate' => $faker->dateTimeThisCentury,
+        'deathdate' => $faker->dateTimeThisDecade,
+        'city' => $faker->city,
+        'country' => $faker->country,
+        'email' => $faker->email,
+        'twitter' => $faker->text,
+        'website' => $faker->url,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime
+    ];
+});
+
+$factory->define(\App\Models\Issue::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->numberBetween(999999, 9999999),
+        'uuid' => $faker->uuid,
+        'volume_id' => $faker->numberBetween(1, 10),
+        'number' => $faker->numberBetween(1, 200),
+        'name' => $faker->text,
+        'intro' => $faker->text,
+        'cover_date' => $faker->dateTime,
+        'store_date' => $faker->dateTime,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime
+    ];
+});
