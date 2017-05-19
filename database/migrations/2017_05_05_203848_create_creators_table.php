@@ -15,7 +15,7 @@ class CreateCreatorsTable extends Migration
     {
         Schema::create('creators', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('uuid', 36);
+            $table->string('uuid', 36)->nullable();
             $table->string('firstname',100)->nullable();
             $table->string('lastname', 150);
             $table->enum('gender', ['male', 'female']);

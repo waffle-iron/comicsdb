@@ -15,7 +15,7 @@ class CreateIssuesTable extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('uuid', 36);
+            $table->string('uuid', 36)->nullable();
             $table->integer('volume_id')->unsigned();
             $table->integer('number')->unsigned();
             $table->string('name')->nullable();
