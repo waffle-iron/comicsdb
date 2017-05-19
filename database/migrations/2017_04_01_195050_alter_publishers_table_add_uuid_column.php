@@ -14,7 +14,7 @@ class AlterPublishersTableAddUuidColumn extends Migration
     public function up()
     {
         Schema::table('publishers', function (Blueprint $table) {
-            $table->char('uuid', 36)->after('id');
+            $table->char('uuid', 36)->after('id')->nullable();
         });
     }
 
