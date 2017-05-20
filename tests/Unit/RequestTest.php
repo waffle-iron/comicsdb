@@ -6,10 +6,9 @@ use App\Http\Requests\CreatorRequest;
 use App\Http\Requests\IssueRequest;
 use App\Http\Requests\PublisherRequest;
 use App\Http\Requests\VolumeRequest;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class RequestTest extends TestCase
 {

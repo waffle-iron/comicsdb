@@ -16,14 +16,14 @@ class CreatorTest extends TestCase
 
     public function test_returns_creator_instance()
     {
-        $creator = factory(Creator::class)->make();
+        $creator = factory(Creator::class)->create();
         $this->assertInstanceOf(Creator::class, $creator);
     }
 
     public function test_returns_an_issue_for_the_selected_creator()
     {
-        $creator = factory(Creator::class)->make();
-        $issue = factory(Issue::class)->make();
+        $creator = factory(Creator::class)->create();
+        $issue = factory(Issue::class)->create();
         $creator->issues()->save($issue);
 
         $this->assertEquals(1, $creator->issues()->count());
