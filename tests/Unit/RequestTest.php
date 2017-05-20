@@ -38,6 +38,7 @@ class RequestTest extends TestCase
 
         $this->assertTrue($publisherRequest->authorize());
         $this->assertArrayHasKey('name', $publisherRequest->rules());
+        $this->assertArrayHasKey('name.required', $publisherRequest->messages());
     }
 
     public function test_check_volume_request()
@@ -46,5 +47,6 @@ class RequestTest extends TestCase
 
         $this->assertTrue($volumeRequest->authorize());
         $this->assertArrayHasKey('name', $volumeRequest->rules());
+        $this->assertArrayHasKey('name.required', $volumeRequest->messages());
     }
 }
